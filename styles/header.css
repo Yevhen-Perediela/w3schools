@@ -1,0 +1,306 @@
+.container {
+  padding: 0 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* nav na gorze*/
+
+.top-nav {
+  background-color: #fff;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: nowrap;
+}
+
+.logo {
+  margin-right: 0;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.auth-buttons {
+  display: flex;
+  margin-left: auto;
+}
+
+.auth-buttons button {
+  padding: 8px 20px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.sign-up {
+  background-color: #04aa6d;
+  color: white;
+  border-radius: 25px 0 0 25px;
+  margin-left: 20px;
+}
+
+.login {
+  background-color: #e7e9eb;
+  color: black;
+  border-radius: 0 25px 25px 0;
+}
+
+/* nav na dole*/
+
+.bottom-nav {
+  background-color: #282a35;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bottom-nav .container {
+  max-width: 600px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.tech-list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 5px 0;
+  gap: 30px;
+  width: 100%;
+  justify-content: center;
+}
+
+.tech-list a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 5px 15px;
+}
+
+.tech-list a:hover {
+  background-color: #000;
+}
+
+.top-nav .search-bar {
+  position: relative;
+  min-width: 200px;
+  flex: 1;
+  max-width: 400px;
+}
+
+.top-nav .search-bar input {
+  width: 100%;
+  padding: 8px 15px;
+  padding-right: 40px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+}
+
+.top-nav .search-bar button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8px 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.top-nav .search-bar button i {
+  color: #666;
+}
+
+@media (max-width: 1200px) {
+  .nav-links {
+    gap: 10px;
+  }
+
+  .nav-links a {
+    padding: 5px 8px;
+  }
+
+  .auth-buttons button {
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-content {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .logo {
+    flex: 0 0 auto;
+    margin-right: auto;
+  }
+
+  .auth-buttons {
+    margin-left: 0;
+    order: 2;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-bar {
+    order: 4;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-content {
+    gap: 10px;
+  }
+
+  .auth-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    padding: 4px 6px;
+  }
+
+  .auth-buttons button {
+    padding: 6px 12px;
+    min-width: 60px;
+    font-size: 13px;
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px 10px;
+}
+
+.nav-links a:hover {
+  color: #04aa6d;
+}
+
+.menu-toggle,
+.tech-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #333;
+}
+
+.tech-menu-toggle {
+  width: 100%;
+  color: white;
+  background: #282a35;
+  padding: 12px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tech-menu-toggle i {
+  transition: transform 0.3s ease;
+}
+
+.menu-active .tech-menu-toggle i {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 992px) {
+  .menu-toggle {
+    display: block;
+    order: 1;
+  }
+
+  .nav-content {
+    justify-content: space-between;
+  }
+
+  .nav-links,
+  .search-bar,
+  .auth-buttons {
+    display: none;
+  }
+
+  .menu-active .nav-links,
+  .menu-active .search-bar,
+  .menu-active .auth-buttons {
+    display: flex;
+    width: 100%;
+    order: 4;
+  }
+
+  .menu-active .nav-content {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .tech-menu-toggle {
+    display: flex;
+  }
+
+  .bottom-nav .container {
+    padding: 0;
+  }
+
+  .tech-list {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tech-list li {
+    width: 100%;
+  }
+
+  .tech-list a {
+    display: block;
+    padding: 12px 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .menu-active .tech-list {
+    display: flex;
+  }
+}
+
+.nav-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
