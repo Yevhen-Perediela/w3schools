@@ -25,9 +25,12 @@ function addElement(type) {
     }
 
     const lineBreak = document.createElement('div');
+    lineBreak.className = 'element-container';
     lineBreak.appendChild(element);
     document.getElementById('element').appendChild(lineBreak);
     document.getElementById('menu').style.display = 'none';
+
+    addAddButtonToElement(lineBreak);
 }
 
 function addImage() {
@@ -57,6 +60,36 @@ function addImage() {
     };
     input.click();
 }
+
+function showAddButton(event) {
+    const addButton = event.currentTarget.querySelector('.add-button');
+    addButton.style.display = 'block';
+}
+
+function hideAddButton(event) {
+    const addButton = event.currentTarget.querySelector('.add-button');
+    addButton.style.display = 'none';
+}
+
+function addAddButtonToElement(element) {
+    const addButton = document.createElement('button');
+    addButton.className = 'add-button';
+    addButton.innerText = 'Dodaj';
+    addButton.onclick = function(event) {
+        const menu = document.getElementById('menu');
+        menu.style.display = 'block';
+        menu.style.left = event.pageX + 'px';
+        menu.style.top = (event.pageY + 20) + 'px';
+        event.stopPropagation();
+    };
+
+    element.appendChild(addButton);
+}
+
+document.querySelectorAll('#element > div').forEach(function(el) {
+    el.classList.add('element-container');
+    addAddButtonToElement(el);
+});
 
 document.addEventListener('click', function() {
     const menu = document.getElementById('menu');
