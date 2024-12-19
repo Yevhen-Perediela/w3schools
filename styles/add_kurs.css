@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.5s;
+}
+
+body {
+    background-color: #282a35;
+    color: white;
+}
+
+#title-input {
+    border: 0px;
+    background-color: #282a35;
+    font-size: 35px;
+    color: white;
+    margin: 20px 0px;
+}
+
+#title-input:focus {
+    outline: none;
+}
+
+#title-input::first-letter {
+    text-transform: capitalize;
+}
+
+textarea,
+#container input,
+.header-input {
+    border: 0px;
+    background-color: #282a35;
+    color: white;
+    /* font-size: 18px; */
+    height: auto;
+    resize: none;
+}
+
+textarea:focus,
+#container input:focus,
+.header-input {
+    outline: none;
+}
+
+#container {
+    padding: 50px 400px;
+    /* width: 100%; */
+}
+
+#main-control {
+    padding: 2px 25px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: 0.5px solid rgb(255, 255, 255);
+    background-color: #63817600;
+    color: white;
+    margin: 15px 5px;
+}
+
+#main-control:hover {
+    background-color: #04aa6d34;
+    cursor: pointer;
+    /* color: black; */
+}
+
+#menu {
+    display: none;
+    position: absolute;
+    background-color: #282a35;
+    border: 1px solid white;
+    z-index: 1000;
+}
+
+#menu div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#menu div:hover {
+    background-color: #3a3f47;
+}
+
+.image-container {
+    display: flex;
+    /* Umożliwia wyświetlanie obrazów obok siebie */
+    justify-content: center;
+    /* Wyśrodkowanie obrazów */
+    margin: 10px 0;
+    /* Margines dla obrazów */
+}
+
+.image-container img {
+    max-width: 45%;
+    /* Ustaw maksymalną szerokość obrazów */
+    height: auto;
+    /* Ustaw automatyczną wysokość */
+    margin: 0 5px;
+    /* Margines między obrazami */
+}
+
+.header-input {
+    font-size: 24px;
+    /* Domyślny rozmiar czcionki dla h2 */
+}
+
+.header-input.h3 {
+    font-size: 18px;
+    /* Rozmiar czcionki dla h3 */
+}
+
+.header-input.h1 {
+    font-size: 32px;
+    /* Rozmiar czcionki dla h1 */
+}
