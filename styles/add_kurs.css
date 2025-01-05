@@ -174,7 +174,7 @@ textarea:focus,
 }
 
 
-#add-to-bd-btn{
+#add-to-bd-btn, #div-add-to-bd select{
     padding: 5px 25px;
     border-radius: 5px;
     font-size: 15px;
