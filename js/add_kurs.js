@@ -59,6 +59,7 @@ function addImage(where, clickedButton) {
         const files = event.target.files;
         const imageContainer = document.createElement('div');
         imageContainer.className = 'image-container';
+        
 
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
@@ -66,7 +67,12 @@ function addImage(where, clickedButton) {
             reader.onload = function(e) {
                 const img = document.createElement('img');
                 img.src = e.target.result;
-                imageContainer.appendChild(img);
+                const imageWrapper = document.createElement('div');
+                imageWrapper.className = 'image-wrapper';
+                imageContainer.appendChild(imageWrapper);
+                imageWrapper.appendChild(img);
+                
+                // Dodaj uchwyt zmiany rozmiaru po załadowaniu obrazu
                 makeResizableImage(img);
             };
             reader.readAsDataURL(file);
@@ -83,10 +89,10 @@ function addImage(where, clickedButton) {
             const currentElement = clickedButton.closest('.element-container');
             parentElement.insertBefore(lineBreak, currentElement.nextSibling);
         }
-        // makeResizable(imageContainer);
     };
     input.click();
 }
+
 
 function showAddButton(event) {
     const addButton = event.currentTarget.querySelector('.add-button');
@@ -137,8 +143,13 @@ function makeResizableImage(img) {
     // Dodanie uchwytu
     const resizer = document.createElement('div');
     resizer.classList.add('resizer');
-    img.parentElement.style.position = 'relative'; // Pozycjonowanie rodzica
-    img.parentElement.appendChild(resizer);
+    const resizeImg = document.createElement('img')
+    resizeImg.src = 'assets/img/resize.png'
+    resizer.appendChild(resizeImg)
+    
+    // Dodaj uchwyt zmiany rozmiaru do wrappera obrazu
+    const imageWrapper = img.closest('.image-wrapper');
+    imageWrapper.appendChild(resizer);
 
     // Funkcjonalność zmiany rozmiaru
     resizer.addEventListener('mousedown', function (e) {
@@ -148,10 +159,12 @@ function makeResizableImage(img) {
         const startY = e.clientY;
         const startWidth = img.offsetWidth;
         const startHeight = img.offsetHeight;
+        const startRatio = startWidth / startHeight; // Zachowanie proporcji
 
         function resize(e) {
+            // Oblicz nową szerokość i wysokość
             const newWidth = startWidth + (e.clientX - startX);
-            const newHeight = startHeight + (e.clientY - startY);
+            const newHeight = newWidth / startRatio; // Wysokość zmienia się w zależności od szerokości
 
             img.style.width = newWidth + 'px';
             img.style.height = newHeight + 'px';
