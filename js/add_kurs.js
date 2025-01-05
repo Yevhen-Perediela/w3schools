@@ -50,16 +50,24 @@ function addElement(type, where, clickedButton) {
 }
 
 
+
 function addImage(where, clickedButton) {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
-    input.multiple = true;
+    input.multiple = true; // Zezwól na wielokrotny wybór
     input.onchange = function(event) {
         const files = event.target.files;
 
+        // Ograniczenie do dwóch plików
+        if (files.length > 2) {
+            alert('Możesz załadować maksymalnie 2 obrazy na raz.');
+            return; // Zatrzymujemy dalsze przetwarzanie, jeśli wybrano więcej niż 2 pliki
+        }
+
         const imageContainer = document.createElement('div');
         imageContainer.className = 'image-container';
+
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
 
@@ -79,19 +87,16 @@ function addImage(where, clickedButton) {
                 if (data.success) {
                     const imageUrl = data.imageUrl; // URL obrazu zwrócony przez serwer
 
-                    
-
                     const img = document.createElement('img');
                     img.src = imageUrl; // Użyj URL obrazu z serwera
+
                     const imageWrapper = document.createElement('div');
                     imageWrapper.className = 'image-wrapper';
                     imageContainer.appendChild(imageWrapper);
                     imageWrapper.appendChild(img);
-                    
+
                     // Dodaj uchwyt zmiany rozmiaru po załadowaniu obrazu
                     makeResizableImage(img);
-
-                    
                 } else {
                     alert('Błąd przesyłania obrazu');
                 }
@@ -100,19 +105,29 @@ function addImage(where, clickedButton) {
                 console.error('Błąd przesyłania obrazu:', error);
             });
         }
+
         const lineBreak = document.createElement('div');
         lineBreak.appendChild(imageContainer);
         lineBreak.className = 'element-container';
         document.getElementById('main-container').appendChild(lineBreak);
+        const parentElement = document.getElementById('main-container');
+        if (where === 'end') {
+            parentElement.appendChild(lineBreak);
+        } else {
+            const currentElement = clickedButton.closest('.element-container');
+            parentElement.insertBefore(lineBreak, currentElement.nextSibling);
+        }
 
         // Dodaj przycisk "Dodaj" do elementu
         addAddButtonToElement(lineBreak);
 
         document.getElementById('menu').style.display = 'none';
     };
+    
 
     input.click();
 }
+
 
 
 
@@ -246,25 +261,30 @@ function generateJSON() {
 function sendToBd() {
     const jsonData = generateJSON(); // Generowanie danych JSON
     const title = document.getElementById('title-input').value; // Pobranie wartości pola "title"
-
+    const type = document.getElementById('kurs-type').value;
     // Tworzymy obiekt z JSON-em i tytułem
-    const payload = JSON.stringify({
-        courseData: jsonData,
-        title: title
-    });
-
-    fetch('save_kurs.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: payload
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Kurs zapisany pomyślnie!');
-        } else {
-            alert('Wystąpił błąd podczas zapisu.');
-        }
-    })
-    .catch(error => console.error('Błąd:', error));
+    if(type){
+        const payload = JSON.stringify({
+            courseData: jsonData,
+            title: title,
+            type: type
+        });
+    
+        fetch('save_kurs.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: payload
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Kurs zapisany pomyślnie!');
+            } else {
+                alert('Wystąpił błąd podczas zapisu.');
+            }
+        })
+        .catch(error => console.error('Błąd:', error));
+    }else{
+        alert('Wybierz HTML/CSS/JS')
+    }
 }

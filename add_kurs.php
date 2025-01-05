@@ -16,7 +16,15 @@
 
         </div>
         <button id="main-control" onclick='AddElementMainBtn()'>+ Dodaj</button><br>
-        <button id="add-to-bd-btn" onclick="sendToBd()">Zapisz kurs</button>
+        <div id="div-add-to-bd">
+            <select id="kurs-type">
+                <option value="" disabled selected>Wybierz typ</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JS">JS</option>
+            </select>
+            <button id="add-to-bd-btn" onclick="sendToBd()">Zapisz kurs</button>
+        </div>
         <div id="menu">
             <div data-type="h2">Dodaj H2</div>
             <div data-type="h3">Dodaj H3</div>
