@@ -67,6 +67,7 @@ function addImage(where, clickedButton) {
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 imageContainer.appendChild(img);
+                makeResizableImage(img);
             };
             reader.readAsDataURL(file);
         }
@@ -82,6 +83,7 @@ function addImage(where, clickedButton) {
             const currentElement = clickedButton.closest('.element-container');
             parentElement.insertBefore(lineBreak, currentElement.nextSibling);
         }
+        // makeResizable(imageContainer);
     };
     input.click();
 }
@@ -131,3 +133,37 @@ document.addEventListener('click', function() {
     const menu = document.getElementById('menu');
     menu.style.display = 'none';
 });
+function makeResizableImage(img) {
+    // Dodanie uchwytu
+    const resizer = document.createElement('div');
+    resizer.classList.add('resizer');
+    img.parentElement.style.position = 'relative'; // Pozycjonowanie rodzica
+    img.parentElement.appendChild(resizer);
+
+    // Funkcjonalność zmiany rozmiaru
+    resizer.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startWidth = img.offsetWidth;
+        const startHeight = img.offsetHeight;
+
+        function resize(e) {
+            const newWidth = startWidth + (e.clientX - startX);
+            const newHeight = startHeight + (e.clientY - startY);
+
+            img.style.width = newWidth + 'px';
+            img.style.height = newHeight + 'px';
+        }
+
+        function stopResize() {
+            document.removeEventListener('mousemove', resize);
+            document.removeEventListener('mouseup', stopResize);
+        }
+
+        document.addEventListener('mousemove', resize);
+        document.addEventListener('mouseup', stopResize);
+    });
+}
+

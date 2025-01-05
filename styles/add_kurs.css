@@ -89,6 +89,7 @@ textarea:focus,
     display: flex;
     /* Umożliwia wyświetlanie obrazów obok siebie */
     justify-content: center;
+    align-items: center;
     /* Wyśrodkowanie obrazów */
     margin: 10px 0;
     /* Margines dla obrazów */
@@ -97,7 +98,7 @@ textarea:focus,
 .image-container img {
     max-width: 45%;
     /* Ustaw maksymalną szerokość obrazów */
-    height: auto;
+    max-height: 300px;
     /* Ustaw automatyczną wysokość */
     margin: 0 5px;
     /* Margines między obrazami */
@@ -152,3 +153,21 @@ textarea:focus,
     display: block;
     /* Pokaż przycisk po najechaniu na element */
 }
+
+.resizer {
+    width: 10px;
+    height: 10px;
+    background: white; /* Biały kolor dla widoczności */
+    border: 2px solid black; /* Obramowanie dla wyraźniejszej widoczności */
+    position: absolute; /* Pozycjonowanie względem obrazu */
+    bottom: 10px; /* Dolny prawy róg obrazu */
+    right: 10px;
+    cursor: se-resize; /* Kursor zmiany rozmiaru */
+    z-index: 999; /* Wyższy z-index, aby był widoczny nad obrazem */
+}
+img {
+    border: 1px solid red; /* Czerwona ramka obrazu */
+}
+
+
+
