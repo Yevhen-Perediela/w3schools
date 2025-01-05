@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -46,9 +47,9 @@
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <ul class="tech-list">
-                    <li><a href="#">HTML (HyperText Markup Language)</a></li>
-                    <li><a href="#">CSS (Cascading Style Sheets)</a></li>
-                    <li><a href="#">JS (JavaScript)</a></li>
+                    <li><a href="kurs.php?type=HTML?lesson=Zmienne">HTML (HyperText Markup Language)</a></li>
+                    <li><a href="kurs.php?type=CSS">CSS (Cascading Style Sheets)</a></li>
+                    <li><a href="kurs.php?type=JS?lesson=Test">JS (JavaScript)</a></li>
                 </ul>
             </div>
         </nav>
