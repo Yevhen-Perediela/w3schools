@@ -15,7 +15,8 @@
         <div id='main-container'>
 
         </div>
-        <button id="main-control" onclick='AddElementMainBtn()'>+ Dodaj</button>
+        <button id="main-control" onclick='AddElementMainBtn()'>+ Dodaj</button><br>
+        <button id="add-to-bd-btn" onclick="sendToBd()">Zapisz kurs</button>
         <div id="menu">
             <div data-type="h2">Dodaj H2</div>
             <div data-type="h3">Dodaj H3</div>
