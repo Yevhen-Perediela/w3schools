@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s linear;
+}
+
+body {
+    background-color: #282a35;
+    color: white;
+    /* padding: 50px auto; */
+    
+}
+
+#left-side{
+    width: 18vw;
+    height: 87.4vh;
+    position: static;
+    background-color: #222536;
+}
+.item-menu{
+    width: 100%;
+    padding: 10px;
+    max-width: 18vw;
+    overflow-x: auto;
+}
+
+.item-menu:hover{
+    background-color: #04aa6d;
+    cursor: pointer;
+    color: black;
+}
