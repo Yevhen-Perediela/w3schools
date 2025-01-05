@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2024 at 09:19 AM
+-- Generation Time: Sty 05, 2025 at 10:06 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -24,30 +24,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `order_kurs`
+-- Struktura tabeli dla tabeli `kursy`
 --
 
-CREATE TABLE `order_kurs` (
-  `id_order` int(11) NOT NULL,
-  `id_kurs` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `status_1_part` varchar(255) DEFAULT NULL,
-  `status_2_part` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `users`
---
-
-CREATE TABLE `users` (
+CREATE TABLE `kursy` (
   `id` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` text NOT NULL,
-  `image` longblob NOT NULL
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data`)),
+  `created_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -55,15 +38,9 @@ CREATE TABLE `users` (
 --
 
 --
--- Indeksy dla tabeli `order_kurs`
+-- Indeksy dla tabeli `kursy`
 --
-ALTER TABLE `order_kurs`
-  ADD PRIMARY KEY (`id_order`);
-
---
--- Indeksy dla tabeli `users`
---
-ALTER TABLE `users`
+ALTER TABLE `kursy`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -71,15 +48,9 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `order_kurs`
+-- AUTO_INCREMENT for table `kursy`
 --
-ALTER TABLE `order_kurs`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
+ALTER TABLE `kursy`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
