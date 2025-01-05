@@ -127,11 +127,8 @@
   </div>
 
   <!-- ŁADOWANIE ACE EDITOR -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.3/ace.js"
-          integrity="sha512-..."
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer">
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.3/ace.js" crossorigin="anonymous"></script>
+
 
   <script>
 
