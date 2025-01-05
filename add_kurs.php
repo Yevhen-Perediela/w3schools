@@ -12,7 +12,7 @@
     ?>
     <div id="container">
         <input type="text" id='title-input' placeholder='Nazwa..'>
-        <div id='element'>
+        <div id='main-container'>
 
         </div>
         <button id="main-control" onclick='AddElementMainBtn()'>+ Dodaj</button>

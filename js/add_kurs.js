@@ -36,7 +36,7 @@ function addElement(type, where, clickedButton) {
     lineBreak.className = 'element-container';
     lineBreak.appendChild(element);
 
-    const parentElement = document.getElementById('element');
+    const parentElement = document.getElementById('main-container');
 
     if (where === 'end') {
         parentElement.appendChild(lineBreak);
@@ -57,41 +57,61 @@ function addImage(where, clickedButton) {
     input.multiple = true;
     input.onchange = function(event) {
         const files = event.target.files;
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'image-container';
-        
 
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                const imageWrapper = document.createElement('div');
-                imageWrapper.className = 'image-wrapper';
-                imageContainer.appendChild(imageWrapper);
-                imageWrapper.appendChild(img);
-                
-                // Dodaj uchwyt zmiany rozmiaru po załadowaniu obrazu
-                makeResizableImage(img);
-            };
-            reader.readAsDataURL(file);
+
+            // Tworzymy obiekt FormData do przesłania na serwer
+            const formData = new FormData();
+            formData.append('image', file);
+
+            // Wyślij plik na serwer za pomocą POST
+            fetch('upload.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Odpowiedź z serwera:', data);
+                // Jeśli serwer zwróci URL do obrazu, tworzymy element <img>
+                if (data.success) {
+                    const imageUrl = data.imageUrl; // URL obrazu zwrócony przez serwer
+
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'image-container';
+
+                    const img = document.createElement('img');
+                    img.src = imageUrl; // Użyj URL obrazu z serwera
+                    const imageWrapper = document.createElement('div');
+                    imageWrapper.className = 'image-wrapper';
+                    imageContainer.appendChild(imageWrapper);
+                    imageWrapper.appendChild(img);
+                    
+                    // Dodaj uchwyt zmiany rozmiaru po załadowaniu obrazu
+                    makeResizableImage(img);
+
+                    const lineBreak = document.createElement('div');
+                    lineBreak.appendChild(imageContainer);
+                    lineBreak.className = 'element-container';
+                    document.getElementById('main-container').appendChild(lineBreak);
+
+                    // Dodaj przycisk "Dodaj" do elementu
+                    addAddButtonToElement(lineBreak);
+                } else {
+                    alert('Błąd przesyłania obrazu');
+                }
+            })
+            .catch(error => {
+                console.error('Błąd przesyłania obrazu:', error);
+            });
         }
 
-        const lineBreak = document.createElement('div');
-        lineBreak.appendChild(imageContainer);
-        document.getElementById('element').appendChild(lineBreak);
-        const parentElement = document.getElementById('element');
-
-        if (where === 'end') {
-            parentElement.appendChild(lineBreak);
-        } else {
-            const currentElement = clickedButton.closest('.element-container');
-            parentElement.insertBefore(lineBreak, currentElement.nextSibling);
-        }
+        document.getElementById('menu').style.display = 'none';
     };
+
     input.click();
 }
+
 
 
 function showAddButton(event) {
@@ -180,3 +200,63 @@ function makeResizableImage(img) {
     });
 }
 
+
+
+
+function generateJSON() {
+    const elements = document.querySelectorAll('#main-container .element-container');
+    const data = [];
+
+    elements.forEach(element => {
+        const obj = {};
+        const child = element.firstChild;
+
+        if (child.tagName === 'TEXTAREA') {
+            obj.type = 'textarea';
+            obj.content = child.value || child.placeholder;
+            obj.styles = { height: child.style.height || 'auto' };
+        } else if (child.tagName === 'INPUT') {
+            obj.type = child.classList.contains('h2') ? 'h2' :
+                       child.classList.contains('h3') ? 'h3' : 'h1';
+            obj.content = child.value || child.placeholder;
+            obj.styles = { class: child.className };
+        } else if (child.classList.contains('image-container')) {
+            obj.type = 'image-container';
+            obj.images = [];
+            const images = child.querySelectorAll('img');
+            images.forEach(img => {
+                obj.images.push({
+                    src: img.src,
+                    width: img.style.width || 'auto',
+                    height: img.style.height || 'auto'
+                });
+            });
+        }
+
+        data.push(obj);
+    });
+
+    return JSON.stringify(data, null, 2);
+}
+
+
+
+function sendToBd(){
+    const jsonData = generateJSON();
+
+    fetch('save_kurs.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: jsonData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Kurs zapisany pomyślnie!');
+        } else {
+            alert('Wystąpił błąd podczas zapisu.');
+        }
+    })
+    .catch(error => console.error('Błąd:', error));
+
+}

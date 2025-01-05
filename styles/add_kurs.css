@@ -149,7 +149,7 @@ textarea:focus,
     /* Wyrównanie elementów w pionie */
 }
 
-.element-container:hover .add-button {
+.element-container:hover .add-button{
     display: block;
     /* Pokaż przycisk po najechaniu na element */
 }
