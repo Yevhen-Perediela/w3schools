@@ -58,6 +58,8 @@ function addImage(where, clickedButton) {
     input.onchange = function(event) {
         const files = event.target.files;
 
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'image-container';
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
 
@@ -77,8 +79,7 @@ function addImage(where, clickedButton) {
                 if (data.success) {
                     const imageUrl = data.imageUrl; // URL obrazu zwrócony przez serwer
 
-                    const imageContainer = document.createElement('div');
-                    imageContainer.className = 'image-container';
+                    
 
                     const img = document.createElement('img');
                     img.src = imageUrl; // Użyj URL obrazu z serwera
@@ -90,13 +91,7 @@ function addImage(where, clickedButton) {
                     // Dodaj uchwyt zmiany rozmiaru po załadowaniu obrazu
                     makeResizableImage(img);
 
-                    const lineBreak = document.createElement('div');
-                    lineBreak.appendChild(imageContainer);
-                    lineBreak.className = 'element-container';
-                    document.getElementById('main-container').appendChild(lineBreak);
-
-                    // Dodaj przycisk "Dodaj" do elementu
-                    addAddButtonToElement(lineBreak);
+                    
                 } else {
                     alert('Błąd przesyłania obrazu');
                 }
@@ -105,6 +100,13 @@ function addImage(where, clickedButton) {
                 console.error('Błąd przesyłania obrazu:', error);
             });
         }
+        const lineBreak = document.createElement('div');
+        lineBreak.appendChild(imageContainer);
+        lineBreak.className = 'element-container';
+        document.getElementById('main-container').appendChild(lineBreak);
+
+        // Dodaj przycisk "Dodaj" do elementu
+        addAddButtonToElement(lineBreak);
 
         document.getElementById('menu').style.display = 'none';
     };
@@ -241,13 +243,20 @@ function generateJSON() {
 
 
 
-function sendToBd(){
-    const jsonData = generateJSON();
+function sendToBd() {
+    const jsonData = generateJSON(); // Generowanie danych JSON
+    const title = document.getElementById('title-input').value; // Pobranie wartości pola "title"
+
+    // Tworzymy obiekt z JSON-em i tytułem
+    const payload = JSON.stringify({
+        courseData: jsonData,
+        title: title
+    });
 
     fetch('save_kurs.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: jsonData
+        body: payload
     })
     .then(response => response.json())
     .then(data => {
@@ -258,5 +267,4 @@ function sendToBd(){
         }
     })
     .catch(error => console.error('Błąd:', error));
-
 }

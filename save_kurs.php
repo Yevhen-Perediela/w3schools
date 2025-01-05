@@ -28,11 +28,17 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     exit;
 }
 
-// Ucieczka danych, aby zapobiec wstrzykiwaniu SQL
-$jsonString = $conn->real_escape_string(json_encode($dataArray));
+// Pobranie danych z JSON-a
+$title = isset($dataArray['title']) ? $conn->real_escape_string($dataArray['title']) : null;
+$courseData = isset($dataArray['courseData']) ? $conn->real_escape_string(json_encode($dataArray['courseData'])) : null;
+
+if (!$title || !$courseData) {
+    echo json_encode(['success' => false, 'message' => 'Brak wymaganych danych.']);
+    exit;
+}
 
 // Przygotowanie i wykonanie zapytania SQL
-$query = "INSERT INTO kursy (kurs_data, created_at) VALUES ('$jsonString', NOW())";
+$query = "INSERT INTO kursy (title, kurs_data, created_at) VALUES ('$title', '$courseData', NOW())";
 
 if ($conn->query($query) === TRUE) {
     echo json_encode(['success' => true, 'message' => 'Kurs zapisany pomyślnie.']);
