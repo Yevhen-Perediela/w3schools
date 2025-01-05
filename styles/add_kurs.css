@@ -118,26 +118,6 @@ textarea:focus,
     display: none;
     /* Ukryj przycisk */
     position: absolute;
-    left: -60px;
-    /* Pozycjonowanie przycisku z lewej strony elementu */
-    background-color: #3a3f47;
-    /* Kolor tła przycisku */
-    color: white;
-    /* Kolor tekstu przycisku */
-    border: none;
-    /* Bez obramowania */
-    padding: 5px;
-    /* Padding dla przycisku */
-    cursor: pointer;
-    /* Kursor wskazujący */
-    transition: all 0.3s;
-    /* Płynne przejście */
-}
-
-.add-button {
-    display: none;
-    /* Ukryj przycisk */
-    position: absolute;
     left: -70px;
     /* Pozycjonowanie przycisku z lewej strony elementu */
     background-color: #3a3f47;
