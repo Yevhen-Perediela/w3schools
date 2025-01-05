@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: all 0.5s;
+    transition: all 0.3s linear;
 }
 
 body {
@@ -95,8 +95,8 @@ textarea:focus,
     /* Margines dla obrazów */
 }
 
-.image-container img {
-    max-width: 45%;
+.image-wrapper img {
+    max-width: 300px;
     /* Ustaw maksymalną szerokość obrazów */
     max-height: 300px;
     /* Ustaw automatyczną wysokość */
@@ -155,19 +155,21 @@ textarea:focus,
 }
 
 .resizer {
-    width: 10px;
-    height: 10px;
-    background: white; /* Biały kolor dla widoczności */
-    border: 2px solid black; /* Obramowanie dla wyraźniejszej widoczności */
     position: absolute; /* Pozycjonowanie względem obrazu */
-    bottom: 10px; /* Dolny prawy róg obrazu */
-    right: 10px;
+    bottom: -5px; /* Dolny prawy róg obrazu */
+    right: -5px;
     cursor: se-resize; /* Kursor zmiany rozmiaru */
     z-index: 999; /* Wyższy z-index, aby był widoczny nad obrazem */
 }
-img {
-    border: 1px solid red; /* Czerwona ramka obrazu */
+.resizer img{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    transform: rotate(90deg);
+    filter: invert(100%);
 }
 
-
+.image-wrapper{
+    position: relative;
+}
 
