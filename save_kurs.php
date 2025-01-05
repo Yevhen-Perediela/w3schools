@@ -3,12 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Konfiguracja bazy danych
-$host = 'localhost';
-$dbname = 'w3schools';
-$username = 'root';
-$password = '';
-$conn = new mysqli($host, $username, $password, $dbname);
+require_once 'connect.php';
 
 if ($conn->connect_error) {
     die("Błąd połączenia z bazą danych: " . $conn->connect_error);
