@@ -5,10 +5,18 @@ document.getElementById('main-control').onclick = function(event) {
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     menu.style.left = event.pageX + 'px';
     menu.style.top = (event.pageY + 20) + 'px';
+    menu.onclick = function(e) {
+        const type = e.target.getAttribute('data-type');
+        if (type != 'image') {
+            addElement(type, 'end', '');
+        }else{
+            addImage('end', '')
+        }
+    };
     event.stopPropagation();
 };
 
-function addElement(type) {
+function addElement(type, where, clickedButton) {
     let element;
     if (type === 'textarea') {
         element = document.createElement('textarea');
@@ -27,13 +35,22 @@ function addElement(type) {
     const lineBreak = document.createElement('div');
     lineBreak.className = 'element-container';
     lineBreak.appendChild(element);
-    document.getElementById('element').appendChild(lineBreak);
-    document.getElementById('menu').style.display = 'none';
 
+    const parentElement = document.getElementById('element');
+
+    if (where === 'end') {
+        parentElement.appendChild(lineBreak);
+    } else {
+        const currentElement = clickedButton.closest('.element-container');
+        parentElement.insertBefore(lineBreak, currentElement.nextSibling);
+    }
+
+    document.getElementById('menu').style.display = 'none';
     addAddButtonToElement(lineBreak);
 }
 
-function addImage() {
+
+function addImage(where, clickedButton) {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -57,6 +74,14 @@ function addImage() {
         const lineBreak = document.createElement('div');
         lineBreak.appendChild(imageContainer);
         document.getElementById('element').appendChild(lineBreak);
+        const parentElement = document.getElementById('element');
+
+        if (where === 'end') {
+            parentElement.appendChild(lineBreak);
+        } else {
+            const currentElement = clickedButton.closest('.element-container');
+            parentElement.insertBefore(lineBreak, currentElement.nextSibling);
+        }
     };
     input.click();
 }
@@ -80,11 +105,22 @@ function addAddButtonToElement(element) {
         menu.style.display = 'block';
         menu.style.left = event.pageX + 'px';
         menu.style.top = (event.pageY + 20) + 'px';
+
+        menu.onclick = function(e) {
+            const type = e.target.getAttribute('data-type');
+            if (type != 'image') {
+                addElement(type, 'after', addButton);
+            }else{
+                addImage('after', addButton)
+            }
+        };
+
         event.stopPropagation();
     };
 
     element.appendChild(addButton);
 }
+
 
 document.querySelectorAll('#element > div').forEach(function(el) {
     el.classList.add('element-container');
