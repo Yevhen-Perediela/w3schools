@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $errors = [];
 
-
     if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || preg_match('/\s/', $password)) {
         $errors[] = "Hasło musi mieć co najmniej 8 znaków, jedną dużą literę i nie może zawierać spacji.";
     }
@@ -37,9 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($errors)) {
+        $default_avatar = file_get_contents('https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg');
+        
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $conn->prepare("INSERT INTO users (username, lastname, email, password) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $username, $lastname, $email, $hashed_password);
+        
+        $stmt = $conn->prepare("INSERT INTO users (username, lastname, email, password, image) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $username, $lastname, $email, $hashed_password, $default_avatar);
         
         if ($stmt->execute()) {
             header("Location: login.php");
@@ -58,7 +60,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja</title>
     <style>
-
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -72,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     ?>
 
-    <form method="POST" action="">
+    <form method="POST" action="login.php">
         <label for="username">Nazwa użytkownika:</label>
         <input type="text" id="username" name="username" required>
         
