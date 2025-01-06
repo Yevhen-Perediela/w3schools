@@ -91,11 +91,14 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                         const btn = document.createElement('button')
                         btn.textContent = 'Uruchom kod'
                         code.className = 'language-html';
-                        code.textContent = item.complete_kod;
+                        code.textContent = item.preview;
                         pre.appendChild(code);
                         pre.appendChild(btn)
                         container.appendChild(pre);
                         hljs.highlightElement(code);
+                        btn.addEventListener('click', () => {
+                            window.location.href = 'edytor/edytor.php?code='+item.complete_kod;
+                        });
                         break;
 
                     case 'notatka':
