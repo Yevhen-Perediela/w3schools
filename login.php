@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p class="error"><?php echo htmlspecialchars($error); ?></p>
     <?php endif; ?>
 
-    <form method="POST" action="">
+    <form method="POST" action="index.php">
         <label for="username">Nazwa użytkownika:</label>
         <input type="text" id="username" name="username" required>
         
