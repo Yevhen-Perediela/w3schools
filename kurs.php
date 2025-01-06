@@ -117,9 +117,11 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                             answerDiv.className = 'quiz-answer';
 
                             const checkbox = document.createElement('input');
-                            checkbox.type = 'checkbox';
-                            checkbox.disabled = true;
-                            checkbox.checked = answer.correct;
+                            checkbox.type = 'radio';
+                            answerDiv.setAttribute('correct', answer.correct);
+                            // checkbox.disabled = true;
+                            // checkbox.checked = answer.correct;
+                            
 
                             const label = document.createElement('label');
                             label.textContent = answer.text;
@@ -153,6 +155,30 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         console.log(kursData);
 
         loadFromJSON(kursData);
+
+        checkboxes = document.querySelectorAll('.quiz-answer');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('click', () => {
+                const quizDiv = checkbox.closest('.quiz-container'); // Znajdujemy kontener quizu
+                const allAnswers = quizDiv.querySelectorAll('.quiz-answer'); // Wszystkie odpowiedzi w tym quizie
+
+                // Usuwamy klasy 'correct' i 'incorrect' z wszystkich odpowiedzi
+                allAnswers.forEach(answer => {
+                    answer.classList.remove('correct', 'incorrect');
+                });
+
+                var isCorrect = checkbox.getAttribute('correct');
+                if (isCorrect == 'true') {
+                    checkbox.classList.add('correct');
+                    console.log('correct');
+                } else {
+                    checkbox.classList.add('incorrect');
+                }
+            });
+        });
+
+        
     </script>
 </body>
 </html>
