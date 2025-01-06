@@ -88,9 +88,12 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                     case 'code':
                         const pre = document.createElement('pre');
                         const code = document.createElement('code');
+                        const btn = document.createElement('button')
+                        btn.textContent = 'Uruchom kod'
                         code.className = 'language-html';
                         code.textContent = item.complete_kod;
                         pre.appendChild(code);
+                        pre.appendChild(btn)
                         container.appendChild(pre);
                         hljs.highlightElement(code);
                         break;
@@ -119,7 +122,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                             const checkbox = document.createElement('input');
                             checkbox.type = 'radio';
                             answerDiv.setAttribute('correct', answer.correct);
-                            // checkbox.disabled = true;
+                            checkbox.disabled = true;
                             // checkbox.checked = answer.correct;
                             
 
@@ -156,17 +159,36 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
         loadFromJSON(kursData);
 
-        checkboxes = document.querySelectorAll('.quiz-answer');
+        quiz_cont = document.querySelectorAll('.quiz-container')
+        quiz_cont.forEach(container=>{
+            const nazwa = container.querySelector('h4').textContent;
+            var i = localStorage.getItem(nazwa)
+            if(i){
+                checkbox = container.querySelectorAll('.quiz-answer')
+                var isCorrect = checkbox[i].getAttribute('correct');
+                if (isCorrect == 'true') {
+                    checkbox[i].classList.add('correct');
+                    console.log('correct');
+                } else {
+                    checkbox[i].classList.add('incorrect');
+                }
 
-        checkboxes.forEach(checkbox => {
+            }
+        })
+
+        checkboxes = document.querySelectorAll('.quiz-answer')
+        checkboxes.forEach((checkbox, index) => {
+            const quizDiv = checkbox.closest('.quiz-container');
+            const allAnswers = quizDiv.querySelectorAll('.quiz-answer');
+            const nazwa = quizDiv.querySelector('h4').textContent;
             checkbox.addEventListener('click', () => {
-                const quizDiv = checkbox.closest('.quiz-container'); // Znajdujemy kontener quizu
-                const allAnswers = quizDiv.querySelectorAll('.quiz-answer'); // Wszystkie odpowiedzi w tym quizie
-
                 // Usuwamy klasy 'correct' i 'incorrect' z wszystkich odpowiedzi
                 allAnswers.forEach(answer => {
                     answer.classList.remove('correct', 'incorrect');
                 });
+                
+                localStorage.setItem(nazwa, index)
+                
 
                 var isCorrect = checkbox.getAttribute('correct');
                 if (isCorrect == 'true') {
@@ -177,6 +199,8 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                 }
             });
         });
+
+        
 
         
     </script>
