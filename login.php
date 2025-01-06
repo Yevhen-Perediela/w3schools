@@ -1,42 +1,29 @@
 <?php
+session_start();
+require_once 'connect.php';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-
     
-    $conn = new mysqli('localhost', 'db_user', 'db_password', 'w3schools');
-
-   
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    
-    $sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
- 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-      
+        
         if (password_verify($password, $user['password'])) {
-           
-            session_start();
             $_SESSION['user_id'] = $user['id'];
-            header("Location: dashboard.php"); 
+            header("Location: index.php");
             exit();
         } else {
-            echo "Nieprawidłowe hasło.";
+            $error = "Nieprawidłowe hasło.";
         }
     } else {
-        echo "Użytkownik nie istnieje.";
+        $error = "Użytkownik nie istnieje.";
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>
 
@@ -46,17 +33,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie</title>
+    <style>
+        
+    </style>
 </head>
 <body>
     <h2>Logowanie</h2>
+    
+    <?php
+    if (isset($error)) {
+        echo "<p class='error'>" . htmlspecialchars($error) . "</p>";
+    }
+    ?>
+
     <form method="POST" action="">
         <label for="username">Nazwa użytkownika:</label>
         <input type="text" id="username" name="username" required>
-        <br>
+        
         <label for="password">Hasło:</label>
         <input type="password" id="password" name="password" required>
-        <br>
+        
         <input type="submit" value="Zaloguj">
     </form>
+    <p>Nie masz konta? <a href="register.php">Zarejestruj się</a></p>
 </body>
 </html>

@@ -30,7 +30,86 @@ function addElement(type, where, clickedButton) {
         element.contentEditable = true;
         element.placeholder = type === 'h1' ? 'Wpisz H1...' : type === 'h2' ? 'Wpisz H2...' : 'Wpisz H3...';
         element.className = 'header-input ' + type;
+    } else if(type == 'code'){
+        let small_code = document.createElement('textarea')
+        small_code.placeholder = 'Fragment kodu...   (HTML/CSS/JS)'
+        let big_code = document.createElement('textarea')
+        big_code.placeholder = 'Cały skrypt...   (HTML/CSS/JS)'
+        element = document.createElement('div')
+        element.className = 'code-div'
+        element.appendChild(small_code)
+        element.appendChild(big_code)
+        small_code.oninput = function() {
+            this.style.height = '';
+            this.style.height = this.scrollHeight + 'px';
+        };
+        big_code.oninput = function() {
+            this.style.height = '';
+            this.style.height = this.scrollHeight + 'px';
+        };
+        
+    } else if(type=='notatka'){
+        let textarea = document.createElement('textarea')
+        textarea.placeholder = 'Notatka..'
+        element = document.createElement('div')
+        element.className = 'notatka-div'
+        element.appendChild(textarea)
+        textarea.oninput = function() {
+            this.style.height = '';
+            this.style.height = this.scrollHeight + 'px';
+        };
+    } else if (type == 'quiz') {
+        element = document.createElement('form');
+        element.className = 'quiz';
+    
+        let pytanie = document.createElement('input');
+        pytanie.className = 'quiz-pytanie';
+        pytanie.type = 'text';
+        pytanie.placeholder = 'Wpisz pytanie...';
+    
+        let btnDodajOdpowiedz = document.createElement('button');
+        btnDodajOdpowiedz.textContent = 'Dodaj odpowiedź';
+        btnDodajOdpowiedz.type = 'button'; // Zapobiega przeładowaniu strony
+    
+        let odpowiedzi = document.createElement('div');
+        odpowiedzi.className = 'answers';
+    
+        // Funkcja do dodawania odpowiedzi
+        btnDodajOdpowiedz.addEventListener('click', () => {
+            let odpowiedz = document.createElement('div');
+            odpowiedz.className = 'answer';
+    
+            let inputOdpowiedz = document.createElement('input');
+            inputOdpowiedz.type = 'text';
+            inputOdpowiedz.placeholder = 'Wpisz odpowiedź...';
+            inputOdpowiedz.className = 'quiz-answer';
+    
+            let radioOdpowiedz = document.createElement('input');
+            radioOdpowiedz.type = 'radio';
+            radioOdpowiedz.name = 'correct-answer';
+            radioOdpowiedz.className = 'correct-answer';
+    
+            let usunOdpowiedz = document.createElement('button');
+            usunOdpowiedz.textContent = 'Usuń';
+            usunOdpowiedz.type = 'button';
+            usunOdpowiedz.className = 'remove-answer';
+    
+            // Obsługa usuwania odpowiedzi
+            usunOdpowiedz.addEventListener('click', () => {
+                odpowiedz.remove();
+            });
+    
+            odpowiedz.appendChild(radioOdpowiedz);
+            odpowiedz.appendChild(inputOdpowiedz);
+            odpowiedz.appendChild(usunOdpowiedz);
+            odpowiedzi.appendChild(odpowiedz);
+        });
+    
+        element.appendChild(pytanie);
+        element.appendChild(btnDodajOdpowiedz);
+        element.appendChild(odpowiedzi);
     }
+    
 
     const lineBreak = document.createElement('div');
     lineBreak.className = 'element-container';
@@ -49,7 +128,11 @@ function addElement(type, where, clickedButton) {
     addAddButtonToElement(lineBreak);
 }
 
+// addElement('quiz', 'end', '')
 
+document.querySelectorAll('textarea').forEach(item => {
+    
+})
 
 function addImage(where, clickedButton) {
     const input = document.createElement('input');
@@ -246,6 +329,30 @@ function generateJSON() {
                     src: img.src,
                     width: img.style.width || 'auto',
                     height: img.style.height || 'auto'
+                });
+            });
+        } else if (child.classList.contains('code-div')){
+            obj.type = 'code'
+            obj.preview = child.firstChild.value
+            obj.complete_kod = child.lastChild.value
+        } else if (child.classList.contains('notatka-div')){
+            obj.type = 'notatka'
+            obj.content = child.firstChild.value
+        } else if (child.classList.contains('quiz')) {
+            let pytanie = child.querySelector('.quiz-pytanie').value;
+            let odpowiedzi = child.querySelectorAll('.answer');
+
+            obj.type = 'quiz';
+            obj.question = pytanie;
+            obj.answers = [];
+
+            odpowiedzi.forEach((odpowiedz) => {
+                let text = odpowiedz.querySelector('.quiz-answer').value;
+                let isCorrect = odpowiedz.querySelector('.correct-answer').checked;
+
+                obj.answers.push({
+                    text: text,
+                    correct: isCorrect
                 });
             });
         }
