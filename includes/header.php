@@ -15,9 +15,9 @@
                         <i class="fas fa-bars"></i>
                     </button>
                     
-                    <div class="logo">
+                    <a href="index.php"><div class="logo">
                         <img src="./assets/img/logo.png" alt="Logo">
-                    </div>
+                    </div></a>
                     
                     <div class="nav-links">
                         <a href="#">O nas</a>
@@ -47,12 +47,13 @@
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <ul class="tech-list">
-                    <li><a href="kurs.php?type=HTML?lesson=Zmienne">HTML (HyperText Markup Language)</a></li>
-                    <li><a href="kurs.php?type=CSS">CSS (Cascading Style Sheets)</a></li>
-                    <li><a href="kurs.php?type=JS?lesson=Test">JS (JavaScript)</a></li>
+                    <li><a href="kurs.php?type=HTML&lesson=Zmienne">HTML (HyperText Markup Language)</a></li>
+                    <li><a href="kurs.php?type=CSS&lesson=Selektory">CSS (Cascading Style Sheets)</a></li>
+                    <li><a href="kurs.php?type=JS&lesson=Loop (for, while)">JS (JavaScript)</a></li>
                 </ul>
             </div>
         </nav>
     </div>
+    <div id="odstep"></div>
 </body>
 </html>
