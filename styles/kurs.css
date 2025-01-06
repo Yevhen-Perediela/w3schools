@@ -124,11 +124,28 @@ a{
 .quiz-answer input[type="checkbox"] {
     cursor: pointer;
 }
-/* 
-.quiz-answer.disabled {
+
+/* .quiz-answer .disabled {
     pointer-events: none;
 } */
 
 .quiz-answer input[type="checkbox"]:disabled {
     cursor: not-allowed;
+}
+
+pre{
+    padding: 10px 10px 0px;
+    border-radius: 10px;
+    background-color: #222536;
+}
+code{
+    border-radius: 7px;
+}
+
+pre button{
+    margin: 10px 0px;
+    border: 0px;
+    padding: 5px;
+    background-color: #04aa6d;
+    border-radius: 6px;
 }
