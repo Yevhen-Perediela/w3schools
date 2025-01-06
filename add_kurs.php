@@ -30,6 +30,8 @@
             <div data-type="h3">Dodaj H3</div>
             <div data-type="textarea">Dodaj Textarea</div>
             <div data-type="image">Dodaj Zdjęcie</div>
+            <div data-type="code">Edytor kodu</div>
+            <div data-type="notatka">Notatka</div>
         </div>
 
     </div>

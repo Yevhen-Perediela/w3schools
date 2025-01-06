@@ -30,6 +30,41 @@ function addElement(type, where, clickedButton) {
         element.contentEditable = true;
         element.placeholder = type === 'h1' ? 'Wpisz H1...' : type === 'h2' ? 'Wpisz H2...' : 'Wpisz H3...';
         element.className = 'header-input ' + type;
+    } else if(type == 'code'){
+        let small_code = document.createElement('textarea')
+        small_code.placeholder = 'Fragment kodu...   (HTML/CSS/JS)'
+        let big_code = document.createElement('textarea')
+        big_code.placeholder = 'Cały skrypt...   (HTML/CSS/JS)'
+        element = document.createElement('div')
+        element.className = 'code-div'
+        element.appendChild(small_code)
+        element.appendChild(big_code)
+        small_code.oninput = function() {
+            this.style.height = '';
+            this.style.height = this.scrollHeight + 'px';
+        };
+        big_code.oninput = function() {
+            this.style.height = '';
+            this.style.height = this.scrollHeight + 'px';
+        };
+        
+    } else if(type=='notatka'){
+        let textarea = document.createElement('textarea')
+        textarea.placeholder = 'Notatka..'
+        element = document.createElement('div')
+        element.className = 'notatka-div'
+        element.appendChild(textarea)
+        textarea.oninput = function() {
+            this.style.height = '';
+            this.style.height = this.scrollHeight + 'px';
+        };
+    } else if(type == 'quiz'){
+        element = document.createElement('form')
+        element.className = 'quiz'
+        let pytanie = document.createElement('input')
+        pytanie.className = 'quiz-pytanie'
+        pytanie.placeholder = 'Wpisz pytanie...'
+        element.appendChild(pytanie)
     }
 
     const lineBreak = document.createElement('div');
@@ -49,7 +84,11 @@ function addElement(type, where, clickedButton) {
     addAddButtonToElement(lineBreak);
 }
 
+addElement('quiz', 'end', '')
 
+document.querySelectorAll('textarea').forEach(item => {
+    
+})
 
 function addImage(where, clickedButton) {
     const input = document.createElement('input');
@@ -248,6 +287,13 @@ function generateJSON() {
                     height: img.style.height || 'auto'
                 });
             });
+        } else if (child.classList.contains('code-div')){
+            obj.type = 'code'
+            obj.preview = child.firstChild.value
+            obj.complete_kod = child.lastChild.value
+        } else if (child.classList.contains('notatka-div')){
+            obj.type = 'notatka'
+            obj.content = child.firstChild.value
         }
 
         data.push(obj);
