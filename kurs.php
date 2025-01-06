@@ -215,6 +215,11 @@ if (json_last_error() !== JSON_ERROR_NONE) {
             });
         });
 
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
+
+        document.getElementById(type).style.backgroundColor='#222536'
+
         
         // var left_menu_link = document.querySelectorAll('.left-menu-link')
 
