@@ -3,6 +3,9 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+.nav-wrapper{
+  position: fixed;
+}
 
 /* nav na gorze*/
 
@@ -300,7 +303,12 @@
 }
 
 .nav-wrapper {
-  position: sticky;
+  /* position: sticky; */
   top: 0;
+  width: 100%;
   z-index: 1000;
+}
+
+#odstep{
+  margin-top: 98px;
 }

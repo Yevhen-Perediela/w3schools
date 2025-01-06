@@ -26,20 +26,20 @@
             </button>
         </div>
 
-        <a href="#" class="scroll-down">
+        <a href="#wave-transition" class="scroll-down">
             <i class="fas fa-chevron-down"></i>
             <span>Zobacz więcej</span>
         </a>
     </div>
 
-    <div class="wave-transition">
+    <div class="wave-transition" id="wave-transition">
         <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
             <path fill="#282a35" d="M0,160L48,165C96,170,192,180,288,176C384,172,480,154,576,144C672,134,768,134,864,144C960,154,1056,176,1152,181C1248,186,1344,176,1392,170L1440,165L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
             <path fill="#d9eee1" d="M0,160L48,165C96,170,192,180,288,176C384,172,480,154,576,144C672,134,768,134,864,144C960,154,1056,176,1152,181C1248,186,1344,176,1392,170L1440,165L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
         </svg>
     </div>
 
-    <div class="html-section">
+    <div class="html-section" id="html-section">
         <div class="html-content">
             <h1 class="html-title">HTML</h1>
             <p class="html-subtitle">Język do budowania stron internetowych</p>
