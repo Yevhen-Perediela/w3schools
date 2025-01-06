@@ -15,7 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $result->fetch_assoc();
         
         if (password_verify($password, $user['password'])) {
+           
             $_SESSION['user_id'] = $user['id'];
+         
             header("Location: index.php");
             exit();
         } else {
@@ -33,20 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie</title>
-    <style>
-        
-    </style>
+
 </head>
 <body>
     <h2>Logowanie</h2>
     
-    <?php
-    if (isset($error)) {
-        echo "<p class='error'>" . htmlspecialchars($error) . "</p>";
-    }
-    ?>
+    <?php if (isset($error)): ?>
+        <p class="error"><?php echo htmlspecialchars($error); ?></p>
+    <?php endif; ?>
 
-    <form method="POST" action="index.php">
+    <form method="POST" action="">
         <label for="username">Nazwa użytkownika:</label>
         <input type="text" id="username" name="username" required>
         
