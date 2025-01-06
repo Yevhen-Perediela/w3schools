@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./styles/footer.css">
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-column">
@@ -21,9 +22,9 @@
         <div class="footer-column">
             <h3>Firma</h3>
             <ul class="footer-links">
-                <li><a href="#">O nas</a></li>
-                <li><a href="#">Regulamin</a></li>
-                <li><a href="#">Kontakt</a></li>
+                <li><a href="about.php">O nas</a></li>
+                <li><a href="terms.php">Regulamin</a></li>
+                <li><a href="contact.php">Kontakt</a></li>
             </ul>
         </div>
     </div>
