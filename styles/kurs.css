@@ -9,14 +9,23 @@ body {
     background-color: #282a35;
     color: white;
     /* padding: 50px auto; */
+    font-family: sans-serif;
+    
+    
+    
+}
+#main-wrapper{
+    display: flex;
+    flex-direction: row;
     
 }
 
 #left-side{
     width: 18vw;
     height: 87.4vh;
-    position: static;
+    position: fixed;
     background-color: #222536;
+    
 }
 .item-menu{
     width: 100%;
@@ -29,4 +38,32 @@ body {
     background-color: #04aa6d;
     cursor: pointer;
     color: black;
+}
+
+#main-container{
+    padding: 30px 60px;
+    padding-left: 23vw;
+}
+
+.image-container {
+    display: flex;
+    /* Umożliwia wyświetlanie obrazów obok siebie */
+    justify-content: center;
+    align-items: center;
+    /* Wyśrodkowanie obrazów */
+    margin: 10px 0;
+    /* Margines dla obrazów */
+}
+
+.image-container img {
+    max-width: 300px;
+    /* Ustaw maksymalną szerokość obrazów */
+    max-height: 300px;
+    /* Ustaw automatyczną wysokość */
+    margin: 0 5px;
+    /* Margines między obrazami */
+}
+a{
+    color: white;
+    text-decoration: none;
 }
