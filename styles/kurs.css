@@ -43,12 +43,13 @@ body {
 #main-container{
     padding: 30px 60px;
     padding-left: 23vw;
+    width: 100%;
 }
 
 .image-container {
     display: flex;
     /* Umożliwia wyświetlanie obrazów obok siebie */
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     /* Wyśrodkowanie obrazów */
     margin: 10px 0;
@@ -66,4 +67,19 @@ body {
 a{
     color: white;
     text-decoration: none;
+}
+
+.notatka-div{
+    width: 100%;
+    padding: 20px 10px;
+    background-color: rgb(82, 82, 5);
+    display: flex;
+    border-top: 2px dashed yellow;
+    border-bottom: 2px dashed yellow;
+    margin: 10px 0px;
+}
+.notatka-div p{
+    margin: 0px;
+    width: 100%;
+    background-color: rgba(255, 255, 0, 0);
 }

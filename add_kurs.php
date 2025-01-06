@@ -32,6 +32,7 @@
             <div data-type="image">Dodaj Zdjęcie</div>
             <div data-type="code">Edytor kodu</div>
             <div data-type="notatka">Notatka</div>
+            <div data-type="quiz">Quiz</div>
         </div>
 
     </div>
