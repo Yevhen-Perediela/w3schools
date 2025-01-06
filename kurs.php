@@ -97,21 +97,13 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                         container.appendChild(pre);
                         hljs.highlightElement(code);
                         btn.addEventListener('click', () => {
-                            const kod = encodeURIComponent(item.complete_kod); 
-                            fetch('edytor/edytor.php', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/text'
-                                },
-                                body: 'code=' + item.complete_kod
-                            })
-                            .then(response => response.text())  
-                            .then(data => {
-                                console.log('Response from server:', data);
-                                window.location.href = 'edytor/edytor.php';
-                            })
-                            .catch(error => console.error('Error:', error));
+                            const kod = encodeURIComponent(item.complete_kod);
+                            console.log(kod);
+                            localStorage.setItem('userCode', item.complete_kod)
+                            window.location.href = 'edytor/edytor.php'
+                           
                         });
+
 
                         break;
 
