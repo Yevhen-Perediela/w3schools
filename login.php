@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     ?>
 
-    <form method="POST" action="">
+    <form method="POST" action="index.php">
         <label for="username">Nazwa użytkownika:</label>
         <input type="text" id="username" name="username" required>
         
