@@ -58,14 +58,58 @@ function addElement(type, where, clickedButton) {
             this.style.height = '';
             this.style.height = this.scrollHeight + 'px';
         };
-    } else if(type == 'quiz'){
-        element = document.createElement('form')
-        element.className = 'quiz'
-        let pytanie = document.createElement('input')
-        pytanie.className = 'quiz-pytanie'
-        pytanie.placeholder = 'Wpisz pytanie...'
-        element.appendChild(pytanie)
+    } else if (type == 'quiz') {
+        element = document.createElement('form');
+        element.className = 'quiz';
+    
+        let pytanie = document.createElement('input');
+        pytanie.className = 'quiz-pytanie';
+        pytanie.type = 'text';
+        pytanie.placeholder = 'Wpisz pytanie...';
+    
+        let btnDodajOdpowiedz = document.createElement('button');
+        btnDodajOdpowiedz.textContent = 'Dodaj odpowiedź';
+        btnDodajOdpowiedz.type = 'button'; // Zapobiega przeładowaniu strony
+    
+        let odpowiedzi = document.createElement('div');
+        odpowiedzi.className = 'answers';
+    
+        // Funkcja do dodawania odpowiedzi
+        btnDodajOdpowiedz.addEventListener('click', () => {
+            let odpowiedz = document.createElement('div');
+            odpowiedz.className = 'answer';
+    
+            let inputOdpowiedz = document.createElement('input');
+            inputOdpowiedz.type = 'text';
+            inputOdpowiedz.placeholder = 'Wpisz odpowiedź...';
+            inputOdpowiedz.className = 'quiz-answer';
+    
+            let radioOdpowiedz = document.createElement('input');
+            radioOdpowiedz.type = 'radio';
+            radioOdpowiedz.name = 'correct-answer';
+            radioOdpowiedz.className = 'correct-answer';
+    
+            let usunOdpowiedz = document.createElement('button');
+            usunOdpowiedz.textContent = 'Usuń';
+            usunOdpowiedz.type = 'button';
+            usunOdpowiedz.className = 'remove-answer';
+    
+            // Obsługa usuwania odpowiedzi
+            usunOdpowiedz.addEventListener('click', () => {
+                odpowiedz.remove();
+            });
+    
+            odpowiedz.appendChild(radioOdpowiedz);
+            odpowiedz.appendChild(inputOdpowiedz);
+            odpowiedz.appendChild(usunOdpowiedz);
+            odpowiedzi.appendChild(odpowiedz);
+        });
+    
+        element.appendChild(pytanie);
+        element.appendChild(btnDodajOdpowiedz);
+        element.appendChild(odpowiedzi);
     }
+    
 
     const lineBreak = document.createElement('div');
     lineBreak.className = 'element-container';
@@ -84,7 +128,7 @@ function addElement(type, where, clickedButton) {
     addAddButtonToElement(lineBreak);
 }
 
-addElement('quiz', 'end', '')
+// addElement('quiz', 'end', '')
 
 document.querySelectorAll('textarea').forEach(item => {
     
@@ -294,6 +338,23 @@ function generateJSON() {
         } else if (child.classList.contains('notatka-div')){
             obj.type = 'notatka'
             obj.content = child.firstChild.value
+        } else if (child.classList.contains('quiz')) {
+            let pytanie = child.querySelector('.quiz-pytanie').value;
+            let odpowiedzi = child.querySelectorAll('.answer');
+
+            obj.type = 'quiz';
+            obj.question = pytanie;
+            obj.answers = [];
+
+            odpowiedzi.forEach((odpowiedz) => {
+                let text = odpowiedz.querySelector('.quiz-answer').value;
+                let isCorrect = odpowiedz.querySelector('.correct-answer').checked;
+
+                obj.answers.push({
+                    text: text,
+                    correct: isCorrect
+                });
+            });
         }
 
         data.push(obj);
