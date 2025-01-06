@@ -145,18 +145,13 @@
   <script>
 
     const editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
+    editor.setTheme("ace/theme/dracula");
     // domyślnie tryb HTML
     editor.session.setMode("ace/mode/html");
-    const codeValue = <?php 
-      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        echo $_POST['code'];
-      }
-    ?>;
-    if (codeValue) {
-      // Formatowanie kodu
-      const formattedCode = html_beautify(decodeURIComponent(codeValue));
-      editor.setValue(formattedCode, -1);
+
+    const savedCode = localStorage.getItem('userCode');
+    if (savedCode) {
+        editor.setValue(savedCode, -1);
     } else {
       editor.setValue(`
       <!DOCTYPE html>
