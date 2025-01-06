@@ -1,3 +1,13 @@
+<?php
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
+
+  
+
+  
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -128,6 +138,8 @@
 
   <!-- ŁADOWANIE ACE EDITOR -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.3/ace.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.6/beautify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.6/beautify-html.min.js"></script>
 
 
   <script>
@@ -136,11 +148,15 @@
     editor.setTheme("ace/theme/monokai");
     // domyślnie tryb HTML
     editor.session.setMode("ace/mode/html");
-
-    // wczytanie poprzednio zapisanego kodu z localStorage (jeżeli istnieje)
-    const savedCode = localStorage.getItem('userCode');
-    if (savedCode) {
-      editor.setValue(savedCode, -1);  // -1, by nie przesuwać kursora na koniec
+    const codeValue = <?php 
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        echo $_POST['code'];
+      }
+    ?>;
+    if (codeValue) {
+      // Formatowanie kodu
+      const formattedCode = html_beautify(decodeURIComponent(codeValue));
+      editor.setValue(formattedCode, -1);
     } else {
       editor.setValue(`
       <!DOCTYPE html>
