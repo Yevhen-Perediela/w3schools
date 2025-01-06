@@ -100,7 +100,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                             const kod = encodeURIComponent(item.complete_kod);
                             console.log(kod);
                             localStorage.setItem('userCode', item.complete_kod)
-                            window.location.href = 'edytor/edytor.php'
+                            window.location.href = 'edytor.php'
                            
                         });
 
