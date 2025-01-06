@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once 'connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -13,12 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        
         if (password_verify($password, $user['password'])) {
-           
             $_SESSION['user_id'] = $user['id'];
-         
-            header("Location: index.php");
+            header("Location: user_panel.php");
             exit();
         } else {
             $error = "Nieprawidłowe hasło.";
@@ -35,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie</title>
-
+    <style>
+     
 </head>
 <body>
     <h2>Logowanie</h2>
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p class="error"><?php echo htmlspecialchars($error); ?></p>
     <?php endif; ?>
 
-    <form method="POST" action="index.php">
+    <form method="POST" action="">
         <label for="username">Nazwa użytkownika:</label>
         <input type="text" id="username" name="username" required>
         
