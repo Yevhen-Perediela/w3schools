@@ -149,3 +149,7 @@ pre button{
     background-color: #04aa6d;
     border-radius: 6px;
 }
+
+.active-page{
+    background-color: #04aa6d;
+}
