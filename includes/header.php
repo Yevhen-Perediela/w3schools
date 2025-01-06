@@ -20,17 +20,12 @@
                     </div></a>
                     
                     <div class="nav-links">
-                        <a href="#">O nas</a>
-                        <a href="#">Regulamin</a>
-                        <a href="#">Kontakt</a>
+                        <a href="about.php">O nas</a>
+                        <a href="terms.php">Regulamin</a>
+                        <a href="contact.php">Kontakt</a>
                     </div>
                     
-                    <div class="search-bar">
-                        <input type="text" placeholder="Szukaj...">
-                        <button type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <?php include 'searchbar.php'; ?>
 
                     <div class="auth-buttons">
                         <button class="sign-up">Zarejestruj się</button>
