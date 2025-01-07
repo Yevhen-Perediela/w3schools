@@ -35,16 +35,44 @@ body {
 }
 
 #main-container {
-    padding: 30px 60px;
-    /* padding-left: 23vw; */
+    padding: 30px 30px;
+    padding-left: 23vw;
+    float: right;
     width: 82vw;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 10px; /* Odstępy między sześciokątami */
+    grid-template-columns: repeat(4, 1fr); /* 4 kolumny w wierszu */
+    gap: 20px; /* Odstępy między elementami */
     justify-content: center;
     align-items: center;
     position: relative;
 }
+
+/* Normalny wiersz */
+#main-container > a:nth-child(8n+1),
+#main-container > a:nth-child(8n+2),
+#main-container > a:nth-child(8n+3),
+#main-container > a:nth-child(8n+4) {
+    grid-column: auto; /* Normalna kolejność */
+}
+
+/* Odwrócony wiersz */
+#main-container > a:nth-child(8n+5) {
+    grid-column: 4; /* Pierwszy element od prawej */
+}
+#main-container > a:nth-child(8n+6) {
+    grid-column: 3; /* Drugi element od prawej */
+}
+#main-container > a:nth-child(8n+7) {
+    grid-column: 2; /* Trzeci element od prawej */
+}
+#main-container > a:nth-child(8n+8) {
+    grid-column: 1; /* Czwarty element od prawej */
+}
+#main-container > a:nth-child(8n+9) {
+    grid-column: 1; /* Czwarty element od prawej */
+}
+
+
 
 #main-container div {
     display: flex;
@@ -53,7 +81,7 @@ body {
     justify-content: center;
     font-size: 20px;
     /* border: 2px solid black; */
-    background-color: #278663;
+    background-color: #04aa6d;
     color: black;
     width: 180px;
     height: 185px;
@@ -62,6 +90,7 @@ body {
     transition: transform 0.3s ease;
     position: relative;
     color: white;
+    
 }
 
 #main-container div img {
@@ -71,12 +100,12 @@ body {
 
 #main-container div:hover {
     transform: scale(1.1);
-    background-color: #04aa6d;
+    background-color: #0d895c;
     color: white;
 }
 
 /* Pozycjonowanie sześciokątów w układzie plastra miodu */
-#main-container div:nth-child(odd) {
+#main-container a:nth-child(odd) {
     margin-top: 100px; /* Przesunięcie co drugi wiersz */
     
 }
@@ -93,4 +122,13 @@ body {
     position: relative;
     z-index: 1; /* Sześciokąty nad SVG */
     
+}
+
+line{
+    /* margin-left: -23vw; */
+}
+
+a{
+    text-decoration: none;
+    color: white;
 }
