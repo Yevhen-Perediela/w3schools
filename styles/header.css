@@ -10,7 +10,7 @@
 /* nav na gorze*/
 
 .top-nav {
-  background-color: #fff;
+  background-color: #282a35;
   padding: 10px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -93,7 +93,7 @@
 }
 
 .tech-list a:hover {
-  background-color: #000;
+  background-color: #222536;
 }
 
 .top-nav .search-bar {
@@ -205,7 +205,8 @@
 }
 
 .nav-links a {
-  color: #333;
+  /* color: #333; */
+  color: white;
   text-decoration: none;
   font-weight: 500;
   padding: 5px 10px;

@@ -1,3 +1,13 @@
+<?php
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
+
+  
+
+  
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -20,21 +30,26 @@
       display: flex;
       flex-direction: column;
     }
-    header {
+    /* header {
       background-color: #333;
       color: #fff;
       padding: 10px 20px;
-    }
+    } */
     .header-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+    .header-content img{
+      width: 70px;
+    }
 
     .main-container {
       display: flex;
-      flex: 1; /* Wypełnia pozostałą wysokość okna */
+      flex: 1; 
+      margin-top: -5px;
       overflow: hidden; /* By nie generować pasków przewijania */
+
     }
 
     /* LEWA KOLUMNA (EDYTOR) */
@@ -48,9 +63,10 @@
 
     /* GÓRNY PANEL W LEWEJ KOLUMNIE (np. przyciski, wybór języka) */
     .editor-tools {
-      background-color: #f9f9f9;
-      padding: 10px;
+      background-color:rgb(29, 29, 41);
+      padding:10px 10px;
       border-bottom: 1px solid #ccc;
+      /* margin-top: -10px; */
     }
     .editor-tools select,
     .editor-tools button {
@@ -93,24 +109,20 @@
   </style>
 </head>
 <body>
-
-  <header>
+    <?php include_once 'includes/header.php'; ?>
+  <!-- <header>
     <div class="header-content">
+      <a href="../index.php"><div class="logo">
+          <img src="../assets/img/logo.png" alt="Logo">
+      </div></a>
       <h1>Edytor Kodu</h1>
-      <div style="font-size: 0.9em; color: #ccc;">
-        (Wersja demo z konsolą i zapisem w localStorage)
-      </div>
+
     </div>
-  </header>
+  </header> -->
 
   <div class="main-container">
     <div id="editorContainer">
       <div class="editor-tools">
-        <select id="modeSelect" onchange="setEditorMode(this.value)">
-          <option value="html" selected>HTML</option>
-          <option value="css">CSS</option>
-          <option value="javascript">JavaScript</option>
-        </select>
         <button onclick="runCode()">Uruchom kod</button>
         <button onclick="copyCode()">Kopiuj kod</button>
         <button onclick="downloadCode()">Pobierz HTML</button>
@@ -128,19 +140,20 @@
 
   <!-- ŁADOWANIE ACE EDITOR -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.3/ace.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.6/beautify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.6/beautify-html.min.js"></script>
 
 
   <script>
 
     const editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
+    editor.setTheme("ace/theme/dracula");
     // domyślnie tryb HTML
     editor.session.setMode("ace/mode/html");
 
-    // wczytanie poprzednio zapisanego kodu z localStorage (jeżeli istnieje)
     const savedCode = localStorage.getItem('userCode');
     if (savedCode) {
-      editor.setValue(savedCode, -1);  // -1, by nie przesuwać kursora na koniec
+        editor.setValue(savedCode, -1);
     } else {
       editor.setValue(`
       <!DOCTYPE html>
@@ -216,6 +229,7 @@
       // Załadowanie kodu do iframe (srcdoc)
       outputFrame.srcdoc = wrappedCode;
     }
+    runCode()
 
     // Nasłuchujemy wiadomości z iframe
     window.addEventListener('message', (event) => {
