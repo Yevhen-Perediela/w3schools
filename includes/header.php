@@ -37,7 +37,8 @@ require_once 'connect.php';
                             <div class="user-info">
                                 <?php if($_SESSION['username'] === 'admin'): ?>
                                     <div class="admin-links">
-                                        <a href="user_panel.php" class="user-profile-link">
+                                        
+                                        <a href="admin_panel.php" class="user-profile-link">
                                             <?php
                                             $stmt = $conn->prepare("SELECT image FROM users WHERE id = ?");
                                             $stmt->bind_param("i", $_SESSION['user_id']);
@@ -52,10 +53,11 @@ require_once 'connect.php';
                                             ?>
                                             <span class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
                                         </a>
-                                     
+                                        
                                     </div>
                                 <?php else: ?>
                                     <a href="user_panel.php" class="user-profile-link">
+                                    
                                         <?php
                                         $stmt = $conn->prepare("SELECT image FROM users WHERE id = ?");
                                         $stmt->bind_param("i", $_SESSION['user_id']);
@@ -108,3 +110,4 @@ require_once 'connect.php';
     <div id="odstep"></div>
 </body>
 </html>
+
