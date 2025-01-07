@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once 'connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -13,10 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
-            header("Location: index.php");
+            
+           
+            if ($username === 'admin') {
+                header("Location: admin_panel.php");
+            } else {
+                header("Location: user_panel.php");
+            }
             exit();
         } else {
             $error = "Nieprawidłowe hasło.";
@@ -34,17 +41,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie</title>
     <style>
-        
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <h2>Logowanie</h2>
     
-    <?php
-    if (isset($error)) {
-        echo "<p class='error'>" . htmlspecialchars($error) . "</p>";
-    }
-    ?>
+    <?php if (isset($error)): ?>
+        <p class="error"><?php echo htmlspecialchars($error); ?></p>
+    <?php endif; ?>
 
     <form method="POST" action="">
         <label for="username">Nazwa użytkownika:</label>

@@ -46,8 +46,14 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         <div id="left-side">
         <?php
         if (mysqli_num_rows($result_all) > 0) {
+            $lesson = $_GET['lesson'];
             while ($row = mysqli_fetch_assoc($result_all)) {
-                echo '<a href="kurs.php?type=' . htmlspecialchars($type) . '&lesson=' . htmlspecialchars($row["title"]) . '"><div class="item-menu">' . htmlspecialchars($row["title"]) . '</div></a>';
+                if($lesson == $row["title"]){
+                    $class_css = 'active-page';
+                }else{
+                    $class_css = 'close-page';
+                }
+                echo '<a href="kurs.php?type=' . $type . '&lesson=' . $row["title"] . '"><div class="item-menu '.$class_css.'">' . htmlspecialchars($row["title"]) . '</div></a>';
             }
         } else {
             echo "Brak kursów.";
@@ -97,8 +103,14 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                         container.appendChild(pre);
                         hljs.highlightElement(code);
                         btn.addEventListener('click', () => {
-                            window.location.href = 'edytor/edytor.php?code='+item.complete_kod;
+                            const kod = encodeURIComponent(item.complete_kod);
+                            console.log(kod);
+                            localStorage.setItem('userCode', item.complete_kod)
+                            window.location.href = 'edytor.php'
+                           
                         });
+
+
                         break;
 
                     case 'notatka':
@@ -203,8 +215,17 @@ if (json_last_error() !== JSON_ERROR_NONE) {
             });
         });
 
-        
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
 
+        document.getElementById(type).style.backgroundColor='#222536'
+
+        
+        // var left_menu_link = document.querySelectorAll('.left-menu-link')
+
+        // left_menu_link.forEach(item => {
+        //     if(item.textContent == )
+        // })
         
     </script>
 </body>

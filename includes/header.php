@@ -42,9 +42,9 @@
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <ul class="tech-list">
-                    <li><a href="kurs.php?type=HTML&lesson=Zmienne">HTML (HyperText Markup Language)</a></li>
-                    <li><a href="kurs.php?type=CSS&lesson=Selektory">CSS (Cascading Style Sheets)</a></li>
-                    <li><a href="kurs.php?type=JS&lesson=Loop (for, while)">JS (JavaScript)</a></li>
+                    <li><a id="HTML" href="kurs.php?type=HTML&lesson=Zmienne">HTML (HyperText Markup Language)</a></li>
+                    <li><a id="CSS" href="kurs.php?type=CSS&lesson=Selektory">CSS (Cascading Style Sheets)</a></li>
+                    <li><a id="JS" href="kurs.php?type=JS&lesson=Loop (for, while)">JS (JavaScript)</a></li>
                 </ul>
             </div>
         </nav>
