@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
     <h2>Logowanie</h2>
