@@ -162,7 +162,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                             image.src = img.src;
                             image.style.width = img.width;
                             image.style.height = img.height;
-                            imageContainer.appendChild(image); // Add image to body
+                            imageContainer.appendChild(image); 
                             document.getElementById('main-container').appendChild(imageContainer)
                         };
                     }
