@@ -26,11 +26,15 @@
                     </div>
                     
                     <?php include 'searchbar.php'; ?>
-
                     <div class="auth-buttons">
                         <button class="sign-up">Zarejestruj się</button>
                         <button class="login">Zaloguj się</button>
                     </div>
+                    <label for="switch" class="switch">
+                        <input id="switch" type="checkbox" onclick="themeChange()" />
+                        <span class="slider"></span>
+                        <span class="decoration"></span>
+                    </label>
                 </div>
             </div>
         </nav>

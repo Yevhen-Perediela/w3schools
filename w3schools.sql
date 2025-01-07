@@ -36,6 +36,7 @@ CREATE TABLE `contact` (
   `topic` varchar(255) NOT NULL DEFAULT 'Inne'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `contact`
 --
@@ -43,6 +44,8 @@ CREATE TABLE `contact` (
 INSERT INTO `contact` (`id`, `name`, `email`, `message`, `created_at`, `topic`) VALUES
 (1, 'Tester1', 'sda@sadf.com', 'Assembly', '2025-01-06 16:57:05', 'Pomysł na nowy kurs'),
 (2, 'qwerty', 'qwertus@gmail.com', 'qwerty', '2025-01-07 19:53:56', 'Zgłoszenie błędu');
+=======
+>>>>>>> 7bfdb2c1d701cb857a29688a8ee28538a71e9f95
 
 -- --------------------------------------------------------
 

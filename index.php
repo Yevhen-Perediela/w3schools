@@ -25,7 +25,7 @@
                 <i class="fas fa-search"></i>
             </button>
         </div>
-
+        
         <a href="#wave-transition" class="scroll-down">
             <i class="fas fa-chevron-down"></i>
             <span>Zobacz więcej</span>
@@ -150,6 +150,14 @@
             }
         }
         createStars();
+
+        let title =document.title;
+        window.addEventListener("blur", ()=>{
+            document.title ="Wracaj!";
+        });
+        window.addEventListener("focus", ()=>{
+            document.title = title;    
+        })
     </script>
 </body>
 </html>
