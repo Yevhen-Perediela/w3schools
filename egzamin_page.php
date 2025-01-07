@@ -5,13 +5,7 @@
     include_once 'includes/header.php';
     
     function getPdfLinks($courseType) {
-        $servername = "localhost"; // Zmień na swoje dane
-        $username = "root";
-        $password = "";
-        $dbname = "w3schools";
-
-        // Nawiązanie połączenia z bazą danych
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        require_once 'connect.php';
 
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
