@@ -52,7 +52,7 @@ require_once 'connect.php';
                                             ?>
                                             <span class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
                                         </a>
-                                        <a href="admin_panel.php" class="admin-link">Panel Admina</a>
+                                     
                                     </div>
                                 <?php else: ?>
                                     <a href="user_panel.php" class="user-profile-link">
