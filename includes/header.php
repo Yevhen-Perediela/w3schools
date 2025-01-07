@@ -25,11 +25,15 @@
                     </div>
                     
                     <?php include 'searchbar.php'; ?>
-
                     <div class="auth-buttons">
                         <a href="register.php"><button class="sign-up">Zarejestruj się</button></a>
                         <a href="login.php"><button class="login">Zaloguj się</button></a>
                     </div>
+                    <label for="switch" class="switch">
+                        <input id="switch" type="checkbox" onclick="themeChange()" />
+                        <span class="slider"></span>
+                        <span class="decoration"></span>
+                    </label>
                 </div>
             </div>
         </nav>
@@ -44,7 +48,7 @@
                     <li><a id="HTML" href="kurs.php?type=HTML&lesson=Zmienne">HTML (HyperText Markup Language)</a></li>
                     <li><a id="CSS" href="kurs.php?type=CSS&lesson=Selektory">CSS (Cascading Style Sheets)</a></li>
                     <li><a id="JS" href="kurs.php?type=JS&lesson=Loop (for, while)">JS (JavaScript)</a></li>
-                    <li><a id="egzamin" href="egzamin_page.php">Egzaminy</a></li>
+                    <li><a id="egzamin" href="egzamin_page.php?course=HTML">Egzaminy</a></li>
                 </ul>
             </div>
         </nav>

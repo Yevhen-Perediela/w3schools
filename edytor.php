@@ -2,10 +2,6 @@
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
-
-  
-
-  
 ?>
 
 <!DOCTYPE html>
@@ -126,6 +122,16 @@
         <button onclick="runCode()">Uruchom kod</button>
         <button onclick="copyCode()">Kopiuj kod</button>
         <button onclick="downloadCode()">Pobierz HTML</button>
+        <select id="themeSelector" onchange="changeTheme(this.value)">
+          <option value="dracula">Dracula</option>
+          <option value="monokai">Monokai</option>
+          <option value="github">GitHub</option>
+          <option value="tomorrow">Tomorrow</option>
+          <option value="twilight">Twilight</option>
+          <option value="solarized_light">Solarized Light</option>
+          <option value="solarized_dark">Solarized Dark</option>
+
+        </select>
       </div>
 
       <div id="editor"></div>
@@ -251,7 +257,9 @@
         .then(() => alert('Skopiowano kod do schowka!'))
         .catch(err => console.error('Błąd podczas kopiowania: ', err));
     }
-
+    function changeTheme(themeName){
+      editor.setTheme("ace/theme/"+ themeName)
+    }
     // Funkcja pobierająca kod jako plik .html
     function downloadCode() {
       const code = editor.getValue();
@@ -267,6 +275,10 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
+    ace.edit(element, {
+    mode: "ace/mode/javascript",
+    selectionStyle: "text"
+})
   </script>
 </body>
 </html>
