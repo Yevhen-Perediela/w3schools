@@ -40,50 +40,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .error {
-            color: red;
-            margin-bottom: 10px;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0 15px 0;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/stars.css">
 </head>
 <body>
-    <h2>Logowanie</h2>
+    <?php include './includes/header.php'; ?>
     
-    <?php if (isset($error)): ?>
-        <p class="error"><?php echo htmlspecialchars($error); ?></p>
-    <?php endif; ?>
+    <div class="stars" id="stars"></div>
+    
+    <main class="main-content">
+        <div class="login-container">
+            <h2>Logowanie</h2>
+            
+            <?php if (isset($error)): ?>
+                <p class="error"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
 
-    <form method="POST" action="">
-        <label for="username">Nazwa użytkownika:</label>
-        <input type="text" id="username" name="username" required>
-        
-        <label for="password">Hasło:</label>
-        <input type="password" id="password" name="password" required>
-        
-        <input type="submit" value="Zaloguj">
-    </form>
-    <p>Nie masz konta? <a href="register.php">Zarejestruj się</a></p>
+            <form method="POST" action="">
+                <label for="username">Nazwa użytkownika:</label>
+                <input type="text" id="username" name="username" required
+                       placeholder="Wprowadź nazwę użytkownika">
+                
+                <label for="password">Hasło:</label>
+                <input type="password" id="password" name="password" required
+                       placeholder="Wprowadź hasło">
+                
+                <input type="submit" value="Zaloguj">
+            </form>
+            <p class="register-link">Nie masz konta? <a href="register.php">Zarejestruj się</a></p>
+        </div>
+    </main>
+
+    <script src="./js/stars.js"></script>
+    <script>
+        createStars();
+    </script>
 </body>
 </html>

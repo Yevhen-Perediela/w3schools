@@ -44,6 +44,7 @@
   font-weight: 500;
   white-space: nowrap;
   min-width: 80px;
+  transition: all 0.3s ease;
 }
 
 .sign-up {
@@ -312,4 +313,39 @@
 
 #odstep{
   margin-top: 98px;
+}
+
+.auth-buttons a {
+    text-decoration: none;
+}
+
+.auth-buttons button {
+    padding: 8px 20px;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 80px;
+    transition: all 0.3s ease;
+}
+
+.auth-buttons .sign-up {
+    background-color: #04aa6d;
+    color: white;
+    border-radius: 25px 0 0 25px;
+    margin-right: 0;
+}
+
+.auth-buttons .sign-up:hover {
+    background-color: #038857;
+}
+
+.auth-buttons .login {
+    background-color: #e7e9eb;
+    color: black;
+    border-radius: 0 25px 25px 0;
+}
+
+.auth-buttons .login:hover {
+    background-color: #d1d4d7;
 }
