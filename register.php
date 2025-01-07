@@ -14,6 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
 
+        if($username == 'Piotrek' || $username == 'piotrek') {
+            $errors[] = 'Piotrek jest zbanowany ;)';
+        }
+
     
         if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || preg_match('/\s/', $password)) {
             $errors[] = "Hasło musi mieć co najmniej 8 znaków, jedną dużą literę i nie może zawierać spacji.";
