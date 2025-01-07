@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="./js/nav.js" defer></script>
 </head>
@@ -38,21 +38,19 @@
             </div>
         </nav>
 
-        <nav class="bottom-nav">
-            <div class="container">
-                <button class="tech-menu-toggle">
-                    <span>Kursy</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <ul class="tech-list">
-                    <li><a id="HTML" href="kurs.php?type=HTML&lesson=Zmienne">HTML (HyperText Markup Language)</a></li>
-                    <li><a id="CSS" href="kurs.php?type=CSS&lesson=Selektory">CSS (Cascading Style Sheets)</a></li>
-                    <li><a id="JS" href="kurs.php?type=JS&lesson=Loop (for, while)">JS (JavaScript)</a></li>
-                    <li><a id="egzamin" href="egzamin_page.php?course=HTML">Egzaminy</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div id="odstep"></div>
-</body>
-</html>
+    <nav class="bottom-nav">
+        <div class="container">
+            <button class="tech-menu-toggle">
+                <span>Kursy</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <ul class="tech-list">
+                <li><a id="HTML" href="kurs.php?type=HTML&lesson=Zmienne">HTML (HyperText Markup Language)</a></li>
+                <li><a id="CSS" href="kurs.php?type=CSS&lesson=Selektory">CSS (Cascading Style Sheets)</a></li>
+                <li><a id="JS" href="kurs.php?type=JS&lesson=Loop (for, while)">JS (JavaScript)</a></li>
+                <li><a id="egzamin" href="egzamin_page.php?course=HTML">Egzaminy</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div id="odstep"></div>

@@ -6,6 +6,11 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+if (isset($_SESSION['username']) && $_SESSION['username'] === 'admin') {
+    header("Location: index.php");
+    exit();
+}
+
 require_once 'connect.php';
 
 $user_id = $_SESSION['user_id'];
