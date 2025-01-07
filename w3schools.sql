@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 06, 2025 at 07:20 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Sty 07, 2025 at 08:33 PM
+-- Wersja serwera: 10.4.28-MariaDB
+-- Wersja PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact`
+-- Struktura tabeli dla tabeli `contact`
 --
 
 CREATE TABLE `contact` (
@@ -36,17 +36,21 @@ CREATE TABLE `contact` (
   `topic` varchar(255) NOT NULL DEFAULT 'Inne'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `contact`
 --
 
 INSERT INTO `contact` (`id`, `name`, `email`, `message`, `created_at`, `topic`) VALUES
-(1, 'Tester1', 'sda@sadf.com', 'Assembly', '2025-01-06 16:57:05', 'Pomysł na nowy kurs');
+(1, 'Tester1', 'sda@sadf.com', 'Assembly', '2025-01-06 16:57:05', 'Pomysł na nowy kurs'),
+(2, 'qwerty', 'qwertus@gmail.com', 'qwerty', '2025-01-07 19:53:56', 'Zgłoszenie błędu');
+=======
+>>>>>>> 7bfdb2c1d701cb857a29688a8ee28538a71e9f95
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kursy`
+-- Struktura tabeli dla tabeli `kursy`
 --
 
 CREATE TABLE `kursy` (
@@ -70,7 +74,56 @@ INSERT INTO `kursy` (`id`, `title`, `kurs_type`, `kurs_data`, `created_at`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktura tabeli dla tabeli `pdf_files`
+--
+
+CREATE TABLE `pdf_files` (
+  `id` int(11) NOT NULL,
+  `course_name` varchar(255) NOT NULL,
+  `course_type` enum('HTML','CSS','JS') NOT NULL,
+  `pdf_link` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `pdf_files`
+--
+
+INSERT INTO `pdf_files` (`id`, `course_name`, `course_type`, `pdf_link`) VALUES
+(1, 'Egzamin 1', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(2, 'Egzamin 2', 'CSS', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(3, 'Egzamin 3', 'JS', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(4, 'Egzamin 4', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(5, 'Egzamin 5', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(6, 'Egzamin 6', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(7, 'Egzamin 6', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(8, 'Egzamin 7', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(9, 'Egzamin 8', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(10, 'Egzamin 9', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(11, 'Egzamin 10', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(12, 'Egzamin 1', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(13, 'Egzamin 2', 'CSS', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(14, 'Egzamin 3', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(15, 'Egzamin 4', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(16, 'Egzamin 1', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(17, 'Egzamin 2', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(18, 'Egzamin 3', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(19, 'Egzamin 4', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(20, 'Egzamin 1', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(21, 'Egzamin 2', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(22, 'Egzamin 3', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(23, 'Egzamin 4', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(24, 'Egzamin 1', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(25, 'Egzamin 2', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(26, 'Egzamin 3', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(27, 'Egzamin 1', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(28, 'Egzamin 2', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(29, 'Egzamin 3', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf'),
+(30, 'Egzamin 4', 'HTML', 'https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `users`
 --
 
 CREATE TABLE `users` (
@@ -83,23 +136,29 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Indexes for dumped tables
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `contact`
+-- Indeksy dla tabeli `contact`
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kursy`
+-- Indeksy dla tabeli `kursy`
 --
 ALTER TABLE `kursy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indeksy dla tabeli `pdf_files`
+--
+ALTER TABLE `pdf_files`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
@@ -112,13 +171,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kursy`
 --
 ALTER TABLE `kursy`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `pdf_files`
+--
+ALTER TABLE `pdf_files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`
