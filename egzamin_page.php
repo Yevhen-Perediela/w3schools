@@ -35,7 +35,7 @@
         return $pdfLinks;
     }
 
-    $courseType = 'HTML'; // Możesz ustawić dynamicznie w zależności od strony
+    $courseType = $_GET['course']; // Możesz ustawić dynamicznie w zależności od strony
     $pdfLinks = getPdfLinks($courseType);
 
 
@@ -51,10 +51,10 @@
 <body>
 <div id="main-wrapper">
     <div id="left-side">
-        <a href="html_page.php"><div class="item-menu">HTML</div></a>
-        <a href="css_page.php"><div class="item-menu">CSS</div></a>
-        <a href="js_page.php"><div class="item-menu">JavaScript</div></a>
-        <a href="download.php">Download</a>
+        <a href="egzamin_page.php?course=HTML"><div class="item-menu">HTML</div></a>
+        <a href="egzamin_page.php?course=CSS"><div class="item-menu">CSS</div></a>
+        <a href="egzamin_page.php?course=JS"><div class="item-menu">JavaScript</div></a>
+        
     </div>
     <div id="main-container">
         <svg id="connections" width="100%" height="100%" style="position: absolute; top: 0; right: 0; z-index: 0;"></svg>
