@@ -24,6 +24,7 @@ body {
 .item-menu{
     width: 100%;
     padding: 10px;
+    box-sizing: border-box;
     max-width: 18vw;
     overflow-x: auto;
 }
