@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -28,8 +27,8 @@
                     <?php include 'searchbar.php'; ?>
 
                     <div class="auth-buttons">
-                        <button class="sign-up">Zarejestruj się</button>
-                        <button class="login">Zaloguj się</button>
+                        <a href="register.php"><button class="sign-up">Zarejestruj się</button></a>
+                        <a href="login.php"><button class="login">Zaloguj się</button></a>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -95,70 +94,89 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel użytkownika</title>
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/user_panel.css">
+    <link rel="stylesheet" href="./styles/stars.css">
 </head>
 <body>
-    <h2>Panel użytkownika</h2>
+    <?php include './includes/header.php'; ?>
     
-    <?php if (!empty($errors)): ?>
-        <?php foreach ($errors as $error): ?>
-            <p class="error"><?php echo htmlspecialchars($error); ?></p>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <div class="stars" id="stars"></div>
+    
+    <main class="main-content">
+        <div class="user-panel-container">
+            <h2>Panel użytkownika</h2>
+            
+            <?php if (!empty($errors)): ?>
+                <?php foreach ($errors as $error): ?>
+                    <p class="error"><?php echo htmlspecialchars($error); ?></p>
+                <?php endforeach; ?>
+            <?php endif; ?>
 
-    <?php if ($message): ?>
-        <p class="success"><?php echo htmlspecialchars($message); ?></p>
-    <?php endif; ?>
+            <?php if ($message): ?>
+                <p class="success"><?php echo htmlspecialchars($message); ?></p>
+            <?php endif; ?>
 
-    <div class="user-info-container">
-        <div class="form-section">
-            <h3>Twoje dane</h3>
-            <div class="user-info">
-                <p><strong>Nazwa użytkownika:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
-                <p><strong>Nazwisko:</strong> <?php echo htmlspecialchars($user['lastname']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+            <div class="form-section">
+                <h3>Twoje dane</h3>
+                <div class="user-info">
+                    <p><strong>Nazwa użytkownika:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
+                    <p><strong>Nazwisko:</strong> <?php echo htmlspecialchars($user['lastname']); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+                </div>
             </div>
+
+            <div class="form-section">
+                <h3>Zmiana nazwy użytkownika</h3>
+                <form method="POST">
+                    <label for="new_username">Nowa nazwa użytkownika:</label>
+                    <input type="text" id="new_username" name="new_username" 
+                           value="<?php echo htmlspecialchars($user['username']); ?>" required>
+                    <input type="submit" name="update_username" value="Zmień nazwę użytkownika">
+                </form>
+            </div>
+
+            <div class="form-section">
+                <h3>Zdjęcie profilowe</h3>
+                <?php if (!empty($user['image'])): ?>
+                    <img src="data:image/jpeg;base64,<?php echo base64_encode($user['image']); ?>" 
+                         class="profile-image" alt="Zdjęcie profilowe">
+                <?php endif; ?>
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="file" name="profile_image" accept="image/*" required>
+                    <input type="submit" value="Zmień zdjęcie">
+                </form>
+            </div>
+
+            <div class="form-section">
+                <h3>Zmiana hasła</h3>
+                <form method="POST">
+                    <label for="old_password">Aktualne hasło:</label>
+                    <input type="password" id="old_password" name="old_password" required
+                           placeholder="Wprowadź aktualne hasło">
+                    
+                    <label for="new_password">Nowe hasło:</label>
+                    <input type="password" id="new_password" name="new_password" required
+                           placeholder="Wprowadź nowe hasło">
+                    
+                    <label for="confirm_password">Powtórz nowe hasło:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required
+                           placeholder="Powtórz nowe hasło">
+                    
+                    <input type="submit" name="update_password" value="Zmień hasło">
+                </form>
+            </div>
+
+            <a href="index.php" class="back-button">
+                Powrót do strony głównej
+            </a>
         </div>
+    </main>
 
-        <div class="form-section">
-            <h3>Zmiana nazwy użytkownika</h3>
-            <form method="POST">
-                <label for="new_username">Nowa nazwa użytkownika:</label>
-                <input type="text" id="new_username" name="new_username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
-                <input type="submit" name="update_username" value="Zmień nazwę użytkownika">
-            </form>
-        </div>
-    </div>
-
-    <div class="form-section">
-        <h3>Zdjęcie profilowe</h3>
-        <?php if (!empty($user['image'])): ?>
-            <img src="data:image/jpeg;base64,<?php echo base64_encode($user['image']); ?>" class="profile-image" alt="Zdjęcie profilowe">
-        <?php endif; ?>
-        <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="profile_image" accept="image/*" required>
-            <input type="submit" value="Zmień zdjęcie">
-        </form>
-    </div>
-
-    <div class="form-section">
-        <h3>Zmiana hasła</h3>
-        <form method="POST">
-            <label for="old_password">Aktualne hasło:</label>
-            <input type="password" id="old_password" name="old_password" required>
-            
-            <label for="new_password">Nowe hasło:</label>
-            <input type="password" id="new_password" name="new_password" required>
-            
-            <label for="confirm_password">Powtórz nowe hasło:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
-            
-            <input type="submit" name="update_password" value="Zmień hasło">
-        </form>
-    </div>
-
-    <a href="index.php">
-        Powrót do panelu głównego
-    </a>
+    <script src="./js/stars.js"></script>
+    <script>
+        createStars();
+    </script>
 </body>
 </html>

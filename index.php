@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/footer.css">
+    <link rel="stylesheet" href="./styles/stars.css">
 </head>
 <body>
     <?php include './includes/header.php'; ?>
@@ -137,18 +138,8 @@
 
     <?php include './includes/footer.php'; ?>
 
+    <script src="./js/stars.js"></script>
     <script>
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 180; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.opacity = Math.random();
-                starsContainer.appendChild(star);
-            }
-        }
         createStars();
     </script>
 </body>
