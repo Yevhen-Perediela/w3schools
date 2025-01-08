@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
+    
     $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -19,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Ustawiamy dane sesji
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['lastname'] = $user['lastname'];
+            $_SESSION['email'] = $user['email'];
             
           
             header("Location: index.php");
