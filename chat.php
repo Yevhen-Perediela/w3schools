@@ -136,9 +136,8 @@
                 const text = await response.text();
                 console.log('Raw response:', text);
 
-                let data;
                 try {
-                    data = JSON.parse(text);
+                    const data = JSON.parse(text);
                     if (data.error) {
                         addMessage('🚫 ' + data.error, 'bot');
                         if (data.error.includes('limit zapytań')) {
@@ -164,8 +163,9 @@
                     console.error('Error parsing JSON:', e);
                     addMessage('🚫 Nieprawidłowa odpowiedź z serwera', 'bot');
                 }
-            } catch (error) {
-                console.error('Błąd:', error);
+            } catch (networkError) {
+                console.error('Network error:', networkError);
+                addMessage('🚫 Błąd połączenia z serwerem', 'bot');
             } finally {
                 messageInput.disabled = false;
                 messageInput.focus();
