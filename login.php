@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = "Użytkownik nie istnieje.";
     }
 }
+include_once 'includes/header.php'
 ?>
 
 <!DOCTYPE html>
