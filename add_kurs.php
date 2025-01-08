@@ -10,6 +10,7 @@
     <?php
         include 'includes/header.php';
     ?>
+    <div id="odstep" style="height: 0px"></div>
     <div id="container">
         <input type="text" id='title-input' placeholder='Nazwa..'>
         <div id='main-container'>

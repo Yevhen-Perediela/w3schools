@@ -141,6 +141,25 @@ textarea:focus,
     transition: all 0.3s;
     /* Płynne przejście */
 }
+.delete-button{
+    display: none;
+    /* Ukryj przycisk */
+    position: absolute;
+    right: -30px;
+    /* Pozycjonowanie przycisku z lewej strony elementu */
+    background-color: #741e1e;
+    /* Kolor tła przycisku */
+    color: white;
+    /* Kolor tekstu przycisku */
+    border: none;
+    /* Bez obramowania */
+    padding: 5px;
+    /* Padding dla przycisku */
+    cursor: pointer;
+    /* Kursor wskazujący */
+    transition: all 0.3s;
+    /* Płynne przejście */
+}
 
 .element-container {
     position: relative;
@@ -149,10 +168,11 @@ textarea:focus,
     /* Umożliwia wyświetlanie elementów w linii */
     align-items: center;
     padding-left: 20px;
+    padding-right: 20px;
     /* Wyrównanie elementów w pionie */
 }
 
-.element-container:hover .add-button{
+.element-container:hover .add-button, .element-container:hover .delete-button{
     display: block;
     /* Pokaż przycisk po najechaniu na element */
 }
