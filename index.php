@@ -23,7 +23,7 @@ ini_set('display_errors', 1);
     <div class="hero-container">
         <div class="stars" id="stars"></div>
         
-        <h1 class="hero-title">Naucz się programować</h1>
+        <h1 class="hero-title">Naucz się programować 123</h1>
         <p class="hero-subtitle">Z największą stroną dla programistów na świecie.</p>
         
         <div class="hero-search-container">
