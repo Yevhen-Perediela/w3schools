@@ -19,12 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Sprawdzanie czy użytkownik już istnieje
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->bind_param("s", $username);
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND email = ?");
+        $stmt->bind_param("ss", $username, $email);
         $stmt->execute();
         if($stmt->get_result()->num_rows > 0) {
-            $errors[] = "Użytkownik o takiej nazwie już istnieje.";
+            $errors[] = "Użytkownik o takiej nazwie lub email już istnieje.";
         }
+
 
         // Sprawdzanie czy email już istnieje
         $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
