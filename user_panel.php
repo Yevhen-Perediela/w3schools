@@ -14,8 +14,25 @@ if (isset($_SESSION['username']) && $_SESSION['username'] === 'admin') {
 require_once 'connect.php';
 
 $user_id = $_SESSION['user_id'];
+$stmt = $conn->prepare("SELECT username, lastname, email, image FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user_data = $result->fetch_assoc();
+
+// Używamy danych z bazy
+$username = $user_data['username'];
+$lastname = $user_data['lastname'];
+$email = $user_data['email'];
+
+// Aktualizujemy sesję
+$_SESSION['username'] = $username;
+$_SESSION['lastname'] = $lastname;
+$_SESSION['email'] = $email;
+
 $message = '';
 $errors = [];
+var_dump($username);
 
 $stmt = $conn->prepare("SELECT username, lastname, email, image FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
@@ -126,9 +143,9 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
             <div class="form-section">
                 <h3>Twoje dane</h3>
                 <div class="user-info">
-                    <p><strong>Nazwa użytkownika:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
-                    <p><strong>Nazwisko:</strong> <?php echo htmlspecialchars($user['lastname']); ?></p>
-                    <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+                    <p><strong>Nazwa użytkownika:</strong> <?php echo htmlspecialchars($username); ?></p>
+                    <p><strong>Nazwisko:</strong> <?php echo htmlspecialchars($lastname); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
                 </div>
             </div>
 
@@ -137,7 +154,7 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
                 <form method="POST">
                     <label for="new_username">Nowa nazwa użytkownika:</label>
                     <input type="text" id="new_username" name="new_username" 
-                           value="<?php echo htmlspecialchars($user['username']); ?>" required>
+                           value="<?php echo htmlspecialchars($username); ?>" required>
                     <input type="submit" name="update_username" value="Zmień nazwę użytkownika">
                 </form>
             </div>
