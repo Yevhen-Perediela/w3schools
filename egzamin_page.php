@@ -5,7 +5,7 @@
     include_once 'includes/header.php';
     
     function getPdfLinks($courseType) {
-        require_once 'connect.php';
+        require 'connect.php';
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
