@@ -35,3 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+const params = new URLSearchParams(window.location.search);
+const type = params.get('course');
+console.log(document.getElementById(type+'-menu'));
+
+document.getElementById(type+'-menu').style.backgroundColor='#04aa6d'

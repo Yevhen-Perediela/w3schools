@@ -42,12 +42,12 @@
     <link rel="stylesheet" href="styles/egzamin_page.css">
 </head>
 <body>
+<div id="odstep" style="height: 0px"></div>
 <div id="main-wrapper">
     <div id="left-side">
-        <a href="egzamin_page.php?course=HTML"><div class="item-menu">HTML</div></a>
-        <a href="egzamin_page.php?course=CSS"><div class="item-menu">CSS</div></a>
-        <a href="egzamin_page.php?course=JS"><div class="item-menu">JavaScript</div></a>
-        
+        <a href="egzamin_page.php?course=HTML"><div id="HTML-menu" class="item-menu">HTML</div></a>
+        <a href="egzamin_page.php?course=CSS"><div id="CSS-menu" class="item-menu">CSS</div></a>
+        <a href="egzamin_page.php?course=JS"><div id="JS-menu" class="item-menu">JavaScript</div></a>
     </div>
     <div id="main-container">
         <svg id="connections" width="100%" height="100%" style="position: absolute; top: 0; right: 0; z-index: 0;"></svg>
