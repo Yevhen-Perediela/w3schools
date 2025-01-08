@@ -50,102 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8" />
     <title>Formularz kontaktowy</title>
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Segoe UI", Tahoma, sans-serif;
-            background: linear-gradient(45deg, #606c88, #3f4c6b);
-            /* alternatywnie: background: linear-gradient(120deg, #ff9a9e, #fad0c4); */
-        }
-
-        .contact-container {
-            max-width: 600px;
-            margin: 150px auto; 
-            background-color: #fff; 
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        h2 {
-            margin-top: 0;
-            font-size: 24px;
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #333;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 14px;
-            transition: 0.3s border-color ease;
-        }
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        textarea:focus,
-        select:focus {
-            border-color: #6a5acd; /* zmienia kolor obramowania po focusie */
-            outline: none;
-        }
-
-        button {
-            background-color: #6a5acd;
-            color: #fff;
-            padding: 12px 24px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s background-color ease;
-        }
-        button:hover {
-            background-color: #5741c1;
-        }
-
-        .error {
-            color: #ff3333;
-            background: #ffe5e5;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-        .success {
-            color: #2e7d32;
-            background: #e3f2fd;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-
-        @media (max-width: 640px) {
-            .contact-container {
-                margin: 20px;
-                padding: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/contact.css">
 </head>
 <body>
     <?php include 'includes/header.php';?>
-
+    <div id="stars" class="stars"></div>
+    <div id="odstep"></div>
     <div class="contact-container">
-        <h2>Formularz kontaktowy</h2>
 
         <!-- Komunikaty (błąd lub sukces) -->
         <?php if (isset($error)): ?>
@@ -202,5 +115,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
     <?php include 'includes/footer.php';?>
+    <script src="js/stars.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+        });
+    </script>
 </body>
 </html>
