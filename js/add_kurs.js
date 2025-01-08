@@ -126,6 +126,7 @@ function addElement(type, where, clickedButton) {
 
     document.getElementById('menu').style.display = 'none';
     addAddButtonToElement(lineBreak);
+    addDeleteButtonToElement(lineBreak)
 }
 
 // addElement('quiz', 'end', '')
@@ -203,6 +204,7 @@ function addImage(where, clickedButton) {
 
         // Dodaj przycisk "Dodaj" do elementu
         addAddButtonToElement(lineBreak);
+        addDeleteButtonToElement(lineBreak)
 
         document.getElementById('menu').style.display = 'none';
     };
@@ -222,6 +224,16 @@ function showAddButton(event) {
 function hideAddButton(event) {
     const addButton = event.currentTarget.querySelector('.add-button');
     addButton.style.display = 'none';
+}
+
+function addDeleteButtonToElement(element){
+    const delButton = document.createElement('button')
+    delButton.className = 'delete-button';
+    delButton.innerText = 'Usuń';
+    delButton.onclick = function(){
+        element.remove()
+    }
+    element.appendChild(delButton);
 }
 
 function addAddButtonToElement(element) {
@@ -253,6 +265,7 @@ function addAddButtonToElement(element) {
 document.querySelectorAll('#element > div').forEach(function(el) {
     el.classList.add('element-container');
     addAddButtonToElement(el);
+    addDeleteButtonToElement(el)
 });
 
 document.addEventListener('click', function() {

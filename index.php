@@ -20,6 +20,7 @@ ini_set('display_errors', 1);
 </head>
 <body>
     <?php include './includes/header.php'; ?>
+    <div id="odstep" style="height: 0px"></div>
     <div class="hero-container">
         <div class="stars" id="stars"></div>
         
