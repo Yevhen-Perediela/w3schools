@@ -50,7 +50,7 @@ if (!function_exists('curl_init')) {
     exit();
 }
 
-$api_key = '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';
+$api_key = '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';
 
 $system_prompt = "Jesteś pomocnym asystentem programowania, który specjalizuje się wyłącznie w JavaScript, HTML, CSS i PHP. 
 Jeśli użytkownik zapyta o inny język programowania, grzecznie poinformuj go, że możesz pomóc tylko w zakresie JS, HTML, CSS i PHP.
