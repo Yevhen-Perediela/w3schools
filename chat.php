@@ -139,35 +139,33 @@
                 let data;
                 try {
                     data = JSON.parse(text);
+                    if (data.error) {
+                        addMessage('🚫 ' + data.error, 'bot');
+                        if (data.error.includes('limit zapytań')) {
+                            let seconds = 60;
+                            const countdownMessage = document.createElement('div');
+                            countdownMessage.classList.add('message', 'bot-message', 'countdown');
+                            countdownMessage.textContent = `Spróbuj ponownie za ${seconds} sekund...`;
+                            chatContainer.appendChild(countdownMessage);
+                            
+                            const countdown = setInterval(() => {
+                                seconds--;
+                                countdownMessage.textContent = `Spróbuj ponownie za ${seconds} sekund...`;
+                                if (seconds <= 0) {
+                                    clearInterval(countdown);
+                                    countdownMessage.remove();
+                                }
+                            }, 1000);
+                        }
+                    } else if (data.response) {
+                        addMessage(data.response, 'bot');
+                    }
                 } catch (e) {
                     console.error('Error parsing JSON:', e);
-                    throw new Error('Nieprawidłowa odpowiedź z serwera');
-                }
-
-                if (data.error) {
-                    addMessage('🚫 ' + data.error, 'bot');
-                    if (data.error.includes('limit zapytań')) {
-                        let seconds = 60;
-                        const countdownMessage = document.createElement('div');
-                        countdownMessage.classList.add('message', 'bot-message', 'countdown');
-                        countdownMessage.textContent = `Spróbuj ponownie za ${seconds} sekund...`;
-                        chatContainer.appendChild(countdownMessage);
-                        
-                        const countdown = setInterval(() => {
-                            seconds--;
-                            countdownMessage.textContent = `Spróbuj ponownie za ${seconds} sekund...`;
-                            if (seconds <= 0) {
-                                clearInterval(countdown);
-                                countdownMessage.remove();
-                            }
-                        }, 1000);
-                    }
-                } else {
-                    addMessage(data.response, 'bot');
+                    addMessage('🚫 Nieprawidłowa odpowiedź z serwera', 'bot');
                 }
             } catch (error) {
                 console.error('Błąd:', error);
-                addMessage('🚫 Wystąpił błąd podczas komunikacji z serwerem', 'bot');
             } finally {
                 messageInput.disabled = false;
                 messageInput.focus();
