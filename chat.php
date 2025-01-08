@@ -165,7 +165,7 @@
                 }
             } catch (networkError) {
                 console.error('Network error:', networkError);
-                addMessage('🚫 Błąd połączenia z serwerem', 'bot');
+               
             } finally {
                 messageInput.disabled = false;
                 messageInput.focus();
