@@ -161,7 +161,7 @@
                     }
                 } catch (e) {
                     console.error('Error parsing JSON:', e);
-                    addMessage('🚫 Nieprawidłowa odpowiedź z serwera', 'bot');
+                    
                 }
             } catch (networkError) {
                 console.error('Network error:', networkError);
