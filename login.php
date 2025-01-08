@@ -57,6 +57,6 @@ include_once 'includes/header.php'
         
         <input type="submit" value="Zaloguj">
     </form>
-    <p>Nie masz konta? <a href="register.php">Zarejestruj się</a></p>
+    <p style="color: white;">Nie masz konta? <a href="register.php">Zarejestruj się</a></p>
 </body>
 </html>
