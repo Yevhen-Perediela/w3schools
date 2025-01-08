@@ -9,7 +9,7 @@ require_once 'connect.php';
 <head>
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="/w3schools/js/nav.js" defer></script>
+    <script src="/js/nav.js" defer></script>
 </head>
 <body>
     <div class="nav-wrapper">
