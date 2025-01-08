@@ -108,7 +108,7 @@
         const messageForm = document.getElementById('message-form');
         const messageInput = document.getElementById('message-input');
 
-        // Dodaj początkową wiadomość
+       
         addMessage('Cześć! Jestem asystentem programowania specjalizującym się w JavaScript, HTML, CSS i PHP. W czym mogę Ci pomóc?', 'bot');
 
         messageForm.addEventListener('submit', async (e) => {
