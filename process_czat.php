@@ -20,17 +20,17 @@ foreach ($requests_data as $time => $count) {
     }
 }
 
-// Sprawdź limit zapytań (maksymalnie 10 na minutę)
+
 if (isset($requests_data[$current_minute]) && $requests_data[$current_minute] >= 10) {
     echo json_encode(['error' => 'Przekroczono limit zapytań. Proszę poczekać minutę.']);
     exit();
 }
 
-// Zwiększ licznik zapytań
+
 $requests_data[$current_minute] = ($requests_data[$current_minute] ?? 0) + 1;
 file_put_contents($cache_file, json_encode($requests_data));
 
-// Odbierz dane JSON
+
 $input = file_get_contents('php://input');
 if (!$input) {
     echo json_encode(['error' => 'Brak danych wejściowych']);
@@ -85,7 +85,7 @@ try {
 
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request_data));
 
-    // Dodaj retry logic
+ 
     $max_retries = 3;
     $retry_count = 0;
     $success = false;
