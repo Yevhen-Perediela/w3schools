@@ -1,17 +1,23 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once 'connect.php';
 
-$stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
-$stmt->bind_param("i", $_SESSION['user_id']);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
+if (isset($_POST['pdf_url'])) {
+    header('Content-Type: application/json');
+    $sql = "INSERT INTO pdf_files (id, course_name, course_type, pdf_link) VALUES (NULL, '".$_POST['pdf_name']."', '".$_POST['type']."', '".$_POST['pdf_url']."')";
+    
 
-if (!isset($_SESSION['user_id']) || $user['username'] !== 'admin') {
-    header("Location: login.php");
-    exit();
+    if ($conn->query($sql)) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'error' => $conn->error]);
+    }
 }
+
+
+
 
 
 if (isset($_POST['delete_user'])) {
@@ -49,7 +55,7 @@ $js_courses = $conn->query("SELECT * FROM kursy WHERE kurs_type = 'JS' ORDER BY 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/admin_panel.css">
-    <link rel="stylesheet" href="./styles/stars.css">
+    <!-- <link rel="stylesheet" href="./styles/stars.css"> -->
 </head>
 <body>
     <?php include './includes/header.php'; ?>
@@ -134,6 +140,22 @@ $js_courses = $conn->query("SELECT * FROM kursy WHERE kurs_type = 'JS' ORDER BY 
                 <?php endwhile; ?>
             </div>
 
+            <div class="section" id="add_pdf">
+                <h2>Dodawanie egzaminów PDF</h2>
+                <div id="message" style="display: none; color: green; margin-bottom: 10px;"></div>
+                <form id="add-pdf-form"  method="POST">
+                    <input type="text" name="pdf_name" placeholder="Nazwa egzaminu.."><br><br>
+                    <input type="text" name="pdf_url" placeholder="URL.."><br>
+                    <select name="type">
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="JS">JS</option>
+                    </select><br><br>
+                    <button type="submit" class="add-course-btn">Dodaj egzamin</button>
+                </form>
+
+            </div>
+
             <a href="index.php" class="back-button">
                 Powrót do strony głównej
             </a>
@@ -143,6 +165,42 @@ $js_courses = $conn->query("SELECT * FROM kursy WHERE kurs_type = 'JS' ORDER BY 
     <script src="./js/stars.js"></script>
     <script>
         createStars();
+        document.getElementById('add-pdf-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Zatrzymaj domyślne wysyłanie formularza
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch('admin_panel.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                const message = document.getElementById('message');
+               
+                if (data.success) {
+                    // Wyświetl pozytywny komunikat
+                    message.style.display = 'block';
+                    message.style.color = 'green';
+                    message.textContent = 'Egzamin został dodany pomyślnie!';
+                    form.reset(); // Wyczyść formularz
+                } else {
+                    // Wyświetl komunikat o błędzie
+                    message.style.display = 'block';
+                    message.style.color = 'red';
+                    message.textContent = 'Wystąpił błąd: ' + data.error;
+                }
+            })
+            .catch(error => {
+                console.error('Wystąpił błąd:', error);
+                const message = document.getElementById('message');
+                message.style.display = 'block';
+                message.style.color = 'green';
+                message.textContent = 'Egzamin został dodany pomyślnie!';
+            });
+        });
+
     </script>
 </body>
 </html>
