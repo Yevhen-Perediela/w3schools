@@ -7,7 +7,7 @@
 }
 
 .hero-container {
-  background-color: #282a35;
+  background-color: #1a1b26;
   color: white;
   text-align: center;
   padding: 130px 20px;
@@ -66,8 +66,9 @@ body {
   min-width: 70px;
 }
 
-.html-section {
-  background-color: #d9eee1;
+.html-section,
+.css-section,
+.js-section {
   padding: 100px 20px;
   text-align: center;
   display: flex;
@@ -75,6 +76,7 @@ body {
   gap: 80px;
   align-items: flex-start;
   margin: 0;
+  min-height: 600px;
 }
 
 .html-content {
@@ -193,26 +195,16 @@ body {
   color: #b00068;
 }
 
-.css-section {
-  background-color: #fff4a3;
-  padding: 100px 20px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  gap: 80px;
-  align-items: flex-start;
-  margin: 0;
-}
-
 .js-section {
   background-color: #282a35;
-  padding: 100px 20px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  gap: 80px;
-  align-items: flex-start;
-  margin: 0;
+}
+
+.css-section {
+  background-color: #fff4a3;
+}
+
+.html-section {
+  background-color: #d9eee1;
 }
 
 .js-title {
@@ -293,36 +285,6 @@ body {
 
 .html-section .code-editor pre code {
   color: black;
-}
-
-.html-section,
-.css-section,
-.js-section {
-  padding: 100px 20px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  gap: 80px;
-  align-items: flex-start;
-  margin: 0;
-  min-height: 600px;
-}
-
-.html-content {
-  text-align: center;
-  width: 400px;
-  flex-shrink: 0;
-}
-
-.html-example {
-  width: 600px;
-  margin: 0;
-  text-align: left;
-  background-color: white;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
 }
 
 .scroll-down {

@@ -1,0 +1,253 @@
+/* Import styli dla gwiazdek */
+@import url("stars.css");
+
+/* Style dla tła strony */
+body {
+  background: #1a1b26 !important;
+}
+
+/* Style dla kontenera gwiazdek */
+#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+#odstep {
+  height: 5px;
+}
+
+/* Główny kontener */
+.containerAbout {
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Sidebar */
+.sidebar {
+  flex: 0 0 300px;
+  background: rgba(40, 42, 53, 0.95);
+  padding: 25px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: fit-content;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 110px;
+}
+
+.sidebar h3 {
+  color: #fff4a3;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.sidebar h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(45deg, #04aa6d, #06c17f);
+  border-radius: 2px;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.sidebar a:hover {
+  color: #04aa6d;
+  background: rgba(4, 170, 109, 0.1);
+  transform: translateX(5px);
+  border-color: rgba(4, 170, 109, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Główna treść */
+.mainContentAbout {
+  flex: 1;
+  background: rgba(40, 42, 53, 0.95);
+  padding: 40px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.mainContentAbout h1 {
+  color: #fff4a3;
+  margin-bottom: 30px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.mainContentAbout h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(45deg, #04aa6d, #06c17f);
+  border-radius: 2px;
+}
+
+.mainContentAbout h2 {
+  color: #fff4a3;
+  margin: 40px 0 20px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.mainContentAbout h3 {
+  color: #fff4a3;
+  margin: 30px 0 15px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.mainContentAbout h4 {
+  color: #fff4a3;
+  margin: 20px 0 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.mainContentAbout p {
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+}
+
+.mainContentAbout a {
+  color: #04aa6d;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.mainContentAbout a:hover {
+  color: #038857;
+  text-decoration: underline;
+}
+
+/* Lista w regulaminie */
+.mainContentAbout ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.mainContentAbout ul li {
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 35px;
+}
+
+.mainContentAbout ul li::before {
+  content: "•";
+  position: absolute;
+  left: 15px;
+  color: #04aa6d;
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+.mainContentAbout ul li:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(5px);
+}
+
+/* Responsywność */
+@media (max-width: 1200px) {
+  .containerAbout {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 992px) {
+  .containerAbout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .containerAbout {
+    padding: 15px;
+    margin: 10px auto;
+  }
+
+  .mainContentAbout {
+    padding: 25px;
+  }
+
+  .mainContentAbout h1 {
+    font-size: 2.2rem;
+  }
+
+  .mainContentAbout h2 {
+    font-size: 1.8rem;
+  }
+
+  .mainContentAbout h3 {
+    font-size: 1.3rem;
+  }
+
+  .mainContentAbout h4 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Animacja wejścia */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
