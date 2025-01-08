@@ -42,6 +42,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
+    <div id="odstep" style="height: 0px"></div>
     <div id="main-wrapper">
         <div id="left-side">
         <?php
