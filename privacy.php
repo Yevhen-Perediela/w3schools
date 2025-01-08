@@ -3,34 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy</title>
-    <link rel="stylesheet" href="styles/regulaminy.css">
+    <title>Polityka Prywatności</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/privacy.css">
 </head>
 <body>
-<?php include 'includes/header.php' ?>
+    <?php include 'includes/header.php' ?>
+    <div id="stars" class="stars"></div>
+    <div id="odstep"></div>
     <div class="containerAbout">
         <div class="sidebar">
-            <h3>About Us</h3>
-            <a href="about.php">About W3Schools</a>
-            <a href="terms.php">About Terms</a>
-            <a href="privacy.php">About Privacy</a>
+            <h3>O nas</h3>
+            <a href="about.php">O W3Schools</a>
+            <a href="terms.php">Regulamin</a>
+            <a href="privacy.php">Polityka Prywatności</a>
         </div>
 
         <div class="mainContentAbout">
-        <h1>Privacy Statement for W3Schools</h1>
-    <p>This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from w3schools.com (the "Site").</p>
+        <h1>Polityka Prywatności W3Schools</h1>
+    <p>Niniejsza Polityka Prywatności opisuje, w jaki sposób Twoje dane osobowe są zbierane, wykorzystywane i udostępniane podczas odwiedzania lub dokonywania zakupu w w3schools.com ("Witryna").</p>
 
-    <h2>Personal Information We Collect</h2>
-    <p>When you visit the Site, we automatically collect certain information about your device, including information about your web browser, IP address, time zone, and some of the cookies that are installed on your device. Additionally, as you browse the Site, we collect information about the individual web pages or products that you view, what websites or search terms referred you to the Site, and information about how you interact with the Site. We refer to this automatically-collected information as "Device Information".</p>
+    <h2>Zbierane Informacje Osobiste</h2>
+    <p>Gdy odwiedzasz Witrynę, automatycznie zbieramy pewne informacje o Twoim urządzeniu, w tym informacje o przeglądarce internetowej, adresie IP, strefie czasowej i niektórych plikach cookie zainstalowanych na Twoim urządzeniu. Dodatkowo, podczas przeglądania Witryny zbieramy informacje o poszczególnych stronach internetowych lub produktach, które wyświetlasz, o stronach internetowych lub hasłach wyszukiwania, które przekierowały Cię do Witryny, oraz informacje o tym, jak wchodzisz w interakcję z Witryną. Te automatycznie zbierane informacje nazywamy "Informacjami o Urządzeniu".</p>
 
-    <p>We collect Device Information using the following technologies:</p>
+    <p>Zbieramy Informacje o Urządzeniu za pomocą następujących technologii:</p>
     <ul>
-        <li>"Cookies" are data files that are placed on your device or computer and often include an anonymous unique identifier. For more information about cookies, and how to disable cookies, visit <a href="http://www.allaboutcookies.org">http://www.allaboutcookies.org</a>.</li>
-        <li>"Log files", and User Accounts, track actions occurring on the Site, and collect data including your IP address, browser type, Internet service provider, referring/exit pages, and date/time stamps.</li>
-        <li>"Web beacons", "tags", and "pixels" are electronic files used to record information about how you browse the Site.</li>
+        <li>"Pliki cookie" to pliki danych umieszczane na Twoim urządzeniu lub komputerze, często zawierające anonimowy unikalny identyfikator. Więcej informacji o plikach cookie i jak je wyłączyć znajdziesz na stronie <a href="http://www.allaboutcookies.org">http://www.allaboutcookies.org</a>.</li>
+        <li>"Pliki dziennika" i Konta Użytkowników śledzą działania zachodzące w Witrynie i zbierają dane, w tym adres IP, typ przeglądarki, dostawcę usług internetowych, strony odsyłające/wyjściowe oraz znaczniki daty/godziny.</li>
+        <li>"Sygnały nawigacyjne", "znaczniki" i "piksele" to pliki elektroniczne używane do rejestrowania informacji o tym, jak przeglądasz Witrynę.</li>
     </ul>
 
-    <p>Additionally, when you make a purchase or attempt to make a purchase through the Site, we collect certain information from you, including your name, billing address, shipping address, payment information (including credit card numbers), email address, and phone number. We refer to this information as "Order Information".</p>
+    <p>Dodatkowo, gdy dokonujesz zakupu lub próbujesz dokonać zakupu za pośrednictwem Witryny, zbieramy od Ciebie pewne informacje, w tym imię i nazwisko, adres rozliczeniowy, adres dostawy, informacje o płatności (w tym numery kart kredytowych), adres e-mail i numer telefonu. Informacje te nazywamy "Informacjami o Zamówieniu".</p>
 
     <h2>Personal User Information</h2>
     <p>When we talk about "Personal Information" in this Privacy Policy, we are talking both about Device Information and Order Information.</p>
@@ -96,12 +100,18 @@
     <p>W3Schools contains links to other sites. We are not responsible for the privacy practices or the content of such Web sites. This privacy document applies only to W3Schools.</p>
 
     <h2>Contact Us</h2>
-    <p>For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e‑mail at <a href="mailto:help@w3schools.com">help@w3schools.com</a> or by mail using the details provided below:</p>
+    <p>Aby uzyskać więcej informacji o naszych praktykach dotyczących prywatności, jeśli masz pytania lub chcesz złożyć skargę, skontaktuj się z nami przez e-mail pod adresem <a href="mailto:help@w3schools.com">help@w3schools.com</a> lub listownie, korzystając z poniższych danych:</p>
     <p>W3Schools<br>
-    [Re: Privacy Compliance Officer]<br>
-    Larsamyraa 18, 4313 SANDNES, Norway</p>
+    [Do: Inspektor Ochrony Danych]<br>
+    Larsamyraa 18, 4313 SANDNES, Norwegia</p>
         </div>
     </div>
-    <?php include 'includes/footer.php' ?>   
+    <?php include 'includes/footer.php' ?>
+    <script src="js/stars.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+        });
+    </script>
 </body>
 </html>

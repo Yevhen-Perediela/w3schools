@@ -107,7 +107,6 @@ require_once 'connect.php';
             </div>
         </nav>
     </div>
-    <div id="odstep"></div>
 </body>
 </html>
 
