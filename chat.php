@@ -133,7 +133,17 @@
                     body: JSON.stringify({ message })
                 });
 
-                const data = await response.json();
+                const text = await response.text();
+                console.log('Raw response:', text);
+
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                    throw new Error('Nieprawidłowa odpowiedź z serwera');
+                }
+
                 if (data.error) {
                     addMessage('🚫 ' + data.error, 'bot');
                     if (data.error.includes('limit zapytań')) {
@@ -157,7 +167,7 @@
                 }
             } catch (error) {
                 console.error('Błąd:', error);
-               
+                addMessage('🚫 Wystąpił błąd podczas komunikacji z serwerem', 'bot');
             } finally {
                 messageInput.disabled = false;
                 messageInput.focus();
@@ -171,12 +181,19 @@
             messageDiv.classList.add('message', `${type}-message`);
             
             if (type === 'bot') {
-                message = message.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, language, code) {
-                    return `<pre><code class="language-${language || 'plaintext'}">${code.trim()}</code></pre>`;
-                });
+                try {
+                    message = message.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, language, code) {
+                        return `<pre><code class="language-${language || 'plaintext'}">${code.trim()}</code></pre>`;
+                    });
+                    messageDiv.innerHTML = message;
+                } catch (error) {
+                    console.error('Error formatting message:', error);
+                    messageDiv.textContent = message;
+                }
+            } else {
+                messageDiv.textContent = message;
             }
             
-            messageDiv.textContent = message;
             chatContainer.appendChild(messageDiv);
             chatContainer.scrollTop = chatContainer.scrollHeight;
             
