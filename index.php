@@ -17,6 +17,8 @@ ini_set('display_errors', 1);
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/footer.css">
     <link rel="stylesheet" href="./styles/stars.css">
+    <link rel="stylesheet" href="styles/chat-widget.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
 </head>
 <body>
     <?php include './includes/header.php'; ?>
@@ -157,5 +159,8 @@ ini_set('display_errors', 1);
             document.title = title;    
         })
     </script>
+
+    <?php include 'includes/chat-widget.php'; ?>
+    <script src="js/chat-widget.js"></script>
 </body>
 </html>
