@@ -117,7 +117,6 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel użytkownika</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="./styles/index.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/user_panel.css">
     <link rel="stylesheet" href="./styles/stars.css">
@@ -144,7 +143,7 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
             <div class="form-section">
                 <h3>Twoje dane</h3>
                 <div class="user-info">
-                    <p><strong>Nazwa użytkownika:</strong> <?php echo htmlspecialchars($username); ?></p>
+                    <p><strong>Nazwa użytkownika:</strong> <span class="username"><?php echo htmlspecialchars($username); ?></span></p>
                     <p><strong>Nazwisko:</strong> <?php echo htmlspecialchars($lastname); ?></p>
                     <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
                 </div>
@@ -152,35 +151,20 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
 
             <div class="form-section">
                 <h3>Zmiana nazwy użytkownika</h3>
-                <form method="POST">
+                <form method="POST" name="update_username">
                     <label for="new_username">Nowa nazwa użytkownika:</label>
                     <input type="text" id="new_username" name="new_username" 
                            value="<?php echo htmlspecialchars($username); ?>" required>
-                    <input type="submit" name="update_username" value="Zmień nazwę użytkownika">
+                    <input type="submit" value="Zmień nazwę użytkownika">
                 </form>
             </div>
 
             <div class="form-section">
                 <h3>Zdjęcie profilowe</h3>
-                <div class="avatar-section">
-                    <?php
-                    $stmt = $conn->prepare("SELECT image FROM users WHERE id = ?");
-                    $stmt->bind_param("i", $_SESSION['user_id']);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $user = $result->fetch_assoc();
-                    
-                    if ($user && $user['image']) {
-                        $imageData = base64_encode($user['image']);
-                        echo '<img src="data:image/jpeg;base64,'.$imageData.'" alt="Avatar" class="avatar-preview">';
-                        echo '<form action="delete_avatar.php" method="POST" class="delete-avatar-form">';
-                        echo '<button type="submit" class="delete-avatar-btn">Usuń zdjęcie profilowe</button>';
-                        echo '</form>';
-                    } else {
-                        echo '<img src="assets/img/user.png" alt="Default Avatar" class="avatar-preview">';
-                    }
-                    ?>
-                </div>
+                <?php if (!empty($user['image'])): ?>
+                    <img src="data:image/jpeg;base64,<?php echo base64_encode($user['image']); ?>" 
+                         class="profile-image" alt="Zdjęcie profilowe">
+                <?php endif; ?>
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="profile_image" accept="image/*" required>
                     <input type="submit" value="Zmień zdjęcie">
@@ -215,6 +199,49 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
     <script src="./js/stars.js"></script>
     <script>
         createStars();
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+       
+        const usernameForm = document.querySelector('form[name="update_username"]');
+        usernameForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            try {
+                const response = await fetch('update_user.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                   
+                    document.querySelector('.user-info .username').textContent = data.new_username;
+                    showMessage('success', 'Nazwa użytkownika została zaktualizowana.');
+                } else {
+                    showMessage('error', data.error);
+                }
+            } catch (error) {
+                showMessage('error', 'Wystąpił błąd podczas aktualizacji.');
+            }
+        });
+        
+        function showMessage(type, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type;
+            messageDiv.textContent = message;
+            
+          
+            document.querySelectorAll('.success, .error').forEach(el => el.remove());
+            
+          
+            usernameForm.insertAdjacentElement('beforebegin', messageDiv);
+           
+            setTimeout(() => messageDiv.remove(), 3000);
+        }
+    });
     </script>
 </body>
 </html>
