@@ -5,7 +5,7 @@
     
     <div class="chat-popup" id="chat-popup">
         <div class="chat-header">
-            <h3>Maksym GPT-4 Turbo</h3>
+            <h3>Asystent AI</h3>
             <button class="chat-close" id="chat-close">×</button>
         </div>
         
