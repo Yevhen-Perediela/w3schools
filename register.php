@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="./styles/index.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/register.css">
     <link rel="stylesheet" href="./styles/stars.css">
@@ -70,6 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php include './includes/header.php'; ?>
     
     <div class="stars" id="stars"></div>
+
+    <div id="odstep" style="height: 0px"></div>
     
     <main class="main-content">
         <div class="register-container">
@@ -130,6 +133,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <p class="login-link">Masz już konto? <a href="login.php">Zaloguj się</a></p>
         </div>
     </main>
+
+    <?php include './includes/footer.php'; ?>
 
     <script src="./js/stars.js"></script>
     <script>

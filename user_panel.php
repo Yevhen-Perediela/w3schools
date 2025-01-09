@@ -161,10 +161,25 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
 
             <div class="form-section">
                 <h3>Zdjęcie profilowe</h3>
-                <?php if (!empty($user['image'])): ?>
-                    <img src="data:image/jpeg;base64,<?php echo base64_encode($user['image']); ?>" 
-                         class="profile-image" alt="Zdjęcie profilowe">
-                <?php endif; ?>
+                <div class="avatar-section">
+                    <?php
+                    $stmt = $conn->prepare("SELECT image FROM users WHERE id = ?");
+                    $stmt->bind_param("i", $_SESSION['user_id']);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $user = $result->fetch_assoc();
+                    
+                    if ($user && $user['image']) {
+                        $imageData = base64_encode($user['image']);
+                        echo '<img src="data:image/jpeg;base64,'.$imageData.'" alt="Avatar" class="avatar-preview">';
+                        echo '<form action="delete_avatar.php" method="POST" class="delete-avatar-form">';
+                        echo '<button type="submit" class="delete-avatar-btn">Usuń zdjęcie profilowe</button>';
+                        echo '</form>';
+                    } else {
+                        echo '<img src="assets/img/user.png" alt="Default Avatar" class="avatar-preview">';
+                    }
+                    ?>
+                </div>
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="profile_image" accept="image/*" required>
                     <input type="submit" value="Zmień zdjęcie">

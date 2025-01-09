@@ -2,8 +2,22 @@
 @import url("stars.css");
 
 /* Style dla tła strony kontaktowej */
-body {
-  background: #1a1b26 !important;
+.contact-page {
+  background: #1a1b26;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dodajemy wrapper dla głównej zawartości */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Style dla kontenera gwiazdek na stronie kontaktowej */
@@ -14,6 +28,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: 0;
+  pointer-events: none;
 }
 
 /* Usuwam style dla body, które mogą kolidować z innymi */
@@ -25,7 +40,7 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 800px;
-  margin: 20px auto 50px;
+  margin: 20px auto;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transform: translateY(0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -192,4 +207,13 @@ body {
 
 #odstep {
   height: 5px;
+}
+
+/* Footer zawsze na dole */
+.footer {
+  position: relative;
+  z-index: 2;
+  background-color: #282a35;
+  width: 100%;
+  margin-top: auto;
 }

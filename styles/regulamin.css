@@ -3,7 +3,10 @@
 
 /* Style dla tła strony */
 body {
-  background: #1a1b26 !important;
+  background: #1a1b26;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Style dla kontenera gwiazdek */
@@ -22,6 +25,7 @@ body {
 
 /* Główny kontener */
 .containerAbout {
+  flex: 1;
   display: flex;
   gap: 40px;
   max-width: 1200px;
