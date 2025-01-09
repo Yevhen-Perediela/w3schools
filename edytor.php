@@ -157,32 +157,50 @@
           <html lang="pl">
           <head>
             <meta charset="UTF-8">
-            <title>Hello!</title>
             <style>
               body {
                 font-family: Arial, sans-serif;
-                background-color: #eef;
+                background-color: #1a1b26;
                 text-align: center;
-                padding: 2em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+                perspective: 1000px;
               }
-              h2 {
-                color: #336699;
+              .container {
+                width: 300px;
+                height: 300px;
+                transform-style: preserve-3d;
+                animation: rotate 10s infinite linear;
+              }
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+              }
+              @keyframes rotate {
+                from { transform: rotateY(0deg); }
+                to { transform: rotateY(360deg); }
               }
             </style>
           </head>
           <body>
-            <h2>Witaj w naszym edytorze!</h2>
-            <p>To jest domyślny kod HTML.</p>
-
-            <script>
-              console.log('Witaj w w3schools!');
-            <\/script>
+            <div class="container">
+              <img src="https://media.discordapp.net/attachments/716126422242033707/820264285376610335/image0.gif?ex=67810b25&is=677fb9a5&hm=eb426289a2bc3d9c21176241e9719ce07cc554e2dc7026db1851a25449b90b6c&">
+            </div>
           </body>
           </html>`, -1);
     }
 
     // Uruchom kod od razu po inicjalizacji edytora
     runCode();
+
+    // Formatuj kod od razu po inicjalizacji edytora
+    formatCode();
 
     // Automatyczne odświeżanie po wprowadzeniu zmian
     let updateTimeout;
