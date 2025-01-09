@@ -187,37 +187,49 @@
             
             if (type === 'bot') {
                 try {
-                   
+                    // Funkcja do bezpiecznego escapowania HTML
                     function escapeHtml(text) {
-                        const div = document.createElement('div');
-                        div.textContent = text;
-                        return div.innerHTML;
+                        return text
+                            .replace(/&/g, "&amp;")
+                            .replace(/</g, "&lt;")
+                            .replace(/>/g, "&gt;")
+                            .replace(/"/g, "&quot;")
+                            .replace(/'/g, "&#039;");
                     }
                     
-                 
-                    message = escapeHtml(message);
+                    // Najpierw escapujemy cały tekst
+                    let escapedMessage = escapeHtml(message);
                     
-                   
-                    message = message.replace(/\n\n/g, '</p><p>');
-                    message = message.replace(/\n/g, '<br>');
-                    
-                   
+                    // Obsługa bloków kodu
                     const codeBlocks = [];
-                    message = message.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, language, code) {
+                    escapedMessage = escapedMessage.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, language, code) {
                         const placeholder = `CODE_BLOCK_${codeBlocks.length}`;
-                        codeBlocks.push(`<pre><code class="language-${language || 'plaintext'}">${escapeHtml(code.trim())}</code></pre>`);
+                        // Nie escapujemy ponownie kodu, bo już jest escapowany
+                        codeBlocks.push(`<pre><code class="language-${language || 'plaintext'}">${code.trim()}</code></pre>`);
                         return placeholder;
                     });
                     
-                 
-                    message = `<p>${message}</p>`;
+                    // Przywracamy znaki HTML w blokach kodu
+                    escapedMessage = escapedMessage
+                        .replace(/&lt;/g, '<')
+                        .replace(/&gt;/g, '>')
+                        .replace(/&quot;/g, '"')
+                        .replace(/&#039;/g, "'")
+                        .replace(/&amp;/g, '&');
                     
-                  
+                    // Zamiana nowych linii na <br> i dodanie paragrafów
+                    escapedMessage = escapedMessage.replace(/\n\n/g, '</p><p>');
+                    escapedMessage = escapedMessage.replace(/\n/g, '<br>');
+                    
+                    // Opakowujemy w paragraf
+                    escapedMessage = `<p>${escapedMessage}</p>`;
+                    
+                    // Przywracamy bloki kodu
                     codeBlocks.forEach((block, index) => {
-                        message = message.replace(`CODE_BLOCK_${index}`, block);
+                        escapedMessage = escapedMessage.replace(`CODE_BLOCK_${index}`, block);
                     });
                     
-                    messageDiv.innerHTML = message;
+                    messageDiv.innerHTML = escapedMessage;
                 } catch (error) {
                     console.error('Error formatting message:', error);
                     messageDiv.textContent = message;
