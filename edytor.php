@@ -8,101 +8,19 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Edytor Kodu </title>
-
-  <style> 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    html, body {
-      height: 100%;
-      width: 100%;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    /* header {
-      background-color: #333;
-      color: #fff;
-      padding: 10px 20px;
-    } */
-    .header-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .header-content img{
-      width: 70px;
-    }
-
-    .main-container {
-      display: flex;
-      flex: 1; 
-      margin-top: -5px;
-      overflow: hidden; /* By nie generować pasków przewijania */
-
-    }
-
-    /* LEWA KOLUMNA (EDYTOR) */
-    #editorContainer {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      border-right: 2px solid #ccc;
-      min-width: 300px;
-    }
-
-    /* GÓRNY PANEL W LEWEJ KOLUMNIE (np. przyciski, wybór języka) */
-    .editor-tools {
-      background-color:rgb(29, 29, 41);
-      padding:10px 10px;
-      border-bottom: 1px solid #ccc;
-      /* margin-top: -10px; */
-    }
-    .editor-tools select,
-    .editor-tools button {
-      margin-right: 10px;
-      padding: 6px 10px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-
-    #editor {
-      flex: 1;
-      /* Ace Editor sam zarządza swoim rozmiarem wewnątrz tego kontenera */
-    }
-
-    /* PRAWA KOLUMNA (PODGLĄD + KONSOLA) */
-    #outputContainer {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #output {
-      flex: 1;
-      border: none;
-    }
-
-    #consoleOutput {
-      border-top: 2px solid #ccc;
-      max-height: 150px;
-      overflow-y: auto;
-      padding: 10px;
-      background-color: #fafafa;
-      font-family: monospace;
-      font-size: 14px;
-    }
-    #consoleOutput p {
-      margin-bottom: 6px;
-    }
-  </style>
+  <title>Edytor Kodu</title>
+  <link rel="stylesheet" href="styles/edytor.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@4.2.1/index.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.3/ext-searchbox.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/standalone.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-html.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-postcss.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-babel.js"></script>
 </head>
 <body>
     <?php include_once 'includes/header.php'; ?>
@@ -119,19 +37,54 @@
   <div class="main-container">
     <div id="editorContainer">
       <div class="editor-tools">
-        <button onclick="runCode()">Uruchom kod</button>
-        <button onclick="copyCode()">Kopiuj kod</button>
-        <button onclick="downloadCode()">Pobierz HTML</button>
-        <select id="themeSelector" onchange="changeTheme(this.value)">
-          <option value="dracula">Dracula</option>
-          <option value="monokai">Monokai</option>
-          <option value="github">GitHub</option>
-          <option value="tomorrow">Tomorrow</option>
-          <option value="twilight">Twilight</option>
-          <option value="solarized_light">Solarized Light</option>
-          <option value="solarized_dark">Solarized Dark</option>
+        <div class="left-buttons">
+          <div class="tool-group">
+              <button onclick="copyCode()" title="Kopiuj kod">
+                  <i class="fas fa-copy"></i>
+              </button>
+              <button onclick="downloadCode()" title="Pobierz jako HTML">
+                  <i class="fas fa-download"></i>
+              </button>
+          </div>
+          
+          <div class="tool-group">
+              <button onclick="formatCode()" title="Formatuj kod">
+                  <i class="fas fa-indent"></i>
+              </button>
+              <button onclick="toggleInvisibles()" title="Pokaż/ukryj niewidoczne znaki">
+                  <i class="fas fa-eye"></i>
+              </button>
+              <button onclick="increaseFontSize()" title="Zwiększ czcionkę">
+                  <i class="fas fa-plus"></i>
+              </button>
+              <button onclick="decreaseFontSize()" title="Zmniejsz czcionkę">
+                  <i class="fas fa-minus"></i>
+              </button>
+          </div>
+        </div>
 
-        </select>
+        <h2 class="editor-title">Edytor Kodu HTML</h2>
+
+        <div class="selector-group">
+            <select id="themeSelector" onchange="changeTheme(this.value)" title="Wybierz motyw">
+                <option value="dracula">Dracula</option>
+                <option value="monokai">Monokai</option>
+                <option value="github">GitHub</option>
+                <option value="tomorrow">Tomorrow</option>
+                <option value="twilight">Twilight</option>
+            </select>
+            <select id="fontSelector" onchange="changeFont(this.value)" title="Wybierz czcionkę">
+                <option value="Cascadia Code" selected>Cascadia Code</option>
+                <option value="Fira Code">Fira Code</option>
+                <option value="JetBrains Mono">JetBrains Mono</option>
+                <option value="Source Code Pro">Source Code Pro</option>
+                <option value="Ubuntu Mono">Ubuntu Mono</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="editor-status">
+          Linia: <span id="cursorPos">1:1</span> | Tryb: HTML
       </div>
 
       <div id="editor"></div>
@@ -139,8 +92,20 @@
 
     <!-- PRAWA KOLUMNA: PODGLĄD (iframe) + KONSOLA -->
     <div id="outputContainer">
-      <iframe id="output"></iframe>
-      <div id="consoleOutput"></div>
+        <div class="preview-header">
+            <div class="preview-info">
+                <img id="previewFavicon" src="" alt="" class="preview-favicon">
+                <span id="previewTitle">Podgląd</span>
+            </div>
+        </div>
+        <iframe id="output"></iframe>
+        <div class="console-container">
+            <div class="console-header">
+                <span>Konsola</span>
+                <button onclick="clearConsole()">Wyczyść</button>
+            </div>
+            <div id="consoleOutput"></div>
+        </div>
     </div>
   </div>
 
@@ -148,14 +113,38 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.3/ace.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.6/beautify.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.6/beautify-html.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.3/ext-language_tools.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.3/ext-beautify.js"></script>
 
 
   <script>
 
     const editor = ace.edit("editor");
     editor.setTheme("ace/theme/dracula");
-    // domyślnie tryb HTML
     editor.session.setMode("ace/mode/html");
+    editor.setOptions({
+        enableBasicAutocompletion: true,
+        enableLiveAutocompletion: true,
+        enableSnippets: true,
+        showPrintMargin: false,
+        wrap: true,
+        fontSize: "14px",
+        highlightActiveLine: true,
+        highlightSelectedWord: true,
+        scrollPastEnd: 0.5,
+        behavioursEnabled: true,
+        displayIndentGuides: true,
+        showGutter: true,
+        showInvisibles: false,
+        fadeFoldWidgets: true,
+        animatedScroll: true,
+        tabSize: 2,
+        fontFamily: "Cascadia Code",
+        enableLigatures: false
+    });
+
+    // Dodaj style dla edytora aby włączyć ligatury
+    document.querySelector('.ace_editor').style.fontFeatureSettings = "normal";
 
     const savedCode = localStorage.getItem('userCode');
     if (savedCode) {
@@ -190,9 +179,17 @@
           </html>`, -1);
     }
 
-    // Gdy użytkownik coś zmienia w edytorze, zapisujemy kod do localStorage
+    // Uruchom kod od razu po inicjalizacji edytora
+    runCode();
+
+    // Automatyczne odświeżanie po wprowadzeniu zmian
+    let updateTimeout;
     editor.session.on('change', () => {
-      localStorage.setItem('userCode', editor.getValue());
+        clearTimeout(updateTimeout);
+        updateTimeout = setTimeout(() => {
+            runCode();
+            localStorage.setItem('userCode', editor.getValue());
+        }, 50);
     });
 
     // Funkcja zmieniająca tryb edytora (HTML/CSS/JavaScript)
@@ -202,52 +199,111 @@
 
     // Funkcja uruchamiająca kod w iframe i przechwytująca console.log
     function runCode() {
-      const code = editor.getValue();
-      const outputFrame = document.getElementById('output');
-      const consoleDiv = document.getElementById('consoleOutput');
+        const code = editor.getValue();
+        const outputFrame = document.getElementById('output');
 
-      // Czyścimy poprzednią zawartość konsoli
-      consoleDiv.innerHTML = '';
+        // Przygotuj skrypt do przechwytywania console.log
+        const consoleScript = `
+            const originalConsole = {
+                log: console.log,
+                error: console.error,
+                warn: console.warn,
+                info: console.info
+            };
 
-      // Otaczamy kod w "szablon" HTML, aby przechwycić console.log
-      const wrappedCode = `
-        <html>
-          <head></head>
-          <body>
-            ${code}
-            <script>
-              (function() {
-                // Zapisujemy oryginalny console.log
-                const originalLog = console.log;
-                // Nadpisujemy console.log w iframe
-                console.log = function(...args) {
-                  // Wysyłamy dane do rodzica (do głównego okna)
-                  window.parent.postMessage({ type: 'iframeConsole', data: args }, '*');
-                  // Wywołujemy oryginalny console.log (aby ewentualnie pojawiało się też w konsoli przeglądarki)
-                  originalLog.apply(console, args);
-                };
-              })();
-            <\/script>
-          </body>
-        </html>
-      `;
+            function sendToParent(type, args) {
+                window.parent.postMessage({
+                    type: 'console',
+                    logType: type,
+                    data: Array.from(args).map(arg => {
+                        try {
+                            return typeof arg === 'object' ? JSON.stringify(arg) : String(arg);
+                        } catch (e) {
+                            return String(arg);
+                        }
+                    })
+                }, '*');
+            }
 
-      // Załadowanie kodu do iframe (srcdoc)
-      outputFrame.srcdoc = wrappedCode;
+            console.log = function() { 
+                sendToParent('log', arguments);
+                originalConsole.log.apply(console, arguments);
+            };
+            console.error = function() {
+                sendToParent('error', arguments);
+                originalConsole.error.apply(console, arguments);
+            };
+            console.warn = function() {
+                sendToParent('warn', arguments);
+                originalConsole.warn.apply(console, arguments);
+            };
+            console.info = function() {
+                sendToParent('info', arguments);
+                originalConsole.info.apply(console, arguments);
+            };
+
+            window.onerror = function(msg, url, line, col, error) {
+                sendToParent('error', [\`\${msg} (line \${line}, column \${col})\`]);
+                return false;
+            };
+        `;
+
+        // Tworzymy dokument HTML
+        const html = `
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <script>${consoleScript}<\/script>
+                </head>
+                <body>
+                    ${code}
+                </body>
+            </html>
+        `;
+
+        // Ustawiamy zawartość iframe
+        outputFrame.srcdoc = html;
+        
+        // Aktualizuj informacje o stronie po załadowaniu iframe
+        outputFrame.onload = () => {
+            setTimeout(updatePreviewInfo, 100); // Dodajemy małe opóźnienie
+        };
     }
-    runCode()
 
     // Nasłuchujemy wiadomości z iframe
     window.addEventListener('message', (event) => {
-      if (event.data && event.data.type === 'iframeConsole') {
-        const consoleDiv = document.getElementById('consoleOutput');
-        // Łączymy wszystkie argumenty w jeden string
-        const messages = event.data.data.join(' ');
-        // Wrzucamy to do <p> i dodajemy do konsoli
-        const p = document.createElement('p');
-        p.textContent = messages;
-        consoleDiv.appendChild(p);
-      }
+        if (event.data && event.data.type === 'console') {
+            const consoleDiv = document.getElementById('consoleOutput');
+            const logElement = document.createElement('div');
+            logElement.className = `console-${event.data.logType}`;
+            
+            // Dodaj licznik logów
+            const logCount = consoleDiv.children.length + 1;
+            
+            // Formatuj wiadomość w zależności od typu danych
+            const formattedMessage = event.data.data.map(item => {
+                try {
+                    if (typeof item === 'object') {
+                        return JSON.stringify(item, null, 2);
+                    }
+                    return item;
+                } catch (e) {
+                    return String(item);
+                }
+            }).join(' ');
+            
+            // Dodajemy timestamp
+            const time = new Date().toLocaleTimeString();
+            logElement.innerHTML = `
+                <span class="console-count">[${logCount}]</span>
+                <span class="console-time">[${time}]</span>
+                <span class="console-type">[${event.data.logType.toUpperCase()}]</span>
+                <span class="console-message">${formattedMessage}</span>
+            `;
+            
+            consoleDiv.appendChild(logElement);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
     });
 
     // Funkcja kopiująca kod z edytora do schowka
@@ -279,6 +335,222 @@
     mode: "ace/mode/javascript",
     selectionStyle: "text"
 })
+
+    // Formatowanie kodu
+    function formatCode() {
+        try {
+            const code = editor.getValue();
+            const cursorPosition = editor.getCursorPosition();
+            
+            // Konfiguracja Prettier
+            const prettierConfig = {
+                parser: "html",
+                plugins: [prettierPlugins.html, prettierPlugins.postcss, prettierPlugins.babel],
+                printWidth: 80,
+                tabWidth: 2,
+                useTabs: false,
+                semi: true,
+                singleQuote: false,
+                trailingComma: "none",
+                bracketSpacing: true,
+                arrowParens: "avoid",
+                htmlWhitespaceSensitivity: "css",
+                endOfLine: "lf"
+            };
+            
+            // Formatowanie kodu
+            const formattedCode = prettier.format(code, prettierConfig);
+            
+            // Aktualizacja edytora
+            editor.setValue(formattedCode, -1);
+            editor.moveCursorToPosition(cursorPosition);
+            
+            // Pokaż powiadomienie o sukcesie
+            showNotification("Kod został sformatowany", "success");
+        } catch (error) {
+            console.error("Błąd formatowania:", error);
+            showNotification("Błąd formatowania kodu", "error");
+        }
+    }
+
+    // Funkcja do pokazywania powiadomień
+    function showNotification(message, type = "info") {
+        const notification = document.createElement("div");
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        
+        Object.assign(notification.style, {
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            padding: "12px 24px",
+            borderRadius: "4px",
+            color: "white",
+            zIndex: 1000,
+            animation: "slideIn 0.3s ease-out",
+            backgroundColor: type === "success" ? "rgba(4, 170, 109, 0.9)" : "rgba(255, 68, 68, 0.9)"
+        });
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = "slideOut 0.3s ease-out";
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
+
+    // Czyszczenie konsoli
+    function clearConsole() {
+        document.getElementById('consoleOutput').innerHTML = '';
+    }
+
+    // Pokazywanie pozycji kursora
+    editor.selection.on('changeCursor', () => {
+        const pos = editor.selection.getCursor();
+        document.getElementById('cursorPos').textContent = `${pos.row + 1}:${pos.column + 1}`;
+    });
+
+    // Skróty klawiszowe
+    editor.commands.addCommand({
+        name: 'runCode',
+        bindKey: {win: 'Ctrl-Enter', mac: 'Command-Enter'},
+        exec: runCode
+    });
+
+    editor.commands.addCommand({
+        name: 'formatCode',
+        bindKey: {win: 'Ctrl-Shift-F', mac: 'Command-Shift-F'},
+        exec: formatCode
+    });
+
+    // Przełączanie widoczności niewidocznych znaków
+    function toggleInvisibles() {
+        const current = editor.getOption('showInvisibles');
+        editor.setOption('showInvisibles', !current);
+        document.querySelector('button[onclick="toggleInvisibles()"]').classList.toggle('active');
+    }
+
+    // Zarządzanie rozmiarem czcionki
+    function increaseFontSize() {
+        const currentSize = parseInt(editor.getFontSize());
+        if (currentSize < 32) { // maksymalny rozmiar
+            editor.setFontSize(currentSize + 2);
+        }
+    }
+
+    function decreaseFontSize() {
+        const currentSize = parseInt(editor.getFontSize());
+        if (currentSize > 8) { // minimalny rozmiar
+            editor.setFontSize(currentSize - 2);
+        }
+    }
+
+    // Dodaj więcej skrótów klawiszowych
+    editor.commands.addCommand({
+        name: 'increaseFontSize',
+        bindKey: {win: 'Ctrl-=', mac: 'Command-='},
+        exec: increaseFontSize
+    });
+
+    editor.commands.addCommand({
+        name: 'decreaseFontSize',
+        bindKey: {win: 'Ctrl--', mac: 'Command--'},
+        exec: decreaseFontSize
+    });
+
+    editor.commands.addCommand({
+        name: 'toggleInvisibles',
+        bindKey: {win: 'Ctrl-I', mac: 'Command-I'},
+        exec: toggleInvisibles
+    });
+
+    // Dodaj funkcję wyszukiwania
+    editor.commands.addCommand({
+        name: 'find',
+        bindKey: {win: 'Ctrl-F', mac: 'Command-F'},
+        exec: (editor) => {
+            ace.require('ace/ext/searchbox').Search(editor);
+        }
+    });
+
+    // Dodaj funkcję zamiany
+    editor.commands.addCommand({
+        name: 'replace',
+        bindKey: {win: 'Ctrl-H', mac: 'Command-Option-F'},
+        exec: (editor) => {
+            ace.require('ace/ext/searchbox').Search(editor, true);
+        }
+    });
+
+    // Dodaj nową funkcję do zmiany czcionki
+    function changeFont(fontFamily) {
+        const elements = editor.container.querySelectorAll('.ace_text-layer, .ace_line, .ace_content, .ace_gutter');
+        elements.forEach(element => {
+            element.style.fontFamily = `${fontFamily}, monospace`;
+        });
+        
+        editor.setOptions({
+            fontFamily: fontFamily,
+            enableLigatures: ['Cascadia Code', 'Fira Code', 'JetBrains Mono'].includes(fontFamily)
+        });
+        
+        // Włącz/wyłącz ligatury w zależności od czcionki
+        if (['Cascadia Code', 'Fira Code', 'JetBrains Mono'].includes(fontFamily)) {
+            editor.container.style.fontFeatureSettings = "'liga' on, 'calt' on";
+        } else {
+            editor.container.style.fontFeatureSettings = "normal";
+        }
+        
+        localStorage.setItem('preferredFont', fontFamily);
+        editor.renderer.updateFontSize();
+        editor.renderer.updateText();
+    }
+    
+    // Wczytaj zapisaną preferencję czcionki przy starcie
+    const savedFont = localStorage.getItem('preferredFont');
+    
+    if (savedFont) {
+        document.getElementById('fontSelector').value = savedFont;
+        changeFont(savedFont);
+    } else {
+        // Jeśli nie ma zapisanej czcionki, ustaw stan ligatur dla domyślnej czcionki
+        editor.container.style.fontFeatureSettings = "'liga' on, 'calt' on";
+    }
+
+    // Funkcja aktualizująca informacje o podglądzie
+    function updatePreviewInfo() {
+        const iframe = document.getElementById('output');
+        try {
+            const iframeWindow = iframe.contentWindow;
+            const iframeDoc = iframeWindow.document;
+            
+            // Próbujemy odczytać tytuł z różnych miejsc
+            let title = 'Podgląd';
+            if (iframeDoc.title) {
+                title = iframeDoc.title;
+            } else {
+                const titleElement = iframeDoc.querySelector('title');
+                if (titleElement) {
+                    title = titleElement.textContent;
+                }
+            }
+            
+            const favicon = iframeDoc.querySelector('link[rel*="icon"]');
+            
+            document.getElementById('previewTitle').textContent = title;
+            
+            const faviconElement = document.getElementById('previewFavicon');
+            if (favicon && favicon.href) {
+                faviconElement.src = favicon.href;
+                faviconElement.style.display = 'block';
+            } else {
+                faviconElement.style.display = 'none';
+            }
+        } catch (e) {
+            console.error('Błąd podczas aktualizacji informacji o podglądzie:', e);
+            document.getElementById('previewTitle').textContent = 'Podgląd';
+        }
+    }
   </script>
 </body>
 </html>

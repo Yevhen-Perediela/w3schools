@@ -1,0 +1,612 @@
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@4.2.1/index.css');
+
+body {
+    background: #1a1b26;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+    margin-top: 98px;
+    overflow: hidden;
+}
+
+#editorContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(40, 42, 53, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.editor-tools {
+    background-color: rgba(40, 42, 53, 0.98);
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+.editor-tools button {
+    background: linear-gradient(45deg, #04aa6d, #06c17f);
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.editor-tools button:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+    font-weight: normal;
+}
+
+.editor-tools button:hover::before {
+    content: '';
+    position: absolute;
+    top: calc(100% - 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+.editor-tools button:hover {
+    background: linear-gradient(45deg, #038857, #04aa6d);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(4, 170, 109, 0.3);
+}
+
+.editor-tools select {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    outline: none;
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.editor-tools select:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(4, 170, 109, 0.5);
+}
+
+#editor {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+#outputContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(40, 42, 53, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+#output {
+    flex: 1;
+    border: none;
+    background: white;
+}
+
+#consoleOutput {
+    font-family: 'Cascadia Code', monospace;
+    padding: 15px;
+    height: 250px;
+    overflow-y: auto;
+    background-color: rgba(40, 42, 53, 0.98);
+    color: #ffffff;
+}
+
+#consoleOutput p {
+    margin: 5px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(4, 170, 109, 0.3);
+}
+
+@media (max-width: 768px) {
+    .editor-tools {
+        flex-wrap: wrap;
+    }
+    
+    .editor-tools button,
+    .editor-tools select {
+        flex: 1;
+        min-width: 120px;
+    }
+} 
+
+.editor-title {
+    color: #fff4a3;
+    font-size: 1.2rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.editor-tools {
+    background-color: rgba(40, 42, 53, 0.98);
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+.tool-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.editor-tools button.active {
+    background: #ff4444;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
+}
+
+.editor-status {
+    background: rgba(40, 42, 53, 0.98);
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.editor-settings {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.font-size-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
+
+#output {
+    background: white;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-header {
+    background: rgba(40, 42, 53, 0.98);
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.9rem;
+}
+
+.preview-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.preview-favicon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.console-header {
+    background: rgba(40, 42, 53, 0.98);
+    padding: 8px 15px;
+    color: white;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.console-header button {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+}
+
+.console-header button:hover {
+    color: white;
+}
+
+.editor-tools button i.fa-sync-alt {
+    transition: transform 0.3s ease;
+}
+
+.editor-tools button.active i.fa-sync-alt {
+    animation: spin 2s linear infinite;
+}
+
+.editor-tools button.active {
+    background: #ff4444;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+    bottom: calc(100% + 10px);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.notification {
+    font-family: "Cascadia Code", monospace;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.notification.success {
+    background-color: rgba(4, 170, 109, 0.9);
+}
+
+.notification.error {
+    background-color: rgba(255, 68, 68, 0.9);
+}
+
+/* Popraw style dla przycisku auto-odświeżania */
+#autoRunBtn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+#autoRunBtn i {
+    font-size: 1rem;
+}
+
+#autoRunBtn.active {
+    background: #ff4444;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
+} 
+
+.ace_editor {
+    font-feature-settings: var(--editor-ligatures) !important;
+}
+
+.ace_text-layer {
+    font-feature-settings: var(--editor-ligatures) !important;
+}
+
+/* Dodaj style dla selektora czcionek */
+#fontSelector {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    outline: none;
+    margin-left: auto;
+}
+
+#fontSelector:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(4, 170, 109, 0.5);
+}
+
+/* Style dla podglądu czcionek w selektorze */
+#fontSelector option {
+    background-color: #282a35;
+    color: white;
+    padding: 8px;
+} 
+
+:root {
+    --editor-ligatures: "'liga' on, 'calt' on";
+} 
+
+/* Style dla konsoli */
+#consoleOutput {
+    font-family: 'Cascadia Code', monospace;
+    padding: 15px;
+    height: 250px;
+    overflow-y: auto;
+    background-color: rgba(40, 42, 53, 0.98);
+    color: #ffffff;
+}
+
+.console-count {
+    color: #888;
+    font-size: 0.8em;
+    margin-right: 8px;
+    user-select: none;
+}
+
+.console-time {
+    color: #666;
+    font-size: 0.8em;
+    margin-right: 8px;
+    user-select: none;
+}
+
+.console-type {
+    font-size: 0.8em;
+    margin-right: 8px;
+    font-weight: bold;
+    user-select: none;
+}
+
+.console-type {
+    color: #888;
+}
+
+.console-error .console-type {
+    color: #ff4444;
+}
+
+.console-warn .console-type {
+    color: #ffb86c;
+}
+
+.console-info .console-type {
+    color: #8be9fd;
+}
+
+.console-message {
+    font-family: 'Cascadia Code', monospace;
+}
+
+.console-message pre {
+    margin: 4px 0 4px 24px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+/* Styl dla obiektów JSON w konsoli */
+.console-object {
+    color: #50fa7b;
+    font-style: italic;
+} 
+
+/* Dodaj styl dla kontenera konsoli */
+.console-container {
+    position: relative;
+    min-height: 250px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dodaj uchwyt do zmiany rozmiaru */
+.console-resize-handle {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    cursor: ns-resize;
+    background: transparent;
+    z-index: 10;
+}
+
+.console-resize-handle:hover {
+    background: rgba(4, 170, 109, 0.2);
+} 
+
+/* Dostosuj rozmiar ikon */
+.editor-tools button i {
+    font-size: 1.1rem;
+} 
+
+/* Kontener dla selektorów */
+.selector-group {
+    display: flex;
+    gap: 10px;
+}
+
+.tool-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+} 
+
+/* Kontener dla lewych przycisków */
+.left-buttons {
+    display: flex;
+    gap: 10px;
+} 
+
+/* Style dla tooltipów selektorów */
+.selector-group select {
+    position: relative;
+}
+
+.selector-group select::after {
+    content: attr(title);
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+    font-weight: normal;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.selector-group select:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.selector-group select::before {
+    content: '';
+    position: absolute;
+    top: calc(100% - 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.selector-group select:hover::before {
+    opacity: 1;
+    visibility: visible;
+} 
+
+/* Style dla opcji w selektorach */
+.editor-tools select option {
+    background-color: #282a35;
+    color: white;
+    padding: 12px;
+    cursor: pointer;
+    border: none;
+    font-size: 0.9rem;
+}
+
+/* Stylizacja menu rozwijanego */
+.editor-tools select:focus {
+    border-color: #04aa6d;
+    box-shadow: 0 0 0 2px rgba(4, 170, 109, 0.2);
+}
+
+/* Hover na opcjach */
+.editor-tools select option:hover,
+.editor-tools select option:focus {
+    background-color: #04aa6d !important;
+    color: white;
+}
+
+/* Zaznaczona opcja */
+.editor-tools select option:checked {
+    background-color: #038857 !important;
+    color: white;
+} 
