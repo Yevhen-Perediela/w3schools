@@ -146,17 +146,17 @@
                 try {
                     const data = JSON.parse(text);
                     if (data.error) {
-                        addMessage('🚫 ' + data.error, 'bot');
+                        console.error('Error parsing JSON:', e);
                     } else if (data.response) {
-                        addMessage(data.response, 'bot');
+                        console.error('Error parsing JSON:', e);
                     }
                 } catch (e) {
                     console.error('Error parsing JSON:', e);
-                    addMessage('🚫 Nieprawidłowa odpowiedź z serwera', 'bot');
+                   
                 }
             } catch (error) {
                 console.error('Network error:', error);
-                addMessage('🚫 Błąd połączenia z serwerem', 'bot');
+               
             } finally {
                 messageInput.disabled = false;
                 messageInput.focus();
