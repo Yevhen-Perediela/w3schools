@@ -38,9 +38,14 @@ textarea,
     height: auto;
     resize: none;
     
+    
+}
+.textarea{
+    width: 70vw;
 }
 textarea{
     margin: 20px 0px 10px 0px;
+    
 }
 textarea:focus,
 #container input:focus,

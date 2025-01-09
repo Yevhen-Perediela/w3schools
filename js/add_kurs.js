@@ -20,7 +20,8 @@ function addElement(type, where, clickedButton) {
     let element;
     if (type === 'textarea') {
         element = document.createElement('textarea');
-        element.placeholder = 'Wpisz text..';
+        element.placeholder = 'Wpisz text..';       
+        element.className = 'textarea'    
         element.oninput = function() {
             this.style.height = '';
             this.style.height = this.scrollHeight + 'px';
