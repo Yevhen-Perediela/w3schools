@@ -65,8 +65,6 @@
           </div>
         </div>
 
-        <h2 class="editor-title">Edytor Kodu HTML</h2>
-
         <div class="selector-group">
             <select id="themeSelector" onchange="changeTheme(this.value)" title="Wybierz motyw">
                 <option value="dracula">Dracula</option>
