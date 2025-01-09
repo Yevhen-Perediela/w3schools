@@ -297,3 +297,45 @@ label {
     padding: 12px;
   }
 }
+
+.avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.avatar-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.delete-avatar-form {
+    width: 100%;
+    max-width: 200px;
+}
+
+.delete-avatar-btn {
+    width: 100%;
+    padding: 8px 16px;
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.delete-avatar-btn:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+}
+
+.delete-avatar-btn:active {
+    transform: translateY(0);
+}

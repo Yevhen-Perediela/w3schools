@@ -1,7 +1,14 @@
+footer.footer,
 .footer {
-  background-color: #282a35;
+  background-color: #282a35 !important;
   color: white;
   padding: 40px 20px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-top: auto;
+  backdrop-filter: none;
+  border: none;
 }
 
 .footer-content {

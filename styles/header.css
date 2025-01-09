@@ -331,11 +331,10 @@
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white;
 }
 
 .auth-buttons span {
@@ -345,34 +344,32 @@
 .user-profile-link {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   text-decoration: none;
-  padding: 5px;
-  border-radius: 25px;
-  transition: background-color 0.3s;
+  background-color: #04aa6d;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px 0 0 25px;
+  margin-right: -20px;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .user-profile-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.user-profile-link .avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
+  background-color: #038857;
 }
 
 .user-profile-link .username {
   color: white;
   font-weight: 500;
+  font-size: 0.95rem;
+  margin-right: 10px;
 }
 
 .user-info {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  align-items: stretch;
+  height: 40px;
 }
 
 /* switch suwak */
@@ -489,4 +486,100 @@ body,
 .bottom-nav,
 .auth-buttons button {
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: stretch;
+    height: 40px;
+}
+
+.user-profile-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    background-color: #04aa6d;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px 0 0 25px;
+    margin-right: -20px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.user-profile-link:hover {
+    background-color: #038857;
+}
+
+.avatar {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username {
+    color: white;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-right: 10px;
+}
+
+/* Przycisk wylogowania */
+.user-info .login {
+    background-color: #e7e9eb;
+    color: black;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 0 25px 25px 0;
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 80px;
+    cursor: pointer;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.user-info .login:hover {
+    background-color: #d1d4d7;
+}
+
+/* Styl dla admin links */
+.admin-links {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .user-info {
+        height: 35px;
+    }
+
+    .user-profile-link {
+        gap: 3px;
+        padding: 6px 15px;
+    }
+
+    .avatar {
+        width: 19px;
+        height: 19px;
+    }
+
+    .username {
+        font-size: 0.85rem;
+    }
+
+    .user-info .login {
+        padding: 6px 15px;
+        min-width: 60px;
+        font-size: 0.85rem;
+    }
 }

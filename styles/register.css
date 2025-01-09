@@ -3,10 +3,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, 
-        #282a35 0%,
-        #282a35 100%
-    );
+    background-color: #1a1b26;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -112,37 +109,36 @@ label {
     font-size: 0.95rem;
 }
 
-input {
+.register-container input:not([type="submit"]) {
     width: 100%;
     padding: 14px;
-    margin-bottom: 0;
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
     transition: all 0.3s ease;
     font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
 }
 
-input:hover {
+.register-container input:not([type="submit"]):hover {
     border-color: #04AA6D;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-input:focus {
+.register-container input:not([type="submit"]):focus {
     outline: none;
     border-color: #04AA6D;
     box-shadow: 0 0 0 4px rgba(4, 170, 109, 0.15);
     background-color: rgba(255, 255, 255, 0.15);
 }
 
-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+.register-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
 }
 
-input[type="submit"] {
+.register-container input[type="submit"] {
     background: linear-gradient(45deg, #04AA6D, #06c17f);
     color: white;
     border: none;
@@ -156,6 +152,7 @@ input[type="submit"] {
     text-transform: uppercase;
     letter-spacing: 1px;
     box-shadow: 0 4px 15px rgba(4, 170, 109, 0.2);
+    width: 100%;
 }
 
 input[type="submit"]:hover {
