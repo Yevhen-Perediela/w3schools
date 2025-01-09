@@ -143,8 +143,7 @@
                 const text = await response.text();
                 console.log('Raw response:', text);
 
-           
-
+              
         function addMessage(message, type) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', `${type}-message`);
@@ -168,18 +167,9 @@
                     const codeBlocks = [];
                     escapedMessage = escapedMessage.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, language, code) {
                         const placeholder = `CODE_BLOCK_${codeBlocks.length}`;
-                        // Nie escapujemy ponownie kodu, bo już jest escapowany
                         codeBlocks.push(`<pre><code class="language-${language || 'plaintext'}">${code.trim()}</code></pre>`);
                         return placeholder;
                     });
-                    
-                    // Przywracamy znaki HTML w blokach kodu
-                    escapedMessage = escapedMessage
-                        .replace(/&lt;/g, '<')
-                        .replace(/&gt;/g, '>')
-                        .replace(/&quot;/g, '"')
-                        .replace(/&#039;/g, "'")
-                        .replace(/&amp;/g, '&');
                     
                     // Zamiana nowych linii na <br> i dodanie paragrafów
                     escapedMessage = escapedMessage.replace(/\n\n/g, '</p><p>');
@@ -199,6 +189,7 @@
                     messageDiv.textContent = message;
                 }
             } else {
+                // Dla wiadomości użytkownika używamy textContent
                 messageDiv.textContent = message;
             }
             
