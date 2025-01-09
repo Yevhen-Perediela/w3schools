@@ -26,8 +26,8 @@ require_once 'connect.php';
                     
                     <div class="nav-links">
                         <a href="about.php">O nas</a>
-                        <a href="terms.php">Regulamin</a>
                         <a href="contact.php">Kontakt</a>
+                        <a href="edytor.php">Edytor</a>
                     </div>
                     
                     <?php include 'searchbar.php'; ?>
