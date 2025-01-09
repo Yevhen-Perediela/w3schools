@@ -37,12 +37,12 @@ textarea,
     /* font-size: 18px; */
     height: auto;
     resize: none;
-    width: 70vw;
+    
     
     
 }
-.textarea{
-    
+.textarea, .header-input, .quiz-pytanie{
+    width: 70vw;
 }
 textarea{
     margin: 20px 0px 10px 0px;
@@ -265,6 +265,7 @@ textarea:focus,
     background-color: #191823;
     color: white;
     margin: 5px 0px;
+    width: 200px;
 
 }
 .quiz-pytanie{
