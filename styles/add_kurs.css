@@ -37,11 +37,12 @@ textarea,
     /* font-size: 18px; */
     height: auto;
     resize: none;
+    width: 70vw;
     
     
 }
 .textarea{
-    width: 70vw;
+    
 }
 textarea{
     margin: 20px 0px 10px 0px;
