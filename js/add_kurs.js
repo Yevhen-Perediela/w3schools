@@ -29,6 +29,7 @@ function addElement(type, where, clickedButton) {
     } else if (type === 'h1' || type === 'h2' || type === 'h3') {
         element = document.createElement('input');
         element.contentEditable = true;
+        // element.className = 'h'
         element.placeholder = type === 'h1' ? 'Wpisz H1...' : type === 'h2' ? 'Wpisz H2...' : 'Wpisz H3...';
         element.className = 'header-input ' + type;
     } else if(type == 'code'){
