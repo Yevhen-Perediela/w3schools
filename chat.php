@@ -146,13 +146,13 @@
                 try {
                     const data = JSON.parse(text);
                     if (data.error) {
-                        console.error('Error parsing JSON:', e);
+                        addMessage('😊 ' + 'Życzymy miłego dnia!', 'bot');
                     } else if (data.response) {
-                        console.error('Error parsing JSON:', e);
+                        addMessage(data.response, 'bot');
                     }
                 } catch (e) {
                     console.error('Error parsing JSON:', e);
-                   
+                    addMessage('😊 Życzymy miłego dnia!', 'bot');
                 }
             } catch (error) {
                 console.error('Network error:', error);
