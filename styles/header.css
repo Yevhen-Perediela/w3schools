@@ -6,14 +6,10 @@
 .nav-wrapper {
   position: fixed;
 }
-.nav-wrapper {
-  position: fixed;
-}
 
 /* nav na gorze*/
 
 .top-nav {
-  background-color: #282a35;
   background-color: #282a35;
   padding: 10px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -41,8 +37,6 @@
   margin-left: auto;
   align-items: center;
   gap: 10px;
-  align-items: center;
-  gap: 10px;
 }
 
 .auth-buttons button {
@@ -60,7 +54,6 @@
   border-radius: 25px 0 0 25px;
   margin-left: 20px;
   margin-right: -20px;
-  margin-right: -20px;
 }
 
 .login {
@@ -68,13 +61,11 @@
   color: black;
   border-radius: 0 25px 25px 0;
 
-
 }
 
 /* nav na dole*/
 
 .bottom-nav {
-  background-color: #141621;
   background-color: #141621;
   width: 100%;
   overflow-x: auto;
@@ -106,7 +97,6 @@
 }
 
 .tech-list a:hover {
-  background-color: #222536;
   background-color: #222536;
 }
 
@@ -220,11 +210,9 @@
 
 .nav-links a {
   color: white;
-  color: white;
   text-decoration: none;
   font-weight: 500;
   padding: 5px 10px;
-  transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
 
@@ -321,9 +309,7 @@
 
 .nav-wrapper {
   /* position: sticky; */
-  /* position: sticky; */
   top: 0;
-  width: 100%;
   width: 100%;
   z-index: 1000;
 }
@@ -464,13 +450,13 @@ input:checked + .slider:before {
 }
 
 /* ====================== */
-/*  styl jasny light mode theme */
+/*  styl jasny light mode  */
 /* ====================== */
 
-/* .light-mode {
-  background-color: #ffffff;
-  color: #111111;
-} */
+.light-mode {
+  background-color: #ffffff; /* Jasne tło główne */
+  color: #111111; /* Ciemny tekst */
+}
 
 .light-mode .top-nav,
 .light-mode .bottom-nav {

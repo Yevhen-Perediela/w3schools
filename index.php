@@ -55,7 +55,7 @@ ini_set('display_errors', 1);
             <p class="html-subtitle">Język do budowania stron internetowych</p>
             
             <div class="html-buttons">
-                <a href="kurs.php?type=HTML&lesson=HTML Lists" class="button button-learn">Kurs HTML</a>
+                <a href="#" class="button button-learn">Kurs HTML</a>
             </div>
         </div>
 
@@ -72,7 +72,7 @@ ini_set('display_errors', 1);
 <span class="bracket">      &lt;</span><span class="tag">p</span><span class="bracket">&gt;</span><span class="text">To jest paragraf</span><span class="bracket">&lt;/</span><span class="tag">p</span><span class="bracket">&gt;</span>
 <span class="bracket">  &lt;/</span><span class="tag">body</span><span class="bracket">&gt;</span>
 <span class="bracket">&lt;/</span><span class="tag">html</span><span class="bracket">&gt;</span></code></pre>
-                <a class="edytor-link" id="html"><button class="try-it">Uruchom kod</button></a>
+                <button class="try-it">Uruchom kod</button>
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@ ini_set('display_errors', 1);
             <p class="css-subtitle">Język do stylizacji stron internetowych</p>
             
             <div class="html-buttons">
-                <a href="kurs.php?type=CSS&lesson=Selektory" class="button button-learn-css">Kurs CSS</a>
+                <a href="#" class="button button-learn-css">Kurs CSS</a>
             </div>
         </div>
 
@@ -98,7 +98,7 @@ ini_set('display_errors', 1);
             <h2>Przykład CSS:</h2>
             <div class="code-editor">
                 <pre><code><span class="selector">body</span> {
-                <span class="property">background-color</span>: <span class="value">lightblue</span>;
+    <span class="property">background-color</span>: <span class="value">lightblue</span>;
 }
 
 <span class="selector">h1</span> {
@@ -110,7 +110,7 @@ ini_set('display_errors', 1);
     <span class="property">font-family</span>: <span class="value">verdana</span>;
     <span class="property">font-size</span>: <span class="value">20px</span>;
 }</code></pre>
-                <a class="edytor-link" id="css"><button class="try-it">Uruchom kod</button></a>
+                <button class="try-it">Uruchom kod</button>
             </div>
         </div>
     </div>
@@ -128,7 +128,7 @@ ini_set('display_errors', 1);
             <p class="js-subtitle">Język do programowania stron internetowych</p>
             
             <div class="html-buttons">
-                <a href="kurs.php?type=JS&lesson=Loop%20(for,%20while)" class="button button-learn-js">Kurs JavaScript</a>
+                <a href="#" class="button button-learn-js">Kurs JavaScript</a>
             </div>
         </div>
 
@@ -140,7 +140,7 @@ ini_set('display_errors', 1);
     x.style.fontSize = <span class="string">"25px"</span>; 
     x.style.color = <span class="string">"red"</span>; 
 }</code></pre>
-                <a id="js" class="edytor-link"><button class="try-it">Uruchom kod</button></a>
+                <button class="try-it">Uruchom kod</button>
             </div>
         </div>
     </div>
@@ -150,6 +150,7 @@ ini_set('display_errors', 1);
     <script src="./js/stars.js"></script>
     <script>
         createStars();
+
         let title =document.title;
         window.addEventListener("blur", ()=>{
             document.title ="Wracaj!";
@@ -158,5 +159,8 @@ ini_set('display_errors', 1);
             document.title = title;    
         })
     </script>
+
+    <?php include 'includes/chat-widget.php'; ?>
+    <script src="js/chat-widget.js"></script>
 </body>
 </html>

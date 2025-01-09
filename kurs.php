@@ -24,9 +24,9 @@ if (mysqli_num_rows($result_one) > 0) {
 }
 
 $kurs_data_array = json_decode($kurs_data, true);
-// if (json_last_error() !== JSON_ERROR_NONE) {
-//     die('Błąd dekodowania JSON: ' . json_last_error_msg()); przed pushem odkomentuj
-// }
+if (json_last_error() !== JSON_ERROR_NONE) {
+    die('Błąd dekodowania JSON: ' . json_last_error_msg());
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +41,7 @@ $kurs_data_array = json_decode($kurs_data, true);
     <!-- Zamiast obecnego linku do domyślnego motywu, wstaw poniższy -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/agate.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
