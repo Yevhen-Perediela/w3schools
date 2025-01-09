@@ -4,9 +4,9 @@
         <div class="footer-column">
             <h3>Popularne Tutoriale</h3>
             <ul class="footer-links">
-                <li><a href="https://w4schools.online/kurs.php?type=HTML">Tutorial HTML</a></li>
-                <li><a href="#">Tutorial CSS</a></li>
-                <li><a href="#">Tutorial JavaScript</a></li>
+                <li><a href="https://w4schools.online/kurs.php?type=HTML&lesson=HTML%20Lists">Tutorial HTML</a></li>
+                <li><a href="https://w4schools.online/kurs.php?type=CSS&lesson=HTML%20Styles%20-%20CSS">Tutorial CSS</a></li>
+                <li><a href="https://w4schools.online/kurs.php?type=JS&lesson=JavaScript%20For%20Loop">Tutorial JavaScript</a></li>
             </ul>
         </div>
         
