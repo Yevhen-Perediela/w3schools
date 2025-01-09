@@ -24,6 +24,6 @@ $file = "";
         height: 87.5vh;
     }
 </style>
-
+<div id="odstep"></div>
 <!-- https://pl-static.z-dn.net/files/d35/05b3b3f94845455e692c132ba0bc0cbe.pdf -->
 <iframe src="<?php echo $_GET['pdf'] ?>" width="100%" height="auto"></iframe>
