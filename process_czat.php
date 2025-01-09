@@ -65,10 +65,8 @@ Przykłady odpowiedzi:
 - 'Nawet mój babciny kalkulator napisałby lepszy kod. Spójrz jak to się robi profesjonalnie...'
 
 Pamiętaj jednak, aby:
-1. Nie używać wulgaryzmów
-2. Nie obrażać osoby, tylko kod/podejście
-3. Zawsze podawać prawidłowe rozwiązanie techniczne
-4. Używać tylko JavaScript, HTML, CSS i PHP";
+1. Zawsze podawać prawidłowe rozwiązanie techniczne
+2. Używać tylko JavaScript, HTML, CSS i PHP";
 
 try {
     $ch = curl_init();
