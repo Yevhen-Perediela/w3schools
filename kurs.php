@@ -41,6 +41,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     <!-- Zamiast obecnego linku do domyślnego motywu, wstaw poniższy -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/agate.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
@@ -66,6 +67,15 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         </div>
         <div id="main-container">
             <h1><?php echo htmlspecialchars($title); ?></h1>
+            <div class="like-container">
+                <button class="like-button">
+                    <i class="fas fa-heart"></i>
+                    Polub kurs
+                </button>
+                <div class="likes-count">
+                    2137 wszystkich polubień
+                </div>
+            </div>
         </div>
     </div>
     <?php include 'includes/footer.php'; ?>
