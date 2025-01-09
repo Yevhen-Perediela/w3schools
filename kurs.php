@@ -21,6 +21,7 @@ $kurs_data = '';
 if (mysqli_num_rows($result_one) > 0) {
     $row = mysqli_fetch_assoc($result_one);
     $kurs_data = $row['kurs_data'];
+    $course_id = $row['id'];
 }
 
 $kurs_data_array = json_decode($kurs_data, true);
@@ -68,13 +69,25 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         <div id="main-container">
             <h1><?php echo htmlspecialchars($title); ?></h1>
             <div class="like-container">
-                <button class="like-button">
-                    <i class="fas fa-heart"></i>
-                    Polub kurs
+                <button class="like-button" data-course-id="<?php echo $course_id; ?>">
+                    <?php
+                    // Sprawdź czy użytkownik polubił ten kurs
+                    $stmt = $conn->prepare("SELECT id FROM course_likes WHERE course_id = ? AND user_id = ?");
+                    $stmt->bind_param("ii", $course_id, $_SESSION['user_id']);
+                    $stmt->execute();
+                    $isLiked = $stmt->get_result()->num_rows > 0;
+                    echo $isLiked ? '❤️' : '🤍';
+                    ?>
                 </button>
-                <div class="likes-count">
-                    2137 wszystkich polubień
-                </div>
+                <span class="likes-count">
+                    <?php
+                    // Pobierz liczbę polubień
+                    $stmt = $conn->prepare("SELECT COUNT(*) as likes FROM course_likes WHERE course_id = ?");
+                    $stmt->bind_param("i", $course_id);
+                    $stmt->execute();
+                    echo $stmt->get_result()->fetch_assoc()['likes'];
+                    ?> polubień
+                </span>
             </div>
         </div>
     </div>
@@ -245,6 +258,34 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
+        });
+
+        document.querySelectorAll('.like-button').forEach(button => {
+            button.addEventListener('click', async function() {
+                const courseId = this.dataset.courseId;
+                try {
+                    const response = await fetch('like.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ 
+                            course_id: parseInt(courseId) 
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    if (data.success) {
+                        this.textContent = data.action === 'liked' ? '❤️' : '🤍';
+                        this.nextElementSibling.textContent = data.likes + ' polubień';
+                    } else {
+                        alert(data.error || 'Wystąpił błąd');
+                    }
+                } catch (error) {
+                    console.error('Błąd:', error);
+                    alert('Wystąpił błąd podczas komunikacji z serwerem');
+                }
+            });
         });
     </script>
 </body>
