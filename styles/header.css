@@ -453,13 +453,13 @@ input:checked + .slider:before {
 }
 
 /* ====================== */
-/*  styl jasny light mode  */
+/*  styl jasny light mode theme */
 /* ====================== */
 
-.light-mode {
-  background-color: #ffffff; /* Jasne tło główne */
-  color: #111111; /* Ciemny tekst */
-}
+/* .light-mode {
+  background-color: #ffffff;
+  color: #111111;
+} */
 
 .light-mode .top-nav,
 .light-mode .bottom-nav {

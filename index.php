@@ -17,6 +17,8 @@ ini_set('display_errors', 1);
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/footer.css">
     <link rel="stylesheet" href="./styles/stars.css">
+    <link rel="stylesheet" href="styles/chat-widget.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
 </head>
 <body>
     <?php include './includes/header.php'; ?>
@@ -53,7 +55,7 @@ ini_set('display_errors', 1);
             <p class="html-subtitle">Język do budowania stron internetowych</p>
             
             <div class="html-buttons">
-                <a href="#" class="button button-learn">Kurs HTML</a>
+                <a href="kurs.php?type=HTML&lesson=HTML Lists" class="button button-learn">Kurs HTML</a>
             </div>
         </div>
 
@@ -88,7 +90,7 @@ ini_set('display_errors', 1);
             <p class="css-subtitle">Język do stylizacji stron internetowych</p>
             
             <div class="html-buttons">
-                <a href="#" class="button button-learn-css">Kurs CSS</a>
+                <a href="kurs.php?type=CSS&lesson=Selektory" class="button button-learn-css">Kurs CSS</a>
             </div>
         </div>
 
@@ -96,7 +98,7 @@ ini_set('display_errors', 1);
             <h2>Przykład CSS:</h2>
             <div class="code-editor">
                 <pre><code><span class="selector">body</span> {
-    <span class="property">background-color</span>: <span class="value">lightblue</span>;
+                <span class="property">background-color</span>: <span class="value">lightblue</span>;
 }
 
 <span class="selector">h1</span> {
@@ -126,7 +128,7 @@ ini_set('display_errors', 1);
             <p class="js-subtitle">Język do programowania stron internetowych</p>
             
             <div class="html-buttons">
-                <a href="#" class="button button-learn-js">Kurs JavaScript</a>
+                <a href="kurs.php?type=JS&lesson=Loop%20(for,%20while)" class="button button-learn-js">Kurs JavaScript</a>
             </div>
         </div>
 
@@ -159,6 +161,9 @@ ini_set('display_errors', 1);
 
         
     </script>
+
+    <?php include 'includes/chat-widget.php'; ?>
+    <script src="js/chat-widget.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>

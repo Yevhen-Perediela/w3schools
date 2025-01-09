@@ -24,9 +24,9 @@ if (mysqli_num_rows($result_one) > 0) {
 }
 
 $kurs_data_array = json_decode($kurs_data, true);
-if (json_last_error() !== JSON_ERROR_NONE) {
-    die('Błąd dekodowania JSON: ' . json_last_error_msg());
-}
+// if (json_last_error() !== JSON_ERROR_NONE) {
+//     die('Błąd dekodowania JSON: ' . json_last_error_msg()); przed pushem odkomentuj
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
