@@ -81,7 +81,7 @@ try {
             ['role' => 'user', 'content' => $message]
         ],
         'temperature' => 0.7,
-        'max_tokens' => 500,
+        'max_tokens' => 1500,
         'presence_penalty' => 0.6,
         'frequency_penalty' => 0.5
     ];
