@@ -140,15 +140,37 @@ tr:hover td {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.course-item:hover {
+.course-item:hover, .msg-item:hover {
     background-color: rgba(255, 255, 255, 0.08);
     transform: translateX(5px);
     border-color: rgba(4, 170, 109, 0.2);
 }
 
+.msg-item{
+    padding: 18px;
+    margin: 12px 0;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex;
+    /* justify-content: space-between; */
+    flex-direction: column;
+    /* align-items: center; */
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 .course-title {
     color: #ffffff;
     font-weight: 500;
+}
+
+.msg-title {
+    color: #c8c8c8;
+    /* font-weight: 500; */
+}
+.msg-msg{
+    color: #ffffff;
+    font-weight: 600;
 }
 
 .add-course-btn {

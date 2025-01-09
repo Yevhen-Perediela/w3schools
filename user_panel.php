@@ -225,6 +225,13 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
                 <?php endif; ?>
             </div>
 
+            <div class="form-section" id="historia">
+                <h3>Historia przegladania</h3>
+                <a href="" id="a-hist1" href=""><p id="hist1"></p></a>
+                <a href='' id="a-hist2" href=""><p id="hist2"></p></a>
+                <a href= '' id="a-hist3" href=""><p id="hist3"></p></a>
+            </div>
+
             <a href="index.php" class="back-button">
                 Powrót do strony głównej
             </a>
@@ -238,6 +245,15 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
     </script>
 
     <script>
+    document.getElementById('hist1').textContent = localStorage.getItem('hist1') 
+    document.getElementById('hist2').textContent = localStorage.getItem('hist2') 
+    document.getElementById('hist3').textContent = localStorage.getItem('hist3') 
+
+    document.getElementById('a-hist1').href = 'kurs.php?type='+localStorage.getItem('a-hist1')+'&lesson='+localStorage.getItem('hist1')
+    document.getElementById('a-hist2').href = 'kurs.php?type='+localStorage.getItem('a-hist2')+'&lesson='+localStorage.getItem('hist2')
+    document.getElementById('a-hist3').href = 'kurs.php?type='+localStorage.getItem('a-hist3')+'&lesson='+localStorage.getItem('hist3')
+
+
     document.addEventListener('DOMContentLoaded', function() {
        
         const usernameForm = document.querySelector('form[name="update_username"]');

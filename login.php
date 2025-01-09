@@ -52,7 +52,7 @@ include_once 'includes/header.php'
     <?php include './includes/header.php'; ?>
     
     <div class="stars" id="stars"></div>
-    
+    <div id="odstep"></div>
     <main class="main-content">
         <div class="login-container">
             <h2>Logowanie</h2>

@@ -236,6 +236,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
         });
+
+        localStorage.setItem('hist1', '')
+        localStorage.setItem('hist2', '')
+        localStorage.setItem('hist3', '')
+        localStorage.setItem('a-hist1', '')
+        localStorage.setItem('a-hist2', '')
+        localStorage.setItem('a-hist3', '')
     </script>
 </body>
 </html>

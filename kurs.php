@@ -248,6 +248,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
         const params = new URLSearchParams(window.location.search);
         const type = params.get('type');
+        const lesson = params.get('lesson');
 
         document.getElementById(type).style.backgroundColor='#222536'
 
@@ -289,6 +290,15 @@ if (json_last_error() !== JSON_ERROR_NONE) {
                 }
             });
         });
+
+        if(localStorage.getItem('hist1') != lesson){
+            localStorage.setItem('hist3', localStorage.getItem('hist2'))
+            localStorage.setItem('hist2', localStorage.getItem('hist1'))
+            localStorage.setItem('hist1', lesson)
+            localStorage.setItem('a-hist3', localStorage.getItem('a-hist2'))
+            localStorage.setItem('a-hist2', localStorage.getItem('a-hist1'))
+            localStorage.setItem('a-hist1', type)
+        }
     </script>
 </body>
 </html>

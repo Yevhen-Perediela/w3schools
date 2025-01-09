@@ -44,6 +44,7 @@ $users_result = $conn->query("SELECT id, username, lastname, email FROM users");
 $html_courses = $conn->query("SELECT * FROM kursy WHERE kurs_type = 'HTML' ORDER BY created_at DESC");
 $css_courses = $conn->query("SELECT * FROM kursy WHERE kurs_type = 'CSS' ORDER BY created_at DESC");
 $js_courses = $conn->query("SELECT * FROM kursy WHERE kurs_type = 'JS' ORDER BY created_at DESC");
+$users_msg = $conn->query("SELECT * FROM contact");
 ?>
 
 <!DOCTYPE html>
@@ -154,6 +155,16 @@ $js_courses = $conn->query("SELECT * FROM kursy WHERE kurs_type = 'JS' ORDER BY 
                     <button type="submit" class="add-course-btn">Dodaj egzamin</button>
                 </form>
 
+            </div>
+
+            <div class="section">
+                <h2>Wiadomości od użytkowników</h2>
+                <?php while ($course = $users_msg->fetch_assoc()): ?>
+                    <div class="msg-item">
+                        <span class="msg-title"><?php echo htmlspecialchars($course['email']).' | '.htmlspecialchars($course['topic']); ?></span><br>
+                        <span class="msg-msg"><?php echo htmlspecialchars($course['message']) ?></span>
+                    </div>
+                <?php endwhile; ?>
             </div>
 
             <a href="index.php" class="back-button">
