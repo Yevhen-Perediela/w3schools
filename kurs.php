@@ -25,7 +25,7 @@ if (mysqli_num_rows($result_one) > 0) {
 }
 
 $kurs_data_array = json_decode($kurs_data, true);
-$kurs_data_json = htmlspecialchars(json_encode($kurs_data_array), ENT_QUOTES, 'UTF-8');
+
 
 if (json_last_error() !== JSON_ERROR_NONE) {
     die('Błąd dekodowania JSON: ' . json_last_error_msg());
@@ -199,7 +199,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
             });
         }
 
-        const kursData = JSON.parse('<?php echo $kurs_data_json; ?>');
+        const kursData = <?php echo $kurs_data_array; ?>;
         console.log(kursData);
 
         loadFromJSON(kursData);
