@@ -199,7 +199,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 matchMessage.textContent = '';
                 matchMessage.className = 'password-match-message';
                 confirmPasswordInput.classList.remove('valid-input', 'invalid-input');
-            }  else {
+            } else if (password === confirmPassword) {
+                // matchMessage.textContent = 'Hasła są zgodne';
+                matchMessage.className = 'password-match-message valid';
+                confirmPasswordInput.classList.add('valid-input');
+                confirmPasswordInput.classList.remove('invalid-input');
+            } else {
                 matchMessage.textContent = 'Hasła nie są zgodne';
                 matchMessage.className = 'password-match-message invalid';
                 confirmPasswordInput.classList.add('invalid-input');
