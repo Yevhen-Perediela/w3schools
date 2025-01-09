@@ -461,3 +461,54 @@ pre,
     background-color: rgba(40, 42, 53, 0.95);
     backdrop-filter: blur(10px);
 }
+
+.like-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.like-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(45deg, #04aa6d, #06c17f);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.like-button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #038857, #04aa6d);
+    box-shadow: 0 4px 15px rgba(4, 170, 109, 0.3);
+}
+
+.like-button i {
+    font-size: 1.2rem;
+}
+
+.likes-count {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.like-button.liked {
+    background: #ff4444;
+}
+
+.like-button.liked:hover {
+    background: #cc0000;
+}

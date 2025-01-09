@@ -66,6 +66,15 @@ $kurs_data_array = json_decode($kurs_data, true);
         </div>
         <div id="main-container">
             <h1><?php echo htmlspecialchars($title); ?></h1>
+            <div class="like-container">
+                <button class="like-button">
+                    <i class="fas fa-heart"></i>
+                    Polub kurs
+                </button>
+                <div class="likes-count">
+                    2137 wszystkich polubień
+                </div>
+            </div>
         </div>
     </div>
     <?php include 'includes/footer.php'; ?>
