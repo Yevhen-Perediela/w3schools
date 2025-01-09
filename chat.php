@@ -146,32 +146,16 @@
                 try {
                     const data = JSON.parse(text);
                     if (data.error) {
-                        addMessage('🚫 ' + data.error, 'bot');
-                        if (data.error.includes('limit zapytań')) {
-                            let seconds = 60;
-                            const countdownMessage = document.createElement('div');
-                            countdownMessage.classList.add('message', 'bot-message', 'countdown');
-                            countdownMessage.textContent = `Spróbuj ponownie za ${seconds} sekund...`;
-                            chatContainer.appendChild(countdownMessage);
-                            
-                            const countdown = setInterval(() => {
-                                seconds--;
-                                countdownMessage.textContent = `Spróbuj ponownie za ${seconds} sekund...`;
-                                if (seconds <= 0) {
-                                    clearInterval(countdown);
-                                    countdownMessage.remove();
-                                }
-                            }, 1000);
-                        }
+                        addMessage('😊 ' + 'Życzymy miłego dnia!', 'bot');
                     } else if (data.response) {
                         addMessage(data.response, 'bot');
                     }
                 } catch (e) {
                     console.error('Error parsing JSON:', e);
-                    
+                    addMessage('😊 Życzymy miłego dnia!', 'bot');
                 }
-            } catch (networkError) {
-                console.error('Network error:', networkError);
+            } catch (error) {
+                console.error('Network error:', error);
                
             } finally {
                 messageInput.disabled = false;
@@ -187,42 +171,46 @@
             
             if (type === 'bot') {
                 try {
-                   
+                    // Funkcja do bezpiecznego escapowania HTML
                     function escapeHtml(text) {
-                        const div = document.createElement('div');
-                        div.textContent = text;
-                        return div.innerHTML;
+                        return text
+                            .replace(/&/g, "&amp;")
+                            .replace(/</g, "&lt;")
+                            .replace(/>/g, "&gt;")
+                            .replace(/"/g, "&quot;")
+                            .replace(/'/g, "&#039;");
                     }
                     
-                 
-                    message = escapeHtml(message);
+                    // Najpierw escapujemy cały tekst
+                    let escapedMessage = escapeHtml(message);
                     
-                   
-                    message = message.replace(/\n\n/g, '</p><p>');
-                    message = message.replace(/\n/g, '<br>');
-                    
-                   
+                    // Obsługa bloków kodu
                     const codeBlocks = [];
-                    message = message.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, language, code) {
+                    escapedMessage = escapedMessage.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, language, code) {
                         const placeholder = `CODE_BLOCK_${codeBlocks.length}`;
-                        codeBlocks.push(`<pre><code class="language-${language || 'plaintext'}">${escapeHtml(code.trim())}</code></pre>`);
+                        codeBlocks.push(`<pre><code class="language-${language || 'plaintext'}">${code.trim()}</code></pre>`);
                         return placeholder;
                     });
                     
-                 
-                    message = `<p>${message}</p>`;
+                    // Zamiana nowych linii na <br> i dodanie paragrafów
+                    escapedMessage = escapedMessage.replace(/\n\n/g, '</p><p>');
+                    escapedMessage = escapedMessage.replace(/\n/g, '<br>');
                     
-                  
+                    // Opakowujemy w paragraf
+                    escapedMessage = `<p>${escapedMessage}</p>`;
+                    
+                    // Przywracamy bloki kodu
                     codeBlocks.forEach((block, index) => {
-                        message = message.replace(`CODE_BLOCK_${index}`, block);
+                        escapedMessage = escapedMessage.replace(`CODE_BLOCK_${index}`, block);
                     });
                     
-                    messageDiv.innerHTML = message;
+                    messageDiv.innerHTML = escapedMessage;
                 } catch (error) {
                     console.error('Error formatting message:', error);
                     messageDiv.textContent = message;
                 }
             } else {
+                // Dla wiadomości użytkownika używamy textContent
                 messageDiv.textContent = message;
             }
             
