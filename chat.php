@@ -143,7 +143,28 @@
                 const text = await response.text();
                 console.log('Raw response:', text);
 
-              
+                try {
+                    const data = JSON.parse(text);
+                    if (data.error) {
+                        addMessage('🚫 ' + data.error, 'bot');
+                    } else if (data.response) {
+                        addMessage(data.response, 'bot');
+                    }
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                    addMessage('🚫 Nieprawidłowa odpowiedź z serwera', 'bot');
+                }
+            } catch (error) {
+                console.error('Network error:', error);
+                addMessage('🚫 Błąd połączenia z serwerem', 'bot');
+            } finally {
+                messageInput.disabled = false;
+                messageInput.focus();
+                button.disabled = false;
+                button.textContent = 'Wyślij';
+            }
+        });
+
         function addMessage(message, type) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', `${type}-message`);
