@@ -105,7 +105,7 @@ require_once 'connect.php';
                 <ul class="tech-list">
                     <li><a id="HTML" href="kurs.php?type=HTML&lesson=HTML Lists">HTML (HyperText Markup Language)</a></li>
                     <li><a id="CSS" href="kurs.php?type=CSS&lesson=HTML Styles - CSS">CSS (Cascading Style Sheets)</a></li>
-                    <li><a id="JS" href="kurs.php?type=JS&lesson=Metoda addEventListener()">JS (JavaScript)</a></li>
+                    <li><a id="JS" href="kurs.php?type=JS&lesson=JavaScript For Loop">JS (JavaScript)</a></li>
                     <li><a id="egzamin" href="egzamin_page.php?course=HTML">Egzaminy</a></li>
                 </ul>
             </div>
