@@ -24,10 +24,12 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .message {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             padding: 15px;
             border-radius: 8px;
             max-width: 80%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
         .user-message {
             background-color: #007bff;
@@ -37,12 +39,17 @@
         .bot-message {
             background-color: #f8f9fa;
             border: 1px solid #dee2e6;
+            line-height: 1.5;
         }
         .bot-message pre {
             background-color: #f8f9fa;
-            padding: 10px;
+            padding: 15px;
             border-radius: 4px;
             overflow-x: auto;
+            margin: 10px 0;
+        }
+        .bot-message p {
+            margin: 10px 0;
         }
         #message-form {
             display: flex;
@@ -180,9 +187,36 @@
             
             if (type === 'bot') {
                 try {
+                   
+                    function escapeHtml(text) {
+                        const div = document.createElement('div');
+                        div.textContent = text;
+                        return div.innerHTML;
+                    }
+                    
+                 
+                    message = escapeHtml(message);
+                    
+                   
+                    message = message.replace(/\n\n/g, '</p><p>');
+                    message = message.replace(/\n/g, '<br>');
+                    
+                   
+                    const codeBlocks = [];
                     message = message.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, language, code) {
-                        return `<pre><code class="language-${language || 'plaintext'}">${code.trim()}</code></pre>`;
+                        const placeholder = `CODE_BLOCK_${codeBlocks.length}`;
+                        codeBlocks.push(`<pre><code class="language-${language || 'plaintext'}">${escapeHtml(code.trim())}</code></pre>`);
+                        return placeholder;
                     });
+                    
+                 
+                    message = `<p>${message}</p>`;
+                    
+                  
+                    codeBlocks.forEach((block, index) => {
+                        message = message.replace(`CODE_BLOCK_${index}`, block);
+                    });
+                    
                     messageDiv.innerHTML = message;
                 } catch (error) {
                     console.error('Error formatting message:', error);
