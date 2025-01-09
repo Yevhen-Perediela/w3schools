@@ -46,18 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await response.json();
       if (data.error) {
         addMessage("🚫 " + data.error, "bot");
-        if (data.error.includes("limit zapytań")) {
-          startCountdown();
-        }
       } else if (data.response) {
         addMessage(data.response, "bot");
       }
     } catch (error) {
       console.error("Error:", error);
-      addMessage(
-        "Przepraszam, wystąpił błąd. Spróbuj ponownie później.",
-        "bot"
-      );
     } finally {
       messageInput.disabled = false;
       messageInput.focus();
@@ -70,28 +63,50 @@ document.addEventListener("DOMContentLoaded", function () {
     messageDiv.classList.add("message", `${type}-message`);
 
     if (type === "bot") {
-      try {
-        message = message.replace(
-          /```(\w+)?\n([\s\S]*?)```/g,
-          function (match, language, code) {
-            return `<pre><code class="language-${
-              language || "plaintext"
-            }">${code.trim()}</code></pre>`;
-          }
-        );
-        messageDiv.innerHTML = message;
-      } catch (error) {
-        messageDiv.textContent = message;
-      }
+        try {
+            // Funkcja do bezpiecznego escapowania HTML
+            function escapeHtml(text) {
+                return text
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+            
+            // Najpierw escapujemy cały tekst
+            let escapedMessage = escapeHtml(message);
+            
+            // Obsługa bloków kodu
+            const codeBlocks = [];
+            escapedMessage = escapedMessage.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, language, code) {
+                const placeholder = `CODE_BLOCK_${codeBlocks.length}`;
+                codeBlocks.push(`<pre><code class="language-${language || 'plaintext'}">${code.trim()}</code></pre>`);
+                return placeholder;
+            });
+            
+            // Zamiana nowych linii na <br>
+            escapedMessage = escapedMessage.replace(/\n/g, '<br>');
+            
+            // Przywracamy bloki kodu
+            codeBlocks.forEach((block, index) => {
+                escapedMessage = escapedMessage.replace(`CODE_BLOCK_${index}`, block);
+            });
+            
+            messageDiv.innerHTML = escapedMessage;
+        } catch (error) {
+            console.error('Error formatting message:', error);
+            messageDiv.textContent = message;
+        }
     } else {
-      messageDiv.textContent = message;
+        messageDiv.textContent = message;
     }
 
     chatContainer.appendChild(messageDiv);
     chatContainer.scrollTop = chatContainer.scrollHeight;
 
     if (type === "bot") {
-      Prism.highlightAllUnder(messageDiv);
+        Prism.highlightAllUnder(messageDiv);
     }
   }
 
