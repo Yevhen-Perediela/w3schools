@@ -39,6 +39,18 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
+
+$stmt = $conn->prepare("
+    SELECT k.id, k.title, k.kurs_type 
+    FROM kursy k 
+    INNER JOIN course_likes cl ON k.id = cl.course_id 
+    WHERE cl.user_id = ?
+    ORDER BY cl.created_at DESC
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$liked_courses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
 if (isset($_POST['update_username'])) {
     $new_username = trim($_POST['new_username']);
     
@@ -192,6 +204,27 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
                 </form>
             </div>
 
+            <div class="form-section">
+                <h3>Polubione kursy</h3>
+                <?php if (!empty($liked_courses)): ?>
+                    <div class="liked-courses">
+                        <?php foreach ($liked_courses as $course): ?>
+                            <div class="course-item">
+                                <a href="kurs.php?type=<?php echo urlencode($course['kurs_type']); ?>&lesson=<?php echo urlencode($course['title']); ?>">
+                                    <span class="course-title"><?php echo htmlspecialchars($course['title']); ?></span>
+                                    <span class="course-type"><?php echo htmlspecialchars($course['kurs_type']); ?></span>
+                                </a>
+                                <button class="unlike-button" data-course-id="<?php echo $course['id']; ?>">
+                                    ❌
+                                </button>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <p class="no-courses">Nie polubiłeś jeszcze żadnych kursów.</p>
+                <?php endif; ?>
+            </div>
+
             <a href="index.php" class="back-button">
                 Powrót do strony głównej
             </a>
@@ -244,6 +277,42 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
            
             setTimeout(() => messageDiv.remove(), 3000);
         }
+    });
+    </script>
+
+    <script>
+    document.querySelectorAll('.unlike-button').forEach(button => {
+        button.addEventListener('click', async function() {
+            const courseId = this.dataset.courseId;
+            try {
+                const response = await fetch('like.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        course_id: parseInt(courseId) 
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success && data.action === 'unliked') {
+                    
+                    this.closest('.course-item').remove();
+                    
+                   
+                    const likedCourses = document.querySelector('.liked-courses');
+                    if (likedCourses.children.length === 0) {
+                        likedCourses.innerHTML = '<p class="no-courses">Nie polubiłeś jeszcze żadnych kursów.</p>';
+                    }
+                    
+                    showMessage('success', 'Usunięto z polubionych.');
+                }
+            } catch (error) {
+                console.error('Błąd:', error);
+                showMessage('error', 'Wystąpił błąd podczas usuwania polubienia.');
+            }
+        });
     });
     </script>
 </body>
