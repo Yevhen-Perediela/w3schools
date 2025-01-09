@@ -150,7 +150,6 @@ ini_set('display_errors', 1);
     <script src="./js/stars.js"></script>
     <script>
         createStars();
-
         let title =document.title;
         window.addEventListener("blur", ()=>{
             document.title ="Wracaj!";
@@ -158,12 +157,6 @@ ini_set('display_errors', 1);
         window.addEventListener("focus", ()=>{
             document.title = title;    
         })
-
-        
     </script>
-
-    <?php include 'includes/chat-widget.php'; ?>
-    <script src="js/chat-widget.js"></script>
-    <script src="js/index.js"></script>
 </body>
 </html>
