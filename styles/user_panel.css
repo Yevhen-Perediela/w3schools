@@ -298,44 +298,74 @@ label {
   }
 }
 
-.avatar-section {
+.liked-courses {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.course-item {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.avatar-preview {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.2);
-}
-
-.delete-avatar-form {
-    width: 100%;
-    max-width: 200px;
-}
-
-.delete-avatar-btn {
-    width: 100%;
-    padding: 8px 16px;
-    background-color: #ff4444;
-    color: white;
-    border: none;
+    padding: 12px 20px;
+    background-color: rgba(147, 112, 219, 0.1);
+    border: 1px solid rgba(147, 112, 219, 0.2);
     border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
     transition: all 0.3s ease;
 }
 
-.delete-avatar-btn:hover {
-    background-color: #cc0000;
-    transform: translateY(-2px);
+.course-item:hover {
+    background-color: rgba(147, 112, 219, 0.2);
+    transform: translateX(5px);
 }
 
-.delete-avatar-btn:active {
-    transform: translateY(0);
+.course-item a {
+    flex-grow: 1;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.course-type {
+    background: linear-gradient(45deg, #9370DB, #8A2BE2);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(147, 112, 219, 0.3);
+}
+
+.unlike-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 1.1em;
+    color: #ff6b6b;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.unlike-button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.no-courses {
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+}
+
+.course-title {
+    font-weight: 500;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
