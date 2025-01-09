@@ -1,6 +1,7 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+error_reporting(0);
+ini_set('display_errors', 0);
+
 
 header('Content-Type: application/json');
 
@@ -50,8 +51,10 @@ if (!function_exists('curl_init')) {
     exit();
 }
 
-$api_key = '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';
+$config = parse_ini_file(__DIR__ . '/.env');
+$api_key = $config['API_TOKEN'];
 
+// echo '<script>console.log('.$api_key.')</script>';
 $system_prompt = "Jesteś pomocnym asystentem programowania, który specjalizuje się wyłącznie w JavaScript, HTML, CSS i PHP. 
 Jeśli użytkownik zapyta o inny język programowania, grzecznie poinformuj go, że możesz pomóc tylko w zakresie JS, HTML, CSS i PHP.
 Zawsze staraj się podawać praktyczne przykłady kodu w swojej odpowiedzi.";
