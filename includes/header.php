@@ -9,7 +9,7 @@ require_once 'connect.php';
 <head>
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="/js/nav.js" defer></script>
+    <script src="js/nav.js" defer></script>
 </head>
 <body>
     <div class="nav-wrapper">
@@ -99,7 +99,7 @@ require_once 'connect.php';
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <ul class="tech-list">
-                    <li><a id="HTML" href="kurs.php?type=HTML&lesson=Zmienne">HTML (HyperText Markup Language)</a></li>
+                    <li><a id="HTML" href="kurs.php?type=HTML&lesson=HTML Lists">HTML (HyperText Markup Language)</a></li>
                     <li><a id="CSS" href="kurs.php?type=CSS&lesson=Selektory">CSS (Cascading Style Sheets)</a></li>
                     <li><a id="JS" href="kurs.php?type=JS&lesson=Loop (for, while)">JS (JavaScript)</a></li>
                     <li><a id="egzamin" href="egzamin_page.php?course=HTML">Egzaminy</a></li>
