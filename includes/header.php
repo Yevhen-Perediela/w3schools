@@ -49,6 +49,8 @@ require_once 'connect.php';
                                             if ($user && $user['image']) {
                                                 $imageData = base64_encode($user['image']);
                                                 echo '<img src="data:image/jpeg;base64,'.$imageData.'" alt="Avatar" class="avatar">';
+                                            } else {
+                                                echo '<img src="assets/img/user.png" alt="Default Avatar" class="avatar">';
                                             }
                                             ?>
                                             <span class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
@@ -68,6 +70,8 @@ require_once 'connect.php';
                                         if ($user && $user['image']) {
                                             $imageData = base64_encode($user['image']);
                                             echo '<img src="data:image/jpeg;base64,'.$imageData.'" alt="Avatar" class="avatar">';
+                                        } else {
+                                            echo '<img src="assets/img/user.png" alt="Default Avatar" class="avatar">';
                                         }
                                         ?>
                                         <span class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></span>

@@ -54,65 +54,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/contact.css">
 </head>
-<body>
+<body class="contact-page">
     <?php include 'includes/header.php';?>
     <div id="stars" class="stars"></div>
-    <div id="odstep"></div>
-    <div class="contact-container">
+    <div class="main-content">
+        <div id="odstep"></div>
+        <div class="contact-container">
 
-        <!-- Komunikaty (błąd lub sukces) -->
-        <?php if (isset($error)): ?>
-            <div class="error">
-                <?= htmlspecialchars($error); ?>
-            </div>
-        <?php endif; ?>
+            <!-- Komunikaty (błąd lub sukces) -->
+            <?php if (isset($error)): ?>
+                <div class="error">
+                    <?= htmlspecialchars($error); ?>
+                </div>
+            <?php endif; ?>
 
-        <?php if (isset($success)): ?>
-            <div class="success">
-                <?= htmlspecialchars($success); ?>
-            </div>
-        <?php endif; ?>
+            <?php if (isset($success)): ?>
+                <div class="success">
+                    <?= htmlspecialchars($success); ?>
+                </div>
+            <?php endif; ?>
 
-        <!-- Formularz kontaktowy -->
-        <form method="POST" action="">
-            <label for="name">Imię:</label>
-            <input type="text" id="name" name="name" 
-                   placeholder="Twoje imię"
-                   value="<?= isset($name) ? htmlspecialchars($name) : '' ?>">
+            <!-- Formularz kontaktowy -->
+            <form method="POST" action="">
+                <label for="name">Imię:</label>
+                <input type="text" id="name" name="name" 
+                       placeholder="Twoje imię"
+                       value="<?= isset($name) ? htmlspecialchars($name) : '' ?>">
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" 
-                   placeholder="Twój email"
-                   value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" 
+                       placeholder="Twój email"
+                       value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
 
-            <!-- Nowe pole SELECT -->
-            <label for="topic">Temat wiadomości:</label>
-            <select name="topic" id="topic">
-                <!--  Jedna z opcji to "Pomysł na nowy kurs" -->
-                <option value="Pomysł na nowy kurs"
-                  <?= (!empty($topic) && $topic === 'Pomysł na nowy kurs') ? 'selected' : '' ?>>
-                  Pomysł na nowy kurs
-                </option>
-                <option value="Zgłoszenie błędu"
-                  <?= (!empty($topic) && $topic === 'Zgłoszenie błędu') ? 'selected' : '' ?>>
-                  Zgłoszenie błędu
-                </option>
-                <option value="Problemy z logowaniem"
-                  <?= (!empty($topic) && $topic === 'Problemy z logowaniem') ? 'selected' : '' ?>>
-                  Problemy z logowaniem
-                </option>
-                <option value="Inne"
-                  <?= (empty($topic) || $topic === 'Inne') ? 'selected' : '' ?>>
-                  Inne
-                </option>
-            </select>
+                <!-- Nowe pole SELECT -->
+                <label for="topic">Temat wiadomości:</label>
+                <select name="topic" id="topic">
+                    <!--  Jedna z opcji to "Pomysł na nowy kurs" -->
+                    <option value="Pomysł na nowy kurs"
+                      <?= (!empty($topic) && $topic === 'Pomysł na nowy kurs') ? 'selected' : '' ?>>
+                      Pomysł na nowy kurs
+                    </option>
+                    <option value="Zgłoszenie błędu"
+                      <?= (!empty($topic) && $topic === 'Zgłoszenie błędu') ? 'selected' : '' ?>>
+                      Zgłoszenie błędu
+                    </option>
+                    <option value="Problemy z logowaniem"
+                      <?= (!empty($topic) && $topic === 'Problemy z logowaniem') ? 'selected' : '' ?>>
+                      Problemy z logowaniem
+                    </option>
+                    <option value="Inne"
+                      <?= (empty($topic) || $topic === 'Inne') ? 'selected' : '' ?>>
+                      Inne
+                    </option>
+                </select>
 
-            <label for="message">Treść wiadomości:</label>
-            <textarea id="message" name="message" rows="5" 
-                      placeholder="Treść wiadomości..."><?= isset($message) ? htmlspecialchars($message) : '' ?></textarea>
+                <label for="message">Treść wiadomości:</label>
+                <textarea id="message" name="message" rows="5" 
+                          placeholder="Treść wiadomości..."><?= isset($message) ? htmlspecialchars($message) : '' ?></textarea>
 
-            <button type="submit">Wyślij</button>
-        </form>
+                <button type="submit">Wyślij</button>
+            </form>
+        </div>
     </div>
     <?php include 'includes/footer.php';?>
     <script src="js/stars.js"></script>

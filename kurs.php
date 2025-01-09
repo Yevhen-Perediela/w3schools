@@ -34,7 +34,9 @@ $kurs_data_array = json_decode($kurs_data, true);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kurs</title>
+    <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/kurs.css">
+    
     <!-- Highlight.js -->
     <!-- Zamiast obecnego linku do domyślnego motywu, wstaw poniższy -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/agate.min.css">
@@ -42,7 +44,8 @@ $kurs_data_array = json_decode($kurs_data, true);
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
-    <div id="odstep" style="height: 0px"></div>
+    <div id="odstep"></div>
+    <div id="stars" class="stars"></div>
     <div id="main-wrapper">
         <div id="left-side">
         <?php
@@ -65,7 +68,8 @@ $kurs_data_array = json_decode($kurs_data, true);
             <h1><?php echo htmlspecialchars($title); ?></h1>
         </div>
     </div>
-
+    <?php include 'includes/footer.php'; ?>
+    <script src="js/stars.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => hljs.highlightAll());
 
@@ -176,7 +180,7 @@ $kurs_data_array = json_decode($kurs_data, true);
         loadFromJSON(kursData);
 
         quiz_cont = document.querySelectorAll('.quiz-container')
-        quiz_cont.forEach(container=>{
+        quiz_cont.forEach(container => {
             const nazwa = container.querySelector('h4').textContent;
             var i = localStorage.getItem(nazwa)
             if(i){
@@ -184,11 +188,11 @@ $kurs_data_array = json_decode($kurs_data, true);
                 var isCorrect = checkbox[i].getAttribute('correct');
                 if (isCorrect == 'true') {
                     checkbox[i].classList.add('correct');
-                    console.log('correct');
+                    checkbox[i].querySelector('input[type="radio"]').checked = true;
                 } else {
                     checkbox[i].classList.add('incorrect');
+                    checkbox[i].querySelector('input[type="radio"]').checked = true;
                 }
-
             }
         })
 
@@ -197,19 +201,20 @@ $kurs_data_array = json_decode($kurs_data, true);
             const quizDiv = checkbox.closest('.quiz-container');
             const allAnswers = quizDiv.querySelectorAll('.quiz-answer');
             const nazwa = quizDiv.querySelector('h4').textContent;
+            const radio = checkbox.querySelector('input[type="radio"]');
+            
             checkbox.addEventListener('click', () => {
-                // Usuwamy klasy 'correct' i 'incorrect' z wszystkich odpowiedzi
                 allAnswers.forEach(answer => {
                     answer.classList.remove('correct', 'incorrect');
+                    answer.querySelector('input[type="radio"]').checked = false;
                 });
                 
                 localStorage.setItem(nazwa, index)
+                radio.checked = true;
                 
-
                 var isCorrect = checkbox.getAttribute('correct');
                 if (isCorrect == 'true') {
                     checkbox.classList.add('correct');
-                    console.log('correct');
                 } else {
                     checkbox.classList.add('incorrect');
                 }
@@ -228,6 +233,9 @@ $kurs_data_array = json_decode($kurs_data, true);
         //     if(item.textContent == )
         // })
         
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+        });
     </script>
 </body>
 </html>
