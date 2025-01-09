@@ -1,11 +1,10 @@
 <?php
-error_reporting(0);
-ini_set('display_errors', 0);
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 header('Content-Type: application/json');
 
-// Sprawdź czy nie przekroczono limitu zapytań (używamy pliku jako prostego cache)
+// Sprawdź czy nie przekroczono limitu zapytań
 $cache_file = 'request_count.txt';
 $current_minute = date('Y-m-d H:i');
 $requests_data = [];
@@ -20,7 +19,6 @@ foreach ($requests_data as $time => $count) {
         unset($requests_data[$time]);
     }
 }
-
 
 if (isset($requests_data[$current_minute]) && $requests_data[$current_minute] >= 10) {
     echo json_encode(['error' => 'Przekroczono limit zapytań. Proszę poczekać minutę.']);
@@ -54,7 +52,6 @@ if (!function_exists('curl_init')) {
 $config = parse_ini_file(__DIR__ . '/.env');
 $api_key = $config['API_TOKEN'];
 
-// echo '<script>console.log('.$api_key.')</script>';
 $system_prompt = "Jesteś toksycznym asystentem programowania, który specjalizuje się w JavaScript, HTML, CSS i PHP. 
 Używaj sarkazmu i złośliwych żartów, ale nadal udzielaj poprawnych technicznie odpowiedzi.
 Możesz dodawać złośliwe komentarze o kodzie użytkownika, ale zawsze musisz też podać prawidłowe rozwiązanie.
@@ -65,8 +62,10 @@ Przykłady odpowiedzi:
 - 'Nawet mój babciny kalkulator napisałby lepszy kod. Spójrz jak to się robi profesjonalnie...'
 
 Pamiętaj jednak, aby:
-1. Zawsze podawać prawidłowe rozwiązanie techniczne
-2. Używać tylko JavaScript, HTML, CSS i PHP";
+1. Nie używać wulgaryzmów
+2. Nie obrażać osoby, tylko kod/podejście
+3. Zawsze podawać prawidłowe rozwiązanie techniczne
+4. Używać tylko JavaScript, HTML, CSS i PHP";
 
 try {
     $ch = curl_init();
@@ -84,13 +83,13 @@ try {
     ]);
 
     $request_data = [
-        'model' => 'gpt-3.5-turbo',
+        'model' => 'gpt-4',
         'messages' => [
             ['role' => 'system', 'content' => $system_prompt],
             ['role' => 'user', 'content' => $message]
         ],
         'temperature' => 0.7,
-        'max_tokens' => 1500,
+        'max_tokens' => 1000,
         'presence_penalty' => 0.6,
         'frequency_penalty' => 0.5
     ];
