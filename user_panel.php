@@ -20,12 +20,11 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user_data = $result->fetch_assoc();
 
-// Używamy danych z bazy
+
 $username = $user_data['username'];
 $lastname = $user_data['lastname'];
 $email = $user_data['email'];
 
-// Aktualizujemy sesję
 $_SESSION['username'] = $username;
 $_SESSION['lastname'] = $lastname;
 $_SESSION['email'] = $email;
@@ -127,6 +126,7 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
     <div class="stars" id="stars"></div>
     
     <main class="main-content">
+        
         <div class="user-panel-container">
             <h2>Panel użytkownika</h2>
             
@@ -172,7 +172,9 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
             </div>
 
             <div class="form-section">
+                
                 <h3>Zmiana hasła</h3>
+                
                 <form method="POST">
                     <label for="old_password">Aktualne hasło:</label>
                     <input type="password" id="old_password" name="old_password" required
@@ -197,6 +199,7 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
     </main>
 
     <script src="./js/stars.js"></script>
+    
     <script>
         createStars();
     </script>
