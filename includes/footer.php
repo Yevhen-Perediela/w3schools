@@ -4,7 +4,7 @@
         <div class="footer-column">
             <h3>Popularne Tutoriale</h3>
             <ul class="footer-links">
-                <li><a href="#">Tutorial HTML</a></li>
+                <li><a href="https://w4schools.online/kurs.php?type=HTML">Tutorial HTML</a></li>
                 <li><a href="#">Tutorial CSS</a></li>
                 <li><a href="#">Tutorial JavaScript</a></li>
             </ul>
