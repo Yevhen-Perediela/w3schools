@@ -64,7 +64,7 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <?php include 'includes/footer.php'; ?>
+    
     <script src="js/stars.js"></script>
     <script src="js/egzamin_page.js"></script>
     <script>
