@@ -55,7 +55,7 @@ ini_set('display_errors', 1);
             <p class="html-subtitle">Język do budowania stron internetowych</p>
             
             <div class="html-buttons">
-                <a href="#" class="button button-learn">Kurs HTML</a>
+                <a href="kurs.php?type=HTML&lesson=HTML Lists" class="button button-learn">Kurs HTML</a>
             </div>
         </div>
 
@@ -90,7 +90,7 @@ ini_set('display_errors', 1);
             <p class="css-subtitle">Język do stylizacji stron internetowych</p>
             
             <div class="html-buttons">
-                <a href="#" class="button button-learn-css">Kurs CSS</a>
+                <a href="kurs.php?type=CSS&lesson=HTML Styles - CSS" class="button button-learn-css">Kurs CSS</a>
             </div>
         </div>
 
@@ -128,7 +128,7 @@ ini_set('display_errors', 1);
             <p class="js-subtitle">Język do programowania stron internetowych</p>
             
             <div class="html-buttons">
-                <a href="#" class="button button-learn-js">Kurs JavaScript</a>
+                <a href="kurs.php?type=JS&lesson=JavaScript For Loop" class="button button-learn-js">Kurs JavaScript</a>
             </div>
         </div>
 
@@ -143,7 +143,7 @@ ini_set('display_errors', 1);
                 <button class="try-it edytor-link">Uruchom kod</button>
             </div>
         </div>
-    </div>
+    </div>  
 
     <?php include './includes/footer.php'; ?>
 
