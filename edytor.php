@@ -44,15 +44,18 @@
               <button onclick="copyCode()" title="Kopiuj kod">
                   <i class="fas fa-copy"></i>
               </button>
+              <button onclick="runCode()" title="Uruchom">
+                  <i class="fas fa-start"></i>
+              </button>
               <button onclick="downloadCode()" title="Pobierz jako HTML">
                   <i class="fas fa-download"></i>
               </button>
           </div>
           
           <div class="tool-group">
-              <!-- <button onclick="formatCode()" title="Formatuj kod">
+              <button onclick="formatCode()" title="Formatuj kod">
                   <i class="fas fa-indent"></i>
-              </button> -->
+              </button>
               <button onclick="toggleInvisibles()" title="Pokaż/ukryj niewidoczne znaki">
                   <i class="fas fa-eye"></i>
               </button>
@@ -201,14 +204,14 @@
     formatCode();
 
     // Automatyczne odświeżanie po wprowadzeniu zmian
-    let updateTimeout;
-    editor.session.on('change', () => {
-        clearTimeout(updateTimeout);
-        updateTimeout = setTimeout(() => {
-            runCode();
-            localStorage.setItem('userCode', editor.getValue());
-        }, 50);
-    });
+    // let updateTimeout;
+    // editor.session.on('change', () => {
+    //     clearTimeout(updateTimeout);
+    //     updateTimeout = setTimeout(() => {
+    //         runCode();
+    //         localStorage.setItem('userCode', editor.getValue());
+    //     }, 50);
+    // });
 
     // Funkcja zmieniająca tryb edytora (HTML/CSS/JavaScript)
     function setEditorMode(mode) {
@@ -217,8 +220,15 @@
 
     // Funkcja uruchamiająca kod w iframe i przechwytująca console.log
     function runCode() {
-        const code = editor.getValue();
-        const outputFrame = document.getElementById('output');
+        const code = editor.getValue(); 
+        const outputFrame = document.getElementById('output')
+        console.log(code.includes('for'));
+
+        
+            
+
+
+
 
         // Przygotuj skrypt do przechwytywania console.log
         const consoleScript = `
@@ -285,7 +295,36 @@
         // Aktualizuj informacje o stronie po załadowaniu iframe
         outputFrame.onload = () => {
             setTimeout(updatePreviewInfo, 100); // Dodajemy małe opóźnienie
+            var iframe = document.getElementById('output');
+        const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+        const element = iframeDocument.getElementById('div');
+            if (element) {
+                console.log('Element znaleziony:', element.innerHTML);
+                if(element.innerHTML.replace(/\s/g, "") == '<p>Hello</p><p>Hello</p><p>Hello</p><p>Hello</p><p>Hello</p>'){
+                    if(code.includes('for')){
+                        alert('Zadanie wykonane')
+                        return
+                    }     
+                }
+            } else {
+                console.log('Element nie znaleziony');
+            }
+
+            const element2 = iframeDocument.getElementById('p');
+            if (element2) {
+                if(element2.style.color == 'red'){
+                    
+                    alert('Zadanie wykonane')
+                    return
+                       
+                }
+            } else {
+                console.log('Element nie znaleziony');
+            }
         };
+
+        
     }
 
     // Nasłuchujemy wiadomości z iframe
