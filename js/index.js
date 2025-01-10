@@ -12,6 +12,7 @@ var code_ex_js = `
                         let x = document.getElementById("demo");
                         x.style.fontSize = "25px"; 
                         x.style.color = "red"; 
+                        console.log('Hello Worls! console.log tez dziala')
                     }
                     Demo()
                 </script>
