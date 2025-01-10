@@ -105,6 +105,7 @@
   min-width: 200px;
   flex: 1;
   max-width: 400px;
+  
 }
 
 .top-nav .search-bar input {
@@ -114,6 +115,7 @@
   border: 1px solid #ddd;
   border-radius: 25px;
   outline: none;
+  margin-bottom: 0px;
 }
 
 .top-nav .search-bar button {

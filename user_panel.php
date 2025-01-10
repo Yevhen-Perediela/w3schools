@@ -128,8 +128,9 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] !== 4) 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel użytkownika</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="./styles/header.css">
+    
     <link rel="stylesheet" href="./styles/user_panel.css">
+    <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/stars.css">
 </head>
 <body>
