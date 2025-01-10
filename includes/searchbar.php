@@ -20,8 +20,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'search') {
     }
     require_once '../connect.php';
     try {
-        $dsn = "mysql:host=$host;dbname=$db;charset=utf8";
-        $pdo = new PDO($dsn, $user, $pass, [
+        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
+        $pdo = new PDO($dsn, $username, $password, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ]);
         // Proste wyszukiwanie w tabeli kursy (po kolumnach title, kurs_type)
