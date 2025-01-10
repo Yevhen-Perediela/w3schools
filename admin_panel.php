@@ -4,6 +4,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once 'connect.php';
 
+if (isset($_SESSION['username'])) {
+    if($_SESSION['username'] != 'admin'){
+        header('Location: user_panel.php');
+    }
+}else{
+    header('Location: login.php');
+}
+
 if (isset($_POST['pdf_url'])) {
     header('Content-Type: application/json');
     $sql = "INSERT INTO pdf_files (id, course_name, course_type, pdf_link) VALUES (NULL, '".$_POST['pdf_name']."', '".$_POST['type']."', '".$_POST['pdf_url']."')";
