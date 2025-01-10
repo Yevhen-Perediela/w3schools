@@ -72,7 +72,7 @@ ini_set('display_errors', 1);
 <span class="bracket">      &lt;</span><span class="tag">p</span><span class="bracket">&gt;</span><span class="text">To jest paragraf</span><span class="bracket">&lt;/</span><span class="tag">p</span><span class="bracket">&gt;</span>
 <span class="bracket">  &lt;/</span><span class="tag">body</span><span class="bracket">&gt;</span>
 <span class="bracket">&lt;/</span><span class="tag">html</span><span class="bracket">&gt;</span></code></pre>
-                <button class="try-it">Uruchom kod</button>
+                <button class="try-it edytor-link">Uruchom kod</button>
             </div>
         </div>
     </div>
@@ -110,7 +110,7 @@ ini_set('display_errors', 1);
     <span class="property">font-family</span>: <span class="value">verdana</span>;
     <span class="property">font-size</span>: <span class="value">20px</span>;
 }</code></pre>
-                <button class="try-it">Uruchom kod</button>
+                <button class="try-it edytor-link">Uruchom kod</button>
             </div>
         </div>
     </div>
@@ -140,7 +140,7 @@ ini_set('display_errors', 1);
     x.style.fontSize = <span class="string">"25px"</span>; 
     x.style.color = <span class="string">"red"</span>; 
 }</code></pre>
-                <button class="try-it">Uruchom kod</button>
+                <button class="try-it edytor-link">Uruchom kod</button>
             </div>
         </div>
     </div>
