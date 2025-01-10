@@ -162,5 +162,6 @@ ini_set('display_errors', 1);
 
     <?php include 'includes/chat-widget.php'; ?>
     <script src="js/chat-widget.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
