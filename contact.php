@@ -10,36 +10,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name    = trim($_POST['name'] ?? '');
     $email   = trim($_POST['email'] ?? '');
     $message = trim($_POST['message'] ?? '');
-    // NOWE: pobranie wartości z selecta (jeśli nic nie wpadnie, przyjmij 'Inne')
     $topic   = trim($_POST['topic'] ?? 'Inne');
 
     if ($name === '' || $email === '' || $message === '') {
         $error = "Wypełnij wszystkie pola!";
     } else {
-        // Połączenie z bazą (PDO) — dostosuj do swoich danych
-        $host = 'localhost';
-        $db   = 'w3schools';
-        $user = 'root';
-        $pass = '';
-
         try {
-            $dsn = "mysql:host=$host;dbname=$db;charset=utf8";
-            $pdo = new PDO($dsn, $user, $pass, [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-            ]);
+            require_once 'connect.php';
 
-            // INSERT do tabeli contact_messages, pamiętaj o kolumnie `topic`
+            // INSERT do tabeli contact_messages
             $sql = "INSERT INTO contact (name, email, message, topic) 
-                    VALUES (:name, :email, :message, :topic)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':name',    $name,    PDO::PARAM_STR);
-            $stmt->bindValue(':email',   $email,   PDO::PARAM_STR);
-            $stmt->bindValue(':message', $message, PDO::PARAM_STR);
-            $stmt->bindValue(':topic',   $topic,   PDO::PARAM_STR);
+                    VALUES (?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssss", $name, $email, $message, $topic);
             $stmt->execute();
 
             $success = "Dziękujemy za kontakt! Twoja wiadomość została zapisana.";
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             $error = "Błąd przy zapisie do bazy danych: " . $e->getMessage();
         }
     }
