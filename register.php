@@ -213,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         passwordInput.addEventListener('input', validatePassword);
-        confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+        // confirmPasswordInput.addEventListener('input', validateConfirmPassword);
         
         validatePassword();
     </script>
