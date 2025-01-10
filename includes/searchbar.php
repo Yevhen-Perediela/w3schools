@@ -74,6 +74,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'search') {
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const input      = document.getElementById('search-input');
+    const input2      = document.getElementById('search-input2');
     const button     = document.getElementById('search-button');
     const resultsDiv = document.getElementById('search-results');
     // Funkcja wysyłająca zapytanie do TEGO SAMEGO pliku searchbar.php
@@ -128,6 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // „Live search” – po wpisywaniu w input (opcjonalnie)
     input.addEventListener('input', async () => {
         const query = input.value.trim();
+        if (query.length < 2) {
+            resultsDiv.style.display = 'none';
+            return;
+        }
+        const results = await fetchSearchResults(query);
+        displayResults(results);
+    });
+    input2.addEventListener('input', async () => {
+        const query = input2.value.trim();
         if (query.length < 2) {
             resultsDiv.style.display = 'none';
             return;

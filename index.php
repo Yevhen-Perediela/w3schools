@@ -30,7 +30,7 @@ ini_set('display_errors', 1);
         <p class="hero-subtitle">Z największą stroną dla programistów na świecie.</p>
         
         <div class="hero-search-container">
-            <input type="text" class="hero-search-input" placeholder="Szukaj kursów, np. HTML">
+            <input type="text" id="search-input2" class="hero-search-input" placeholder="Szukaj kursów, np. HTML">
             <button class="hero-search-button">
                 <i class="fas fa-search"></i>
             </button>
