@@ -186,9 +186,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             // Sprawdzanie zgodności haseł
-            if (confirmPasswordInput.value) {
-                validateConfirmPassword();
-            }
+            // if (confirmPasswordInput.value) {
+            //     validateConfirmPassword();
+            // }
         }
 
         function validateConfirmPassword() {
