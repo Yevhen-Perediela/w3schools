@@ -18,10 +18,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'search') {
         echo json_encode([]);
         exit;
     }
-    $host = 'localhost';
-    $db   = 'w3schools';
-    $user = 'root';
-    $pass = '';
+    require_once '../connect.php';
     try {
         $dsn = "mysql:host=$host;dbname=$db;charset=utf8";
         $pdo = new PDO($dsn, $user, $pass, [
