@@ -15,11 +15,11 @@ function createStars() {
 
     star.style.opacity = Math.random() * 0.5 + 0.1;
 
-    /*
+    
     const animationDuration = Math.random() * 3 + 2;
     const animationDelay = Math.random() * 5;
     star.style.animation = `twinkle ${animationDuration}s infinite ${animationDelay}s`;
-    */
+    
 
     starsContainer.appendChild(star);
   }

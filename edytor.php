@@ -50,9 +50,9 @@
           </div>
           
           <div class="tool-group">
-              <button onclick="formatCode()" title="Formatuj kod">
+              <!-- <button onclick="formatCode()" title="Formatuj kod">
                   <i class="fas fa-indent"></i>
-              </button>
+              </button> -->
               <button onclick="toggleInvisibles()" title="Pokaż/ukryj niewidoczne znaki">
                   <i class="fas fa-eye"></i>
               </button>
